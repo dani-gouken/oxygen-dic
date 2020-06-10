@@ -1,0 +1,77 @@
+<?php
+
+
+namespace Oxygen\DI\Extraction\ExtractionParameters;
+
+
+use InvalidArgumentException;
+use Oxygen\DI\Contracts\ExtractionParameterContract;
+
+class FunctionExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract
+{
+    private $method;
+    private $methodIsString;
+    /**
+     * @var array
+     */
+    private $parameters;
+
+
+    public function __construct($method, array $parameters)
+    {
+        $methodIsCallable = is_callable($method);
+        $methodIsString = is_string($method);
+        if(!$methodIsString && !$methodIsCallable){
+            throw new InvalidArgumentException("Parameter 1 should be either a string or a callable");
+        }
+        $this->method = $method;
+        $this->parameters = $parameters;
+        $this->methodIsString = $methodIsString;
+        parent::__construct();
+    }
+
+    public function getExtractionKey():string
+    {
+        return $this->methodIsString ? $this->method : "__closure__";
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * @return bool
+     */
+    public function methodIsString(): bool
+    {
+        return $this->methodIsString;
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters): void
+    {
+        $this->parameters = $parameters;
+    }
+
+    public static function fromArray($array)
+    {
+        return self::hydrateMappingFromArray(new FunctionExtractionParameter(
+            $array["method"],
+            $array["parameter"]
+        ),$array);
+    }
+
+    public function toArray(): array
+    {
+        return array_merge([
+            "method" => $this->method,
+            'parameter' =>$this->parameters,
+        ],$this->mappingToArray());
+    }
+}

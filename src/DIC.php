@@ -1,335 +1,351 @@
 <?php
-namespace ExpressiveDIC;
 
-use Closure;
-use ExpressiveDIC\Exceptions\InvalidArgumentException;
-use ExpressiveDIC\Exceptions\NotFoundException;
-use ExpressiveDIC\Exceptions\ContainerException;
+namespace Oxygen\DI;
+
+use ArrayAccess;
+use Oxygen\DI\Contracts\ExtractorContract;
+use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\StorageContract;
+use Oxygen\DI\Exceptions\NotFoundException;
+use Oxygen\DI\Exceptions\ContainerException;
+use Oxygen\DI\Exceptions\CircularDependencyException;
+use Oxygen\DI\Exceptions\StorageNotFoundException;
+use Oxygen\DI\Extraction\ContainerExtractor;
+use Oxygen\DI\Extraction\ExtractionChain;
+use Oxygen\DI\Extraction\FunctionExtractor;
+use Oxygen\DI\Extraction\MethodExtractor;
+use Oxygen\DI\Extraction\ObjectExtractor;
+use Oxygen\DI\Extraction\ValueExtractor;
+use Oxygen\DI\Storage\FactoryStorage;
+use Oxygen\DI\Storage\SingletonStorage;
+use Oxygen\DI\Storage\ValueStorage;
 use Psr\Container\ContainerInterface;
 
-class DIC implements ContainerInterface, \ArrayAccess
+class DIC implements ContainerInterface, ArrayAccess
 {
-    /**
-     * @var array Store description
-     */
-    private $descriptions = [];
-
-    public const SINGLETON = 'singleton';
-    public const VALUE = 'value';
-    public const DESCRIPTION = 'description';
-    public const ALL = 'all';
-
 
     /**
-     * @var array store available singletons
+     * @var array<ExtractorContract>
      */
-    private $singletons = [];
+    private $extractors = [];
+    /**
+     * @var StorageContract[]
+     */
+    private $container = [];
 
     /**
-     * @var array store values or instances
+     * @var array
      */
-    private $values = [];
-
+    public $resolvedValues = [];
+    /**
+     * @var $instance DIC
+     */
     private static $instance;
 
     /**
-     * describe description
-     * @param String|int $alias
-     * @param callable $description
-     * @param string $type
-     * @return DIC
-     * @throws InvalidArgumentException
+     * @var string
      */
-    public function describe($alias, $description, $type = self::DESCRIPTION):self
-    {
-        switch ($type) {
-            case (self::SINGLETON):
-                $this->describeSingleton($alias, $description);
-                break;
-            case (self::VALUE):
-                $this->describeValue($alias, $description);
-                break;
-            default:
-                $this->descriptions[$alias] = $description;
-        }
-        return $this;
-    }
+    private $defaultStorageAlias = FactoryStorage::class;
+    /**
+     * @var ExtractionChain
+     */
+    private $chain;
 
-    public function getInstance()
+    /**
+     * @return DIC
+     * @throws ContainerException
+     */
+    public static function getInstance()
     {
         if (is_null(self::$instance)) {
             self::$instance = new self();
         }
         return self::$instance;
     }
+
     /**
-     * describe a singleton
-     * @param String|int $alias
-     * @param callable $description
-     * @return DIC
+     * DIC constructor.
+     * @throws ContainerException
      */
-    public function describeSingleton($alias, callable $description):self
+    public function __construct()
     {
-        $this->singletons[$alias] = $description;
-        return $this;
+        $this->addStorage(new FactoryStorage($this));
+        $this->addStorage(new SingletonStorage($this));
+        $this->addStorage(new ValueStorage($this));
+        $this->extractors = [
+            MethodExtractor::class => new MethodExtractor(),
+            ObjectExtractor::class => new ObjectExtractor(),
+            FunctionExtractor::class => new FunctionExtractor(),
+            ValueExtractor::class => new ValueExtractor(),
+            ContainerExtractor::class => new ContainerExtractor()
+        ];
+        $this->chain = new ExtractionChain();
+        self::$instance = $this;
     }
 
     /**
-     * store an instance
-     * @param String|int $alias
-     * @param $instance
-     * @return DIC
-     * @throws InvalidArgumentException
+     * @param string $extractorClassName
+     * @return ExtractorContract
+     * @throws ContainerException
      */
-    public function describeValue($alias, $instance):self
+    public function getExtractor(string $extractorClassName): ExtractorContract
     {
-        if (is_callable($instance)) {
-            throw new InvalidArgumentException('Argument of [describeInstance] should not be a callable');
+        if (!$this->hasExtractor($extractorClassName)) {
+            throw new ContainerException("Unable to resolve the extractor [$extractorClassName]");
         }
+        return $this->extractors[$extractorClassName];
+    }
 
-        $this->values[$alias] = $instance;
-        return $this;
+    public function hasExtractor($extractorClassName)
+    {
+        return array_key_exists($extractorClassName, $this->extractors);
     }
 
     /**
-     * describe descriptions
-     * @param array $descriptions
-     * @return DIC
-     * @throws InvalidArgumentException
+     * Add a new storage. will throw if a storage with a similar key already exists
+     * @param StorageContract $storage
+     * @throws ContainerException
      */
-    public function describeMany(array $descriptions):self
+    public function addStorage(StorageContract $storage)
     {
-        foreach ($descriptions as $alias => $description) {
-            $this->describe($alias, $description);
+        if (array_key_exists($storageKey = $storage->getStorageKey(), $this->getContainer())) {
+            throw new ContainerException("A storage with the key [$storageKey] already exists");
         }
-        return $this;
+        $this->container[$storage->getStorageKey()] = $storage;
+    }
+
+
+    /**
+     * check if the storage exists
+     * @param string $key
+     * @return bool
+     */
+    public function hasStorage(string $key): bool
+    {
+        return array_key_exists($key, $this->container);
     }
 
     /**
-     * describe singletons
-     * @param array $descriptions
-     * @return DIC
+     * get a storage
+     * @param string $key
+     * @return StorageContract
+     * @throws StorageNotFoundException
      */
-    public function describeSingletons(array $descriptions):self
+    public function getStorage(string $key): StorageContract
     {
-        foreach ($descriptions as $alias => $description) {
-            $this->describeSingleton($alias, $description);
+        if (!$this->hasStorage($key)) {
+            throw new StorageNotFoundException($key);
         }
-        return $this;
+        return $this->container[$key];
     }
 
     /**
-     * describe instances
-     * @param array $instances
-     * @return DIC
-     * @throws InvalidArgumentException
+     * return the container
+     * @return StorageContract[]
      */
-    public function describeValues(array $instances):self
+    public function getContainer()
     {
-        foreach ($instances as $alias => $instance) {
-            $this->describeValue($alias, $instance);
+        return $this->container;
+    }
+
+    /**
+     * return the default storage
+     * @return StorageContract
+     * @throws NotFoundException
+     */
+    public function getDefaultStorage()
+    {
+        return $this->getStorageFor($this->defaultStorageAlias);
+    }
+
+    /**
+     * return the factory storage
+     * @return FactoryStorage
+     * @throws StorageNotFoundException
+     */
+    public function factory(): FactoryStorage
+    {
+        /**
+         * @var $result FactoryStorage
+         */
+        $result = $this->getStorage(FactoryStorage::STORAGE_KEY);
+        return $result;
+    }
+
+    /**
+     * return the singleton storage
+     * @return SingletonStorage
+     * @throws StorageNotFoundException
+     */
+    public function singleton(): SingletonStorage
+    {
+        /**
+         * @var $result SingletonStorage
+         */
+        $result = $this->getStorage(SingletonStorage::STORAGE_KEY);
+        return $result;
+    }
+
+    /**
+     * return the value storage
+     * @return ValueStorage
+     * @throws StorageNotFoundException
+     */
+    public function value(): ValueStorage
+    {
+        /**
+         * @var $result ValueStorage
+         */
+        $result = $this->getStorage(ValueStorage::STORAGE_KEY);
+        return $result;
+    }
+
+    /**
+     * @param StorableContract $storable
+     * @return mixed
+     * @throws ContainerException
+     */
+    public function extract(StorableContract $storable)
+    {
+        $extractionParameter = $storable->getExtractionParameter();
+        $extractor = $this->getExtractor($extractorClassName = $storable->getExtractorClassName());
+        if (!$extractor->isValidExtractionParameter($extractionParameter)) {
+            $extractionParameterClassName = get_class($extractionParameter);
+            throw new ContainerException("[$extractionParameterClassName] is not a valid parameter for the extractor [$extractorClassName]");
         }
-        return $this;
+        return $extractor->extract($extractionParameter, $this);
     }
 
     /**
-     * return all the available descriptions as a key value array
-     * @return array
+     * @param StorableContract $storable
+     * @param string $dependencyAlias
+     * @return mixed
+     * @throws CircularDependencyException
+     * @throws ContainerException
      */
-    public function getDescriptions():array
+    public function extractDependency(StorableContract $storable, string $dependencyAlias)
     {
-        return $this->descriptions;
-    }
-
-    /**
-     * return all the available descriptions as a key value array
-     * @return array
-     */
-    public function getValues():array
-    {
-        return $this->values;
-    }
-
-    /**
-     * return all the available singletons as a key value(closure) array
-     * @return array
-     */
-    public function getSingletons():array
-    {
-        return $this->singletons;
+        $this->chain->append($dependencyAlias);
+        return $this->extract($storable);
     }
 
 
     /**
      * Return a value store inside de container
      * @param string $alias
-     * @param string $container
+     * @param string|null $storage
+     * @param array $args
      * @return mixed|void
-     * @throws InvalidArgumentException
+     * @throws CircularDependencyException
+     * @throws ContainerException
      * @throws NotFoundException
+     * @throws StorageNotFoundException
      */
-    public function get($alias, $container = self::ALL)
+    public function get($alias, ?string $storage = null, $args = [])
     {
-        if (!$this->has($alias)) {
-            throw new NotFoundException("Cannot resolve [$alias]");
-        }
-        switch ($container) {
-            case self::SINGLETON:
-                return $this->getSingleton($alias);
-            case self::DESCRIPTION:
-                return $this->getDescription($alias);
-            case self::VALUE:
-                return $this->getValue($alias);
-            default:
-                if ($this->hasValue($alias)) {
-                    return $this->getValue($alias);
-                }
-                if ($this->hasSingleton($alias)) {
-                    return $this->getSingleton($alias);
-                }
-                if ($this->hasDescription($alias)) {
-                    return $this->getDescription($alias);
-                }
-        }
+        $this->chain->restartWith($alias);
+        $result = $this->getDependency($alias, $storage, $args);
+        return $result;
     }
 
     /**
-     * check if the an instance with the given alias exists
+     * Return a value store inside de container
+     * @param string $alias
+     * @param array $args
+     * @param $storage
+     * @return mixed|void
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws CircularDependencyException
+     */
+    public function getDependency($alias, ?string $storage = null, $args = [])
+    {
+        $this->chain->append($alias);
+        if (!$this->has($alias, $storage)) {
+            $result = $this->make($alias, is_array($args) ? $args : [$args]);
+        } else {
+            $storage = $this->getStorageFor($alias);
+            $result = $storage->get($alias);
+
+        }
+        return $result;
+    }
+
+    /**
+     * check if the container can build the object that has the given alias
+     * @param string $alias
+     * @param string $storage
+     * @return bool
+     * @throws StorageNotFoundException
+     */
+    public function has($alias, ?string $storage = null)
+    {
+        if (!is_null($storage)) {
+            return $this->getStorage($storage)->has($alias);
+        }
+        foreach ($this->container as $storage) {
+            if ($storage->has($alias)) {
+                $this->resolvedValues[$alias] = $storage->getStorageKey();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param $alias
-     * @return bool
-     */
-    public function hasValue($alias)
-    {
-        return array_key_exists($alias, $this->values);
-    }
-
-    /**
-     * check if the a description with the given alias exists
-     * @param $alias
-     * @return bool
-     */
-    public function hasDescription($alias)
-    {
-        return array_key_exists($alias, $this->descriptions);
-    }
-
-    /**
-     * check if the a factory with the given alias exists
-     * @param $alias
-     * @return bool
-     */
-    public function hasSingleton($alias)
-    {
-        return array_key_exists($alias, $this->singletons);
-    }
-
-    /**check if the container can build the object that has the given alias
-     * @param string $alias
-     * @param string $container
-     * @return bool
-     */
-    public function has($alias, $container = self::ALL)
-    {
-        switch ($container) {
-            case self::SINGLETON:
-                return $this->hasSingleton($alias);
-            case self::DESCRIPTION:
-                return $this->hasDescription($alias);
-            case self::VALUE:
-                return $this->hasValue($alias);
-            default:
-                return $this->hasSingleton($alias) || $this->hasDescription($alias) || $this->hasValue($alias);
-        }
-    }
-
-    /**
-     * @param string $alias
-     * @return mixed
+     * @return StorageContract
      * @throws NotFoundException
      */
-    public function getValue(string $alias)
+    public function getStorageFor($alias): StorageContract
     {
-        if (!$this->hasValue($alias)) {
-            throw new NotFoundException("Cannot resolve an instance with alias [$alias]");
+        if (array_key_exists($alias, $this->resolvedValues)) {
+            return $this->container[$this->resolvedValues[$alias]];
         }
-        return $this->getValues()[$alias];
+        foreach ($this->container as $storage) {
+            if ($storage->has($alias)) {
+                $this->resolvedValues[$alias] = $storage->getStorageKey();
+                return $storage;
+            }
+        }
+        throw new NotFoundException($alias);
     }
 
-    /**
-     * @param string $alias
-     * @return mixed
-     * @throws NotFoundException
-     * @throws InvalidArgumentException
-     */
-    public function getSingleton(string $alias)
-    {
-        if (!$this->hasSingleton($alias)) {
-            throw new NotFoundException("Cannot resolve a singleton with alias [$alias]");
-        }
-        if ($this->hasValue($alias)) {
-            return $this->getValue($alias);
-        }
-        $instance = $this->getSingletons()[$alias]();
-        $this->describeValue($alias, $instance);
-        return $instance;
-    }
 
     /**
-     * @param string $alias
-     * @return mixed
-     * @throws NotFoundException
-     */
-    public function getDescription(string $alias)
-    {
-        if (!$this->hasDescription($alias)) {
-            throw new NotFoundException("Cannot resolve a description with alias [$alias]");
-        }
-        $description = $this->getDescriptions()[$alias];
-        if (is_callable($description)) {
-            return $description();
-        }
-        return $description[$alias];
-    }
-
-    /**
-     * @return array
-     */
-    private function getContainerTypes()
-    {
-        return [
-          self::DESCRIPTION,
-          self::VALUE,
-          self::SINGLETON
-        ];
-    }
-
-    /**
+     * parse the the [storage::key] notation
+     *
      * @param $offset
      * @return array
      */
     private function parseOffset($offset)
     {
         $result = explode('::', $offset);
-        if (count($result)<=1) {
+        if (count($result) <= 1) {
             return [
-               'container' => self::ALL,
-               'value'=>$offset
+                'value' => $offset
             ];
         }
-        $container = $result[0];
+        $storage = $result[0];
         unset($result[0]);
         $value = implode('::', $result);
-        if (!in_array($container, $this->getContainerTypes())) {
+        if (!$this->hasStorage($storage)) {
             return [
-                'container' => self::ALL,
-                'value'=>$offset
+                'value' => $offset
             ];
         }
         return [
-            'container'=>$container,
-            'value'=>$value
+            'storage' => $storage,
+            'value' => $value
         ];
     }
+
+    /**
+     * @param mixed $offset
+     * @return bool
+     * @throws StorageNotFoundException
+     */
     public function offsetExists($offset)
     {
         $data = $this->parseOffset($offset);
@@ -339,214 +355,79 @@ class DIC implements ContainerInterface, \ArrayAccess
     /**
      * @param mixed $offset
      * @return mixed|void
-     * @throws InvalidArgumentException
+     * @throws ContainerException
      * @throws NotFoundException
+     * @throws CircularDependencyException
      */
     public function offsetGet($offset)
     {
         $data = $this->parseOffset($offset);
-        return $this->get($data['value'], $data['container']);
+        return $this->get($data['value'], $data['container'], []);
     }
 
     /**
      * @param mixed $offset
      * @param mixed $value
-     * @return DIC|void
-     * @throws InvalidArgumentException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
      */
     public function offsetSet($offset, $value)
     {
         $data = $this->parseOffset($offset);
-        if (!is_callable($value)) {
-            $data['container'] = self::VALUE;
+        if (!array_key_exists("storage", $data)) {
+            $this->getDefaultStorage()->store($offset, $value);
+            return;
         }
-        return $this->describe($data['value'], $value, $data['container']);
+        $storage = $data["storage"];
+        $key = $data["value"];
+        $this->getStorage($storage)->store($key, $value);
     }
 
+    /**
+     * @param mixed $offset
+     * @throws StorageNotFoundException
+     */
     public function offsetUnset($offset)
     {
-        if ($this->hasSingleton($offset)) {
-            unset($this->singletons[$offset]);
+        $data = $this->parseOffset($offset);
+        if (array_key_exists("storage", $data)) {
+            $storage = $data["storage"];
+            $key = $data["value"];
+            $this->getStorage($storage)->remove($key);
+            return;
         }
-        if ($this->hasDescription($offset)) {
-            unset($this->descriptions[$offset]);
-        }
-        if ($this->hasValue($offset)) {
-            unset($this->values[$offset]);
+        foreach ($this->getContainer() as $storageKey => $storage) {
+            $storage->remove($storageKey);
         }
         return;
     }
 
-
     /**
-     * @param string $className
-     * @param array $args
-     * @param bool $cache
-     * @return mixed|object|void
-     * @throws InvalidArgumentException
-     * @throws NotFoundException
-     * @throws \ReflectionException
+     * @param string $alias
+     * @param array $params
+     * @return mixed
      * @throws ContainerException
      */
-    public function make(string $className, array $args = [], bool $cache = false)
+    public function make(string $alias, array $params = [])
     {
-        if ($className instanceof Closure) {
-            return $className($this, $args);
-        }
-        if ($this->has($className)) {
-            return $this->get($className);
-        }
-        $reflectedClass = new \ReflectionClass($className);
-        if (!$reflectedClass->isInstantiable()) {
-            throw new ContainerException("Unable to resolve the class [$className]");
-        }
-        $constructor = $reflectedClass->getConstructor();
-        if (is_null($constructor)) {
-            return $reflectedClass->newInstance();
-        }
-        $constructor->getParameters();
-        $params = $this->getFunctionParameters($constructor,$args);
-
-        $result =  $reflectedClass->newInstanceArgs($params);
-        if ($cache) {
-            try {
-                $this->describeValue($className, $result);
-            } catch (InvalidArgumentException $e) {
-                throw $e;
-            }
-        }
-        return $result;
+        return $this->extract(new BuildObject($alias, $params));
     }
 
-    /**
-     * Call a methods or a function
-     * @param   String $function
-     * @param   array $args
-     * @return  mixed
-     * @throws  ContainerException
-     * @throws  InvalidArgumentException
-     * @throws  NotFoundException
-     */
-    public function call(String $function,$args=[]){
-        try {
-            $result = $this->parseClassMethodNotation($function);
-            $function = $result['function'];
-            $class = $result['class'];
-            if (is_null($class)) {
-                return $this->callFunction($function,$args);
-            }
-            return $this->callMethod($class,$function,$args);
-        } catch (\ReflectionException $e) {
-            throw new NotFoundException("Cannot generate reflection for ['$function']");
-        }
-    }
-
-    /**
-     * Call a function
-     * @param  Strng function aname
-     * @param  array Arggumets
-     * @return mixed
-     */
-    public function callFunction(String $function,$args=[]){
-        $reflectedFunction = new \ReflectionFunction($function);
-        $closure = $reflectedFunction->getClosure();
-        $params = $this->getFunctionParameters($reflectedFunction,$args);
-        return call_user_func_array($closure,$params);
-    }
-
-    /**
-     * call a method inside a class that the container can build 
-     * @param  String the class that has the method
-     * @param  string
-     * @param  array
-     * @return mixed
-     */
-    public function callMethod($class,$method='__invoke',$args=[]){
-        $reflectedMethod = new \ReflectionMethod($class,$method);
-        $params = $this->getFunctionParameters($reflectedMethod,$args);
-
-        $instance = $this->make($class);
-        return $reflectedMethod->invokeArgs($instance,$args);
-    }
-
-    private function parseClassMethodNotation($string){
-        $result['class'] = null;
-        $explodedString = explode('::', $string);
-        if (count($explodedString)<=1) {
-            $result['function'] = $string;
-            return $result;
-        }
-        list($class, $method) = $explodedString;
-        $result['class'] = $class;
-        $result['function'] = $method;
-        return $result;
-
-    }
-
-    /**
-     * @param \ReflectionParameter $param
-     * @return String|null
-     */
-    private function getParameterClassName(\ReflectionParameter $param):?String{
-        $paramClass = $param->getClass();
-        if(is_null($paramClass)){
-            return null;
-        }
-        return $paramClass->getName();
-    }
-
-    /**
-     * Returns the default value of a function parameter.
-     *
-     * @param \ReflectionParameter $parameter
-     * @param \ReflectionFunctionAbstract $function
-     * @return mixed
-     * @throws InvalidArgumentException
-     */
-    private function getParameterDefaultValue(\ReflectionParameter $parameter, \ReflectionFunctionAbstract $function)
+    public function toArray(): array
     {
-        try {
-            return $parameter->getDefaultValue();
-        } catch (\ReflectionException $e) {
-            throw new InvalidArgumentException(sprintf(
-                'The parameter "%s" of %s has no type defined or guessable. It has a default value, '
-                . 'but the default value can\'t be read through Reflection because it is a PHP internal class.',
-                $parameter->getName(),
-                $function->getName()
-            ));
+        $data = [];
+        /**
+         * AbstractStorable $storage
+         */
+        foreach ($this->container as $storage) {
+            $data[$storage->getStorageKey()] = $storage->toArray();
         }
+        return $data;
     }
 
-    /**
-     * @param \ReflectionFunctionAbstract $method
-     * @param array $args
-     * @return array
-     * @throws ContainerException
-     * @throws InvalidArgumentException
-     * @throws NotFoundException
-     * @throws \ReflectionException
-     */
-    private function getFunctionParameters(\ReflectionFunctionAbstract $method, $args=[]):array{
-        $params = [];
-        foreach ($method->getParameters() as $index => $parameter) {
-            $paramName = $parameter->getName();
-            if (array_key_exists($parameter->getName(), $args)) {
-                $params[$paramName] = $args[$paramName];
-                continue;
-            }
-            if ($parameter->isDefaultValueAvailable() || $parameter->isOptional()) {
-                $params[$paramName] = $this->getParameterDefaultValue($parameter, $method);
-            }
-            $paramClass = $this->getParameterClassName($parameter);
-            if (is_null($paramClass)) {
-                throw new NotFoundException("Cannot resolve argument [{$paramName}]");
-            }
-            if ($this->has($paramClass)) {
-                $params[$paramName] = $this->get($paramClass);
-                continue;
-            }
-            $params[$paramName] = $this->make($paramClass);
-        }
-        return $params;
+    public function getExtractors():array{
+        return $this->extractors;
     }
+
 }

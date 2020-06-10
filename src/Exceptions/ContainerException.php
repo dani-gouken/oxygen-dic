@@ -1,6 +1,6 @@
 <?php
 
-namespace ExpressiveDIC\Exceptions;
+namespace Oxygen\DI\Exceptions;
 
 use Psr\Container\ContainerExceptionInterface;
 

@@ -1,9 +1,20 @@
 <?php
-namespace ExpressiveDIC\Exceptions;
+namespace Oxygen\DI\Exceptions;
 
+use Exception;
+use Oxygen\DI\Contracts\StorageContract;
 use Psr\Container\NotFoundExceptionInterface;
 
-class NotFoundException extends \Exception implements NotFoundExceptionInterface
+class NotFoundException extends Exception implements NotFoundExceptionInterface
 {
+    public function __construct(string $key, ?StorageContract $storage = null)
+    {
+        if($storage){
+            $message = "The container is unable to resolve [$key] using the storage [{$storage->getStorageKey()}]";
+        }else{
+            $message = "The container is unable to resolve [$key].";
+        }
+        parent::__construct($message);
+    }
 
 }
