@@ -21,7 +21,7 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
     {
         $methodIsCallable = is_callable($method);
         $methodIsString = is_string($method);
-        if(!$methodIsString && !$methodIsCallable){
+        if (!$methodIsString && !$methodIsCallable) {
             throw new InvalidArgumentException("Parameter 1 should be either a string or a callable");
         }
         $this->method = $method;
@@ -30,7 +30,7 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
         parent::__construct();
     }
 
-    public function getExtractionKey():string
+    public function getExtractionKey(): string
     {
         return $this->methodIsString ? $this->method : "__closure__";
     }
@@ -42,7 +42,10 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
     {
         return $this->method;
     }
-
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
     /**
      * @return bool
      */
@@ -64,14 +67,14 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
         return self::hydrateMappingFromArray(new FunctionExtractionParameter(
             $array["method"],
             $array["parameter"]
-        ),$array);
+        ), $array);
     }
 
     public function toArray(): array
     {
         return array_merge([
             "method" => $this->method,
-            'parameter' =>$this->parameters,
-        ],$this->mappingToArray());
+            'parameter' => $this->parameters,
+        ], $this->mappingToArray());
     }
 }

@@ -34,7 +34,7 @@ class FunctionExtractor implements ExtractorContract
          */
         $reflectedFunction = new ReflectionFunction($params->getMethod());
         $closure = $reflectedFunction->getClosure();
-        $params = $this->getFunctionParameters($reflectedFunction, $container,$params);
+        $params = $this->getFunctionParameters($reflectedFunction, $container, $params, $params->getParameters());
         return call_user_func_array($closure, $params);
     }
 

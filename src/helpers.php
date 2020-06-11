@@ -1,6 +1,6 @@
 <?php
-
 use Oxygen\DI\BuildObject;
+use Oxygen\DI\CallFunction;
 use Oxygen\DI\CallMethod;
 use Oxygen\DI\Get;
 use Oxygen\DI\Value;
@@ -18,7 +18,7 @@ function callInvoke(array $parameters = []){
 }
 
 function callFunction($callable,array $parameters = []){
-    return callFunction($callable,$parameters);
+    return new CallFunction($callable,$parameters);
 }
 
 function get(string $key){
