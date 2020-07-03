@@ -76,6 +76,5 @@ function configuration(string $key){
     return "secret" . $key;
 }
 $dic->factory()->store("auth.secret",callFunction("configuration",["key"=>"yelp"]));
-
 var_dump($dic->make(User::class));
 var_dump($dic->factory()->get("auth.secret"));

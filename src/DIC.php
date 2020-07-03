@@ -45,7 +45,7 @@ class DIC implements ContainerInterface, ArrayAccess
     /**
      * @var string
      */
-    private $defaultStorageAlias = FactoryStorage::class;
+    private $defaultStorageAlias = SingletonStorage::STORAGE_KEY;
     /**
      * @var ExtractionChain
      */
@@ -143,7 +143,7 @@ class DIC implements ContainerInterface, ArrayAccess
      * return the container
      * @return StorageContract[]
      */
-    public function getContainer()
+    public function getContainer(): array
     {
         return $this->container;
     }
@@ -153,9 +153,18 @@ class DIC implements ContainerInterface, ArrayAccess
      * @return StorageContract
      * @throws NotFoundException
      */
-    public function getDefaultStorage()
+    public function getDefaultStorage(): StorageContract
     {
-        return $this->getStorageFor($this->defaultStorageAlias);
+        return $this->getStorage($this->defaultStorageAlias);
+    }
+
+    /**
+     * return the default storage alias
+     * @return string
+     */
+    public function getDefaultStorageAlias(): String
+    {
+        return $this->defaultStorageAlias;
     }
 
     /**
@@ -166,7 +175,7 @@ class DIC implements ContainerInterface, ArrayAccess
     public function factory(): FactoryStorage
     {
         /**
-         * @var $result FactoryStorage
+         * @var FactoryStorage $result 
          */
         $result = $this->getStorage(FactoryStorage::STORAGE_KEY);
         return $result;
@@ -179,9 +188,7 @@ class DIC implements ContainerInterface, ArrayAccess
      */
     public function singleton(): SingletonStorage
     {
-        /**
-         * @var $result SingletonStorage
-         */
+        /** @var SingletonStorage $result */
         $result = $this->getStorage(SingletonStorage::STORAGE_KEY);
         return $result;
     }
@@ -194,7 +201,7 @@ class DIC implements ContainerInterface, ArrayAccess
     public function value(): ValueStorage
     {
         /**
-         * @var $result ValueStorage
+         * @var ValueStorage $result
          */
         $result = $this->getStorage(ValueStorage::STORAGE_KEY);
         return $result;
@@ -231,7 +238,7 @@ class DIC implements ContainerInterface, ArrayAccess
 
 
     /**
-     * Return a value store inside de container
+     * Return a value store inside the container
      * @param string $alias
      * @param string|null $storage
      * @param array $args
@@ -241,10 +248,10 @@ class DIC implements ContainerInterface, ArrayAccess
      * @throws NotFoundException
      * @throws StorageNotFoundException
      */
-    public function get($alias, ?string $storage = null, $args = [])
+    public function get($alias, ?string $storage = null, $args = [], $makeIfNotAvailable = true)
     {
         $this->chain->restartWith($alias);
-        $result = $this->getDependency($alias, $storage, $args);
+        $result = $this->getDependency($alias, $storage, $args, $makeIfNotAvailable);
         return $result;
     }
 
@@ -253,22 +260,24 @@ class DIC implements ContainerInterface, ArrayAccess
      * @param string $alias
      * @param array $args
      * @param $storage
+     * @param bool $makeIfNotAvailable
      * @return mixed|void
      * @throws ContainerException
      * @throws NotFoundException
      * @throws StorageNotFoundException
      * @throws CircularDependencyException
      */
-    public function getDependency($alias, ?string $storage = null, $args = [])
+    public function getDependency(String $alias, ?string $storage = null, $args = [], bool $makeIfNotAvailable = true)
     {
         $this->chain->append($alias);
-        if (!$this->has($alias, $storage)) {
-            $result = $this->make($alias, is_array($args) ? $args : [$args]);
-        } else {
-            $storage = $this->getStorageFor($alias);
-            $result = $storage->get($alias);
-
+        if (!$this->has($alias, $storage) && $makeIfNotAvailable) {
+            return  $this->make($alias, is_array($args) ? $args : [$args]);
         }
+        if (!is_null($storage)) {
+            return $this->getStorage($storage)->get($alias);
+        }
+        $storage = $this->getStorageFor($alias);
+        $result = $storage->get($alias);
         return $result;
     }
 
@@ -362,7 +371,7 @@ class DIC implements ContainerInterface, ArrayAccess
     public function offsetGet($offset)
     {
         $data = $this->parseOffset($offset);
-        return $this->get($data['value'], $data['container'], []);
+        return $this->get($data['value'], $data['storage'] ?? null, []);
     }
 
     /**
@@ -426,8 +435,17 @@ class DIC implements ContainerInterface, ArrayAccess
         return $data;
     }
 
-    public function getExtractors():array{
+    /**
+     * Return all the available extractors
+     * @return ExtractorContract[]
+     */
+    public function getExtractors(): array
+    {
         return $this->extractors;
     }
 
+    public function getExtractionChain(): ExtractionChain
+    {
+        return $this->chain;
+    }
 }

@@ -2,6 +2,7 @@
 
 
 namespace Oxygen\DI\Storage;
+
 use Oxygen\DI\Contracts\StorableContract;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
@@ -19,7 +20,7 @@ use Oxygen\DI\Extraction\ValueExtractor;
  */
 abstract class AbstractStorage implements StorageContract
 {
-    protected $supportedExtractors = [ValueExtractor::class,ObjectExtractor::class,MethodExtractor::class,FunctionExtractor::class];
+    protected $supportedExtractors = [ValueExtractor::class, ObjectExtractor::class, MethodExtractor::class, FunctionExtractor::class];
 
     protected $descriptions = [];
 
@@ -27,22 +28,25 @@ abstract class AbstractStorage implements StorageContract
      * @param string $extractorClassName
      * @throws ContainerException
      */
-    public function addSupportForExtractor(string $extractorClassName): void{
-        if($this->container->hasExtractor($extractorClassName)){
+    public function addSupportForExtractor(string $extractorClassName): void
+    {
+        if ($this->container->hasExtractor($extractorClassName)) {
             throw new ContainerException("You are trying add the support for the invoker [$extractorClassName] 
-            in the storage [".self::class."], but that invoker is not registered in the container");
+            in the storage [" . self::class . "], but that invoker is not registered in the container");
         }
-        if(!array_key_exists($extractorClassName,$this->supportedExtractors)){
+        if (!array_key_exists($extractorClassName, $this->supportedExtractors)) {
             $this->supportedExtractors[] = $extractorClassName;
         }
     }
 
-    public function supportExtractor(string $extractorClassName): bool{
-        return in_array($extractorClassName,$this->supportedExtractors);
+    public function supportExtractor(string $extractorClassName): bool
+    {
+        return in_array($extractorClassName, $this->supportedExtractors);
     }
 
-    public function has(string $key):bool{
-        return array_key_exists($key,$this->descriptions);
+    public function has(string $key): bool
+    {
+        return array_key_exists($key, $this->descriptions);
     }
 
     /**
@@ -51,7 +55,8 @@ abstract class AbstractStorage implements StorageContract
      * @throws ContainerException
      * @throws NotFoundException
      */
-    public function get(string $key){
+    public function get(string $key)
+    {
         return $this->container->extract($this->resolve($key));
     }
 
@@ -65,10 +70,10 @@ abstract class AbstractStorage implements StorageContract
      * @return mixed
      * @throws NotFoundException
      */
-    public function resolve(string $key):StorableContract
+    public function resolve(string $key): StorableContract
     {
-        if(!$this->has($key)){
-            throw new NotFoundException($key,$this);
+        if (!$this->has($key)) {
+            throw new NotFoundException($key, $this);
         }
         return $this->getDescriptions()[$key];
     }
@@ -79,7 +84,7 @@ abstract class AbstractStorage implements StorageContract
      */
     public function toGet(string $key, StorableContract $value)
     {
-        $this->store($key,$value);
+        $this->store($key, $value);
     }
 
     public function extends(string $key, callable $extendFunction)
@@ -90,22 +95,21 @@ abstract class AbstractStorage implements StorageContract
     public function toArray(): array
     {
         $data = [];
-        foreach ($this->descriptions as $key =>  $description){
+        foreach ($this->descriptions as $key =>  $description) {
             $data[$key] = $description->toArray();
         }
         return $data;
     }
 
-    public function getDescriptions(){
+    public function getDescriptions()
+    {
         return $this->descriptions;
     }
 
-    public function remove(string $key){
-        if(!$this->has($key)){
+    public function remove(string $key)
+    {
+        if ($this->has($key)) {
             unset($this->descriptions[$key]);
         }
     }
-
-
-
 }

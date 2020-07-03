@@ -39,7 +39,7 @@ class ObjectExtractor implements ExtractorContract
         try {
             $reflectedClass = new ReflectionClass($params->getClassName());
         } catch (Exception $e) {
-            throw new ContainerException("Unable to generate reflected class for [$className]");
+            throw new ContainerException("Unable to resolve the class [$className]");
         }
         if (!$reflectedClass->isInstantiable()) {
             throw new ContainerException("The class [$className] is not instantiable");
@@ -49,7 +49,7 @@ class ObjectExtractor implements ExtractorContract
             return $reflectedClass->newInstance();
         }
         $constructor->getParameters();
-        $resolvedParameters = $this->getFunctionParameters($constructor, $container,$params,$params->getConstructorArgs());
+        $resolvedParameters = $this->getFunctionParameters($constructor, $container, $params, $params->getConstructorArgs());
         $result = $reflectedClass->newInstanceArgs($resolvedParameters);
         if ($params->canCacheResult()) {
             $container->getStorage(ValueStorage::STORAGE_KEY)->store($className, new Value($result));

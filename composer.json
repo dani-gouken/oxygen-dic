@@ -15,17 +15,27 @@
             "email": "globexcam.dani@gmail.com"
         }
     ],
-    "scripts":{
-        "test" : "kahlan"
+    "scripts": {
+        "test": "kahlan"
     },
     "minimum-stability": "beta",
     "require": {
         "psr/container": "^1.0"
     },
     "autoload": {
-        "psr-4": { "Oxygen\\DI\\": "src","Oxygen\\DI\\Test\\": "tests" },
+        "psr-4": {
+            "Oxygen\\DI\\": "src"
+        },
         "files": [
             "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Oxygen\\DI\\Test\\": "tests"
+        },
+        "files": [
+            "tests/Misc/functions.php"
         ]
     }
 }

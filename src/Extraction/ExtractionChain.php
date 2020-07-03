@@ -17,21 +17,29 @@ class ExtractionChain
      * @param string $item
      * @throws CircularDependencyException
      */
-    public function append(string $item){
-        if(in_array($item,$this->chain)){
-            throw new CircularDependencyException($item,$this);
+    public function append(string $item)
+    {
+        if ($this->contains($item)) {
+            throw new CircularDependencyException($item, $this);
         }
         $this->chain[] = $item;
     }
 
+    public function contains(string $item)
+    {
+        return in_array($item, $this->chain);
+    }
 
-    public function restartWith(string $item){
+
+    public function restartWith(string $item)
+    {
         $this->clear();
         //$this->chain[$item] = $item;
     }
 
 
-    public function clear(){
+    public function clear()
+    {
         $this->chain = [];
     }
 
@@ -45,8 +53,6 @@ class ExtractionChain
 
     public function __toString()
     {
-        return implode(" => ",$this->chain);
+        return implode(" => ", $this->chain);
     }
-
-
 }
