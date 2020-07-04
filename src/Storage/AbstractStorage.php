@@ -21,16 +21,19 @@ use Oxygen\DI\Extraction\ValueExtractor;
 abstract class AbstractStorage implements StorageContract
 {
     protected $supportedExtractors = [ValueExtractor::class, ObjectExtractor::class, MethodExtractor::class, FunctionExtractor::class];
-
+    protected $container;
     protected $descriptions = [];
-
+    public function __construct(DIC $dic)
+    {
+        $this->container = $dic;
+    }
     /**
      * @param string $extractorClassName
      * @throws ContainerException
      */
     public function addSupportForExtractor(string $extractorClassName): void
     {
-        if ($this->container->hasExtractor($extractorClassName)) {
+        if (!$this->container->hasExtractor($extractorClassName)) {
             throw new ContainerException("You are trying add the support for the invoker [$extractorClassName] 
             in the storage [" . self::class . "], but that invoker is not registered in the container");
         }
