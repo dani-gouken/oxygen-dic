@@ -18,10 +18,10 @@ class ValueExtractionParameter extends AbstractExtractionParameter implements Ex
 
     public function getExtractionKey(): string
     {
-        if(is_string($this->value) || is_numeric($this->value)){
-            return (string)$this->value;
+        if (is_string($this->value) || is_numeric($this->value)) {
+            return (string) $this->value;
         }
-        if(is_object($this->value)){
+        if (is_object($this->value)) {
             return get_class($this->value);
         }
         return "__closure__";
@@ -33,6 +33,14 @@ class ValueExtractionParameter extends AbstractExtractionParameter implements Ex
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function setValue($value)
+    {
+        return $this->value = $value;
     }
 
     public static function fromArray($array)

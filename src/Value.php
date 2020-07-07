@@ -49,4 +49,14 @@ class Value extends AbstractStorable
         $this->parameter = $parameter;
         return $this;
     }
+
+    public function setValue($value)
+    {
+        $this->parameter->setValue($value);
+    }
+
+    public function getValue()
+    {
+        return $this->parameter->getValue();
+    }
 }

@@ -101,6 +101,11 @@ class DIC implements ContainerInterface, ArrayAccess
         return array_key_exists($extractorClassName, $this->extractors);
     }
 
+    public function addExtractor(ExtractorContract $extractor): void
+    {
+        $this->extractors[get_class($extractor)] = $extractor;
+    }
+
     /**
      * Add a new storage. will throw if a storage with a similar key already exists
      * @param StorageContract $storage

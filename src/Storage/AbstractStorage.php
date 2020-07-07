@@ -27,6 +27,12 @@ abstract class AbstractStorage implements StorageContract
     {
         $this->container = $dic;
     }
+
+    public function getContainer(): DIC
+    {
+        return $this->container;
+    }
+
     /**
      * @param string $extractorClassName
      * @throws ContainerException
@@ -52,20 +58,27 @@ abstract class AbstractStorage implements StorageContract
         return array_key_exists($key, $this->descriptions);
     }
 
-    /**
-     * @param string $key
-     * @return mixed
-     * @throws ContainerException
-     * @throws NotFoundException
-     */
-    public function get(string $key)
+    public function contains(String $key): bool
     {
-        return $this->container->extract($this->resolve($key));
+        return $this->has($key);
     }
 
+    /**
+     * @param string $key
+     * @param StorableContract $value
+     */
     public function store(string $key, StorableContract $value)
     {
         $this->descriptions[$key] = $value;
+    }
+
+    /**
+     * @param string $key
+     * @param StorableContract $value
+     */
+    public function toGet(string $key, StorableContract $value)
+    {
+        $this->store($key, $value);
     }
 
     /**
@@ -83,16 +96,19 @@ abstract class AbstractStorage implements StorageContract
 
     /**
      * @param string $key
-     * @param StorableContract $value
+     * @return mixed
+     * @throws ContainerException
+     * @throws NotFoundException
      */
-    public function toGet(string $key, StorableContract $value)
+    public function get(string $key)
     {
-        $this->store($key, $value);
+        return $this->container->extract($this->resolve($key));
     }
+
 
     public function extends(string $key, callable $extendFunction)
     {
-        $this->descriptions[$key] = $extendFunction($this->descriptions[$key]);
+        $this->store($key, $extendFunction($this->descriptions[$key]));
     }
 
     public function toArray(): array

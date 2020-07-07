@@ -33,7 +33,7 @@ class ObjectExtractor implements ExtractorContract
     public function extract(ExtractionParameterContract $params, DIC $container)
     {
         /**
-         * @var $params ObjectExtractionParameter
+         * @var ObjectExtractionParameter $params 
          */
         $className = $params->getClassName();
         try {
