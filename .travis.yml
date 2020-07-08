@@ -8,7 +8,7 @@ install:
 - travis_retry composer install --no-interaction --no-suggest
 
 script:
-- composer test -- --coverage-clover=coverage.xml
+- composer test
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 branches:
