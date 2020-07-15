@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction;
 
-
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\ExtractorContract;
 use Oxygen\DI\Contracts\StorableContract;
@@ -32,12 +31,12 @@ class MethodExtractor implements ExtractorContract
      */
     public function extract(ExtractionParameterContract $params, DIC $container)
     {
-        $object = $this->getObject($params,$container);
+        $object = $this->getObject($params, $container);
         /**
          * @var $params MethodExtractionParameter
          */
         $reflectedMethod = new ReflectionMethod($object, $params->getMethod());
-        $methodParams = $this->getFunctionParameters($reflectedMethod, $container,$params,$params->getParameters());
+        $methodParams = $this->getFunctionParameters($reflectedMethod, $container, $params, $params->getParameters());
         return $reflectedMethod->invokeArgs($object, $methodParams);
     }
 
@@ -50,15 +49,16 @@ class MethodExtractor implements ExtractorContract
      * @throws NotFoundException
      * @throws StorageNotFoundException
      */
-    public function getObject(MethodExtractionParameter $parameter,DIC $container):object {
-        if($parameter->getClass() instanceof  StorableContract){
+    public function getObject(MethodExtractionParameter $parameter, DIC $container):object
+    {
+        if ($parameter->getClass() instanceof  StorableContract) {
             /**
              * @var $storable StorableContract
              */
             $storable = $parameter->getClass();
             return $container->extractDependency($storable, $parameter->getClassName());
         }
-        if($parameter->classIsString()){
+        if ($parameter->classIsString()) {
             return $container->getDependency($parameter->getClass());
         }
         return $parameter->getClass();

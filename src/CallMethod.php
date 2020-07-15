@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI;
 
-
 use InvalidArgumentException;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;

@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction\ExtractionParameters;
 
-
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\MappingContract;
 use Oxygen\DI\Mapping\Mapping;

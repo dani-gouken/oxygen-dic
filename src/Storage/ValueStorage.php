@@ -34,8 +34,8 @@ class ValueStorage extends AbstractStorage
      */
     public function store(string $key, StorableContract $value)
     {
-        if(!$this->supportExtractor($value->getExtractorClassName())){
-            throw new UnsupportedInvokerException($this->getStorageKey(),$key,$value,$this->supportedExtractors);
+        if (!$this->supportExtractor($value->getExtractorClassName())) {
+            throw new UnsupportedInvokerException($this->getStorageKey(), $key, $value, $this->supportedExtractors);
         }
         parent::store($key, $value);
     }

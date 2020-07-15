@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction\ExtractionParameters;
 
-
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 
 class ValueExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract

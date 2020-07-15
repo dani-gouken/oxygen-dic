@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Contracts;
 
-
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\ContainerException;
 
@@ -50,7 +49,7 @@ interface StorageContract
      * @param StorableContract $storable
      * @return mixed
      */
-    public function store(string $key ,StorableContract $storable);
+    public function store(string $key, StorableContract $storable);
 
     /**
      * resolve a value in the storage
@@ -66,7 +65,7 @@ interface StorageContract
      * @param callable $extendFunction
      * @return mixed
      */
-    public function extends(string $key , callable $extendFunction);
+    public function extends(string $key, callable $extendFunction);
 
     /**
      * convert the storage to an array

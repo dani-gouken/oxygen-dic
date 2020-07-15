@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction;
 
-
 use InvalidArgumentException;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\DIC;
@@ -32,28 +31,28 @@ trait ParameterResolverTrait
         ReflectionParameter $parameter,
         DIC $container,
         ExtractionParameterContract $extractionParameter
-    ){
+    ) {
 
         $paramName = $parameter->name;
         if ($parameter->isDefaultValueAvailable() || $parameter->isOptional()) {
-           return $this->getParameterDefaultValue($parameter, $method);
+            return $this->getParameterDefaultValue($parameter, $method);
         }
-        if($extractionParameter->getParameterMapping()->hasMappingFor($paramName)){
+        if ($extractionParameter->getParameterMapping()->hasMappingFor($paramName)) {
             $mapping = $extractionParameter->getParameterMapping()->getMappingFor($paramName);
-            return $container->extractDependency($mapping->getStorable(),$mapping->getMappedEntityKey());
+            return $container->extractDependency($mapping->getStorable(), $mapping->getMappedEntityKey());
         }
         $paramClass = $this->getParameterClassName($parameter);
-        if(is_null($paramClass)){
-            if($method instanceof  ReflectionMethod){
+        if (is_null($paramClass)) {
+            if ($method instanceof  ReflectionMethod) {
                 throw new ContainerException("Cannot resolve argument [{$parameter->name}] when trying to call 
                 the method [$method->name] on [$method->class]");
             }
             throw new ContainerException("Cannot resolve argument [{$parameter->name}] 
                 when trying to call the method [$method->name]");
         }
-        if($extractionParameter->getObjectMapping()->hasMappingFor($paramClass)){
+        if ($extractionParameter->getObjectMapping()->hasMappingFor($paramClass)) {
             $mapping = $extractionParameter->getObjectMapping()->getMappingFor($paramClass);
-            return $container->extractDependency($mapping->getStorable(),$mapping->getMappedEntityKey());
+            return $container->extractDependency($mapping->getStorable(), $mapping->getMappedEntityKey());
         }
         return $container->getDependency($paramClass);
     }
@@ -98,8 +97,7 @@ trait ParameterResolverTrait
         DIC $container,
         ExtractionParameterContract $extractionParameter,
         $args = []
-    ): array
-    {
+    ): array {
         $params = [];
         foreach ($method->getParameters() as $index => $parameter) {
             $paramName = $parameter->getName();
@@ -107,7 +105,7 @@ trait ParameterResolverTrait
                 $params[$paramName] = $args[$paramName];
                 continue;
             }
-            $params[$paramName] = $this->searchParameterValue($method,$parameter,$container,$extractionParameter);
+            $params[$paramName] = $this->searchParameterValue($method, $parameter, $container, $extractionParameter);
         }
         return $params;
     }
@@ -126,5 +124,4 @@ trait ParameterResolverTrait
         }
         return $paramClass->getName();
     }
-
 }

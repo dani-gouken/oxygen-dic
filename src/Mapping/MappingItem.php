@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Mapping;
 
-
 use Oxygen\DI\Contracts\MappingItemContract;
 use Oxygen\DI\Contracts\StorableContract;
 
@@ -39,7 +38,7 @@ class MappingItem implements MappingItemContract
         $key = array_key_first($array);
         $storable = $array[$key];
         $storableKey = array_key_first($storable);
-        return new MappingItem($key,call_user_func(array($storableKey, 'fromArray'),$storable[$storableKey]));
+        return new MappingItem($key, call_user_func(array($storableKey, 'fromArray'), $storable[$storableKey]));
     }
 
     public function toArray(): array

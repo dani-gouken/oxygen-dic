@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Mapping;
 
-
 use Oxygen\DI\Contracts\MappingContract;
 use Oxygen\DI\Contracts\MappingItemContract;
 use Oxygen\DI\Exceptions\ContainerException;
@@ -29,7 +28,7 @@ class Mapping implements MappingContract
      */
     public function getMappingFor(string $key): MappingItemContract
     {
-        if(!$this->hasMappingFor($key)){
+        if (!$this->hasMappingFor($key)) {
             throw new ContainerException("Unable to find a valid mapping for [$key]");
         }
         return $this->map[$key];
@@ -41,7 +40,7 @@ class Mapping implements MappingContract
      */
     public function hasMappingFor(string $key): bool
     {
-        return array_key_exists($key,$this->map);
+        return array_key_exists($key, $this->map);
     }
 
     /**
@@ -65,7 +64,7 @@ class Mapping implements MappingContract
     public function toArray(): array
     {
         $result = [];
-        foreach ($this->map as $item){
+        foreach ($this->map as $item) {
             $result[] = $item->toArray();
         }
         return $result;

@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Contracts;
 
-
 use Oxygen\DI\DIC;
 
 interface ExtractorContract

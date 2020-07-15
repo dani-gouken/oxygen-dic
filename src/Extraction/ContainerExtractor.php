@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction;
 
-
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\ExtractorContract;
 use Oxygen\DI\DIC;
@@ -27,9 +26,9 @@ class ContainerExtractor implements ExtractorContract
     public function extract(ExtractionParameterContract $params, DIC $container)
     {
         /**
-         * @var $params ContainerExtractionParameter
+         * @var ContainerExtractionParameter $params
          */
-        return $container->getDependency($params->getKey());
+        return $container->getDependency($params->getKey(), null, [], false);
     }
 
     public function isValidExtractionParameter(ExtractionParameterContract $params)

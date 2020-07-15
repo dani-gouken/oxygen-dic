@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Contracts;
 
-
 interface MappingContract extends ArraySerializable
 {
     /**
@@ -29,5 +28,4 @@ interface MappingContract extends ArraySerializable
      * @return bool
      */
     public function add(MappingItemContract $mappingItem);
-
 }

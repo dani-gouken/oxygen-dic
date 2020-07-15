@@ -31,9 +31,9 @@ class ContainerExtractionParameter extends AbstractExtractionParameter
 
     public static function fromArray($array)
     {
-      return self::hydrateMappingFromArray(new ContainerExtractionParameter(
+        return self::hydrateMappingFromArray(new ContainerExtractionParameter(
             $array["key"]
-        ),$array);
+        ), $array);
     }
 
     public function toArray(): array

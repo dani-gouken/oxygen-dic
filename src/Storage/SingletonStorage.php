@@ -34,10 +34,10 @@ class SingletonStorage extends AbstractStorage
      */
     public function get(string $key)
     {
-        if(!$this->has($key)){
-            throw new NotFoundException($key,$this);
+        if (!$this->has($key)) {
+            throw new NotFoundException($key, $this);
         }
-        if(array_key_exists($key,$this->resolvedValues)){
+        if (array_key_exists($key, $this->resolvedValues)) {
             return $this->resolvedValues[$key];
         }
         $value = $this->container->extract($this->getDescriptions()[$key]);

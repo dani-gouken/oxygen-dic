@@ -9,5 +9,4 @@ class StorageNotFoundException extends ContainerException
     {
         parent::__construct("The storage [$storageKey] doesnt exists or is not registered in the container");
     }
-
 }

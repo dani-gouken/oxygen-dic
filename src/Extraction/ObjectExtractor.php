@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction;
 
-
 use Exception;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\ExtractorContract;
@@ -33,7 +32,7 @@ class ObjectExtractor implements ExtractorContract
     public function extract(ExtractionParameterContract $params, DIC $container)
     {
         /**
-         * @var ObjectExtractionParameter $params 
+         * @var ObjectExtractionParameter $params
          */
         $className = $params->getClassName();
         try {
@@ -49,7 +48,12 @@ class ObjectExtractor implements ExtractorContract
             return $reflectedClass->newInstance();
         }
         $constructor->getParameters();
-        $resolvedParameters = $this->getFunctionParameters($constructor, $container, $params, $params->getConstructorArgs());
+        $resolvedParameters = $this->getFunctionParameters(
+            $constructor,
+            $container,
+            $params,
+            $params->getConstructorArgs()
+        );
         $result = $reflectedClass->newInstanceArgs($resolvedParameters);
         if ($params->canCacheResult()) {
             $container->getStorage(ValueStorage::STORAGE_KEY)->store($className, new Value($result));

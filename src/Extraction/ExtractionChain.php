@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction;
 
-
 use Oxygen\DI\Exceptions\CircularDependencyException;
 
 class ExtractionChain

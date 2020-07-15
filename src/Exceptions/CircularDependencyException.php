@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Exceptions;
 
-
 use Exception;
 use Oxygen\DI\Extraction\ExtractionChain;
 

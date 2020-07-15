@@ -20,7 +20,12 @@ use Oxygen\DI\Extraction\ValueExtractor;
  */
 abstract class AbstractStorage implements StorageContract
 {
-    protected $supportedExtractors = [ValueExtractor::class, ObjectExtractor::class, MethodExtractor::class, FunctionExtractor::class];
+    protected $supportedExtractors = [
+        ValueExtractor::class,
+        ObjectExtractor::class,
+        MethodExtractor::class,
+        FunctionExtractor::class
+    ];
     protected $container;
     protected $descriptions = [];
     public function __construct(DIC $dic)
@@ -114,7 +119,7 @@ abstract class AbstractStorage implements StorageContract
     public function toArray(): array
     {
         $data = [];
-        foreach ($this->descriptions as $key =>  $description) {
+        foreach ($this->descriptions as $key => $description) {
             $data[$key] = $description->toArray();
         }
         return $data;

@@ -10,7 +10,6 @@ use Oxygen\DI\Extraction\FunctionExtractor;
 use Oxygen\DI\Storage\AbstractStorage;
 use Oxygen\DI\Test\BaseTestCase;
 use Oxygen\DI\Value;
-use TypeError;
 
 class AbstractStorageTest extends BaseTestCase
 {
@@ -61,6 +60,9 @@ class AbstractStorageTest extends BaseTestCase
         $this->assertFalse($storage->contains("bar"));
     }
 
+    /**
+     * @covers AbstractStorage::toGet()
+     */
     public function testStore()
     {
         $storage = $this->makeStorage();

@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI;
 
-
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
 use Oxygen\DI\Extraction\ObjectExtractor;
@@ -63,7 +62,7 @@ class BuildObject extends AbstractStorable
 
     public function toArray(): array
     {
-        return array_merge(["className" => $this->className],$this->extractionParameterToArray());
+        return array_merge(["className" => $this->className], $this->extractionParameterToArray());
     }
 
     public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
@@ -71,5 +70,4 @@ class BuildObject extends AbstractStorable
         $this->extractionParameter = $extractionParameter;
         return $this;
     }
-
 }

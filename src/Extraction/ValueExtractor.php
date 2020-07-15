@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction;
 
-
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\ExtractorContract;
 use Oxygen\DI\DIC;

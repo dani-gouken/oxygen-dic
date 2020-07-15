@@ -5,6 +5,7 @@ namespace Oxygen\DI\Test\Storage;
 use Oxygen\DI\AbstractStorable;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
 use Oxygen\DI\Extraction\ValueExtractor;
 use Oxygen\DI\Storage\SingletonStorage;
@@ -36,10 +37,11 @@ class SingletonStorageTest extends BaseTestCase
         $storable
             ->expects($this->once())
             ->method("getExtractionParameter");
-        
+
         $storage->store("foo", $storable);
         $storage->get("foo");
-        $storage->get("foo");
-        $storage->get("foo");
+        $this->assertEquals("bar", $storage->get("foo"));
+        $this->expectException(NotFoundException::class);
+        $storage->get("baz");
     }
 }

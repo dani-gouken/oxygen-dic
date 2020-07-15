@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Extraction\ExtractionParameters;
 
-
 use Oxygen\DI\Contracts\ArraySerializable;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 

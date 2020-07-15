@@ -9,7 +9,7 @@ use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\FunctionExtractor;
 use Oxygen\DI\Extraction\MethodExtractor;
 
-class FactoryStorage extends  AbstractStorage
+class FactoryStorage extends AbstractStorage
 {
     protected $supportedExtractors= [FunctionExtractor::class,MethodExtractor::class];
     /**
@@ -31,8 +31,8 @@ class FactoryStorage extends  AbstractStorage
      */
     public function store(string $key, StorableContract $value)
     {
-        if(!$this->supportExtractor($value->getExtractorClassName())){
-            throw new UnsupportedInvokerException($this->getStorageKey(),$key,$value,$this->supportedExtractors);
+        if (!$this->supportExtractor($value->getExtractorClassName())) {
+            throw new UnsupportedInvokerException($this->getStorageKey(), $key, $value, $this->supportedExtractors);
         }
         parent::store($key, $value);
     }

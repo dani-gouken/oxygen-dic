@@ -180,7 +180,7 @@ class DIC implements ContainerInterface, ArrayAccess
     public function factory(): FactoryStorage
     {
         /**
-         * @var FactoryStorage $result 
+         * @var FactoryStorage $result
          */
         $result = $this->getStorage(FactoryStorage::STORAGE_KEY);
         return $result;
@@ -223,7 +223,8 @@ class DIC implements ContainerInterface, ArrayAccess
         $extractor = $this->getExtractor($extractorClassName = $storable->getExtractorClassName());
         if (!$extractor->isValidExtractionParameter($extractionParameter)) {
             $extractionParameterClassName = get_class($extractionParameter);
-            throw new ContainerException("[$extractionParameterClassName] is not a valid parameter for the extractor [$extractorClassName]");
+            throw new ContainerException("[$extractionParameterClassName] is not a valid parameter 
+                for the extractor [$extractorClassName]");
         }
         return $extractor->extract($extractionParameter, $this);
     }

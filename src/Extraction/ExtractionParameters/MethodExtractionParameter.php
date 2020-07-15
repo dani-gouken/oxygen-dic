@@ -64,7 +64,6 @@ class MethodExtractionParameter extends AbstractExtractionParameter implements E
         }
         $this->class = $class;
         parent::__construct();
-
     }
 
     public function getExtractionKey(): string
@@ -132,7 +131,10 @@ class MethodExtractionParameter extends AbstractExtractionParameter implements E
     public static function fromArray($array)
     {
         return self::hydrateMappingFromArray(new self(
-            is_array($array["class"])? call_user_func_array([array_key_first($array["class"]),"fromArray"],$array["class"]) : $array["class"],
+            is_array($array["class"])? call_user_func_array(
+                [array_key_first($array["class"]),"fromArray"],
+                $array["class"]
+            ) : $array["class"],
             $array["method"],
             $array["parameter"]
         ), $array);
@@ -141,7 +143,9 @@ class MethodExtractionParameter extends AbstractExtractionParameter implements E
     public function toArray(): array
     {
         return array_merge([
-            "class" => $this->getClass() instanceof ArraySerializable ? [get_class($this->getClass()) => $this->getClass()->toArray()] : $this->getClass(),
+            "class" => $this->getClass() instanceof ArraySerializable ?
+                        [get_class($this->getClass()) => $this->getClass()->toArray()] :
+                        $this->getClass(),
             "method" => $this->method,
             'parameter' => $this->parameters,
         ], $this->mappingToArray());
