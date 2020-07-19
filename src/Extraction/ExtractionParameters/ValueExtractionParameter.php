@@ -23,7 +23,7 @@ class ValueExtractionParameter extends AbstractExtractionParameter implements Ex
         if (is_object($this->value)) {
             return get_class($this->value);
         }
-        return "__closure__";
+        return "closure_".rand();
     }
 
     /**
@@ -35,6 +35,7 @@ class ValueExtractionParameter extends AbstractExtractionParameter implements Ex
     }
 
     /**
+     * @param $value
      * @return mixed
      */
     public function setValue($value)

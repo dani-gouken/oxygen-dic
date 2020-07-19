@@ -1,5 +1,7 @@
 <?php
 
+namespace Oxygen\DI\Test;
+
 use Oxygen\DI\Contracts\StorableContract;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
@@ -7,6 +9,7 @@ use Oxygen\DI\Exceptions\CircularDependencyException;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Exceptions\StorageNotFoundException;
+use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\ContainerExtractor;
 use Oxygen\DI\Extraction\ExtractionChain;
 use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
@@ -17,10 +20,11 @@ use Oxygen\DI\Extraction\ValueExtractor;
 use Oxygen\DI\Storage\FactoryStorage;
 use Oxygen\DI\Storage\SingletonStorage;
 use Oxygen\DI\Storage\ValueStorage;
-use Oxygen\DI\Test\BaseTestCase;
 use Oxygen\DI\Test\Misc\CircularDependency\CDDummy2;
 use Oxygen\DI\Test\Misc\Dummy1;
 use Oxygen\DI\Test\Misc\Dummy2;
+use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Container\ContainerInterface;
 
 class DICTest extends BaseTestCase
 {
@@ -30,15 +34,18 @@ class DICTest extends BaseTestCase
     public function testTheContainerCanBeInstantiated()
     {
         $container = $this->getContainer();
-        $this->assertInstanceOf(DIC::class, $container,);
+        $this->assertInstanceOf(DIC::class, $container);
     }
 
     public function testItImplementPsr4()
     {
         $container = $this->getContainer();
-        $this->assertInstanceOf(Psr\Container\ContainerInterface::class, $container);
+        $this->assertInstanceOf(ContainerInterface::class, $container);
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function testItIsASingleton()
     {
         $container = $this->getContainer();
@@ -62,9 +69,13 @@ class DICTest extends BaseTestCase
         }
     }
 
-    public function testItCanReslovedARegisteredExtractorByHisNameOrThrowsOtherwise()
+    /**
+     * @throws ContainerException
+     */
+    public function testItCanResolvedARegisteredExtractorByHisNameOrThrowsOtherwise()
     {
-        $this->assertInstanceOf(MethodExtractor::class, $this->getContainer()->getExtractor(MethodExtractor::class));
+        $this->assertInstanceOf(MethodExtractor::class, $this->getContainer()
+            ->getExtractor(MethodExtractor::class));
         $this->expectException(ContainerException::class);
         $this->getContainer()->getExtractor("foo");
     }
@@ -75,11 +86,14 @@ class DICTest extends BaseTestCase
         $this->assertFalse($this->getContainer()->hasExtractor("foo"));
     }
 
+    /**
+     * @throws ContainerException
+     * @throws StorageNotFoundException
+     */
     public function testAddStorage()
     {
-        /** @var StorageContract|\PHPUnit\Framework\MockObject\MockObject $storage*/
+        /** @var StorageContract|MockObject $storage */
         $storage = $this->createMock(StorageContract::class);
-        // Configurer le bouchon.
         $storage->method('getStorageKey')
             ->willReturn('foo');
         $container = $this->getContainer();
@@ -96,6 +110,9 @@ class DICTest extends BaseTestCase
         $this->assertFalse($container->hasStorage("foo"));
     }
 
+    /**
+     * @throws StorageNotFoundException
+     */
     public function testGetStorage()
     {
         $storage = $this->getContainer();
@@ -109,40 +126,60 @@ class DICTest extends BaseTestCase
         $this->assertCount(3, $this->getContainer()->getContainer());
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     */
     public function testGetDefaultStorage()
     {
         $container = $this->getContainer();
-        $this->assertEquals($container->getStorage($container->getDefaultStorageAlias()), $container->getDefaultStorage());
+        $this->assertEquals(
+            $container->getStorage($container->getDefaultStorageAlias()),
+            $container->getDefaultStorage()
+        );
     }
-    public function testDefautStorageAlias()
+
+    public function testDefaultStorageAlias()
     {
         $this->assertEquals($this->getContainer()->getDefaultStorageAlias(), SingletonStorage::STORAGE_KEY);
     }
 
+    /**
+     * @throws StorageNotFoundException
+     */
     public function testItCanLoadFactoryStorage()
     {
         $this->assertInstanceOf(FactoryStorage::class, $this->getContainer()->factory());
     }
 
+    /**
+     * @throws StorageNotFoundException
+     */
     public function testItCanLoadSingletonStorage()
     {
         $this->assertInstanceOf(SingletonStorage::class, $this->getContainer()->singleton());
     }
 
+    /**
+     * @throws StorageNotFoundException
+     */
     public function testItCanLoadValueStorage()
     {
         $this->assertInstanceOf(ValueStorage::class, $this->getContainer()->value());
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function testItCanExtractAStorable()
     {
         $container = $this->getContainer();
-        /** @var StorableContract|\PHPUnit\Framework\MockObject\MockObject $storable */
+        /** @var StorableContract|MockObject $storable */
         $storable = $this->createMock(StorableContract::class);
         $storable->method("getExtractorClassName")->willReturn(ValueExtractor::class);
         $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
         $this->assertEquals("foo", $container->extract($storable));
-        /** @var StorableContract|\PHPUnit\Framework\MockObject\MockObject $storable */
+        /** @var StorableContract|MockObject $storable */
         $storable = $this->createMock(StorableContract::class);
         $storable->method("getExtractorClassName")->willReturn(MethodExtractor::class);
         $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
@@ -150,10 +187,14 @@ class DICTest extends BaseTestCase
         $container->extract($storable);
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     */
     public function testExtractDependency()
     {
         $container = $this->getContainer();
-        /** @var StorableContract|\PHPUnit\Framework\MockObject\MockObject $storable */
+        /** @var StorableContract|MockObject $storable */
         $storable = $this->createMock(StorableContract::class);
         $storable->method("getExtractorClassName")->willReturn(ValueExtractor::class);
         $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
@@ -161,6 +202,13 @@ class DICTest extends BaseTestCase
         $this->assertTrue($container->getExtractionChain()->contains("foo"));
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testGet()
     {
         $container = $this->getContainer();
@@ -180,6 +228,13 @@ class DICTest extends BaseTestCase
         $container->get("baz", null, []);
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testGetThrowsIfTheValueIsNotInTheStorageOrTheStorageDoesntExists()
     {
         $container = $this->getContainer();
@@ -191,6 +246,13 @@ class DICTest extends BaseTestCase
         $container->get("foo", "FOO", [], false);
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testGetMakeTheObjectIfTheValueIsNotAvailable()
     {
         $container = $this->getContainer();
@@ -198,6 +260,12 @@ class DICTest extends BaseTestCase
         $this->assertInstanceOf(Dummy1::class, $container->get(Dummy1::class));
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     */
     public function testGetThrowsInCaseOfCircularDependency()
     {
         $container = $this->getContainer();
@@ -205,6 +273,13 @@ class DICTest extends BaseTestCase
         $container->get(CDDummy2::class);
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testGetDependency()
     {
         $container = $this->getContainer();
@@ -216,7 +291,13 @@ class DICTest extends BaseTestCase
         $this->assertCount(3, $container->getExtractionChain()->chain);
     }
 
-
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testGetDependencyThrowsIfTheValueIsNotInTheStorageOrTheStorageDoesntExists()
     {
         $container = $this->getContainer();
@@ -229,6 +310,13 @@ class DICTest extends BaseTestCase
         $container->getDependency("foo", "FOO", [], false);
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testGetDependencyMakeTheObjectIfTheValueIsNotAvailable()
     {
         $container = $this->getContainer();
@@ -236,6 +324,12 @@ class DICTest extends BaseTestCase
         $this->assertInstanceOf(Dummy1::class, $container->getDependency(Dummy1::class));
     }
 
+    /**
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     */
     public function testGetDependencyThrowsInCaseOfCircularDependency()
     {
         $container = $this->getContainer();
@@ -243,6 +337,10 @@ class DICTest extends BaseTestCase
         $container->getDependency(CDDummy2::class);
     }
 
+    /**
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testHas()
     {
         $container = $this->getContainer();
@@ -255,7 +353,12 @@ class DICTest extends BaseTestCase
         $this->assertFalse($container->has("baz", ValueStorage::STORAGE_KEY));
     }
 
-    public function TestGetStorageFor()
+    /**
+     * @throws NotFoundException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
+    public function testGetStorageFor()
     {
         $container = $this->getContainer();
         $container->value()->store("foo", value("bar"));
@@ -308,6 +411,9 @@ class DICTest extends BaseTestCase
         $this->assertTrue(isset($container["FACTORIES::bar"]));
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function testItCanMakeObject()
     {
         $container = $this->getContainer();
@@ -316,7 +422,7 @@ class DICTest extends BaseTestCase
         $this->assertInstanceOf(Dummy2::class, $dummy2);
         $this->assertEquals("bar", $dummy2->getFoo());
         $this->expectException(ContainerException::class);
-        $dummy2 = $container->make(Dummy2::class);
+        $container->make(Dummy2::class);
     }
 
     public function testGetExtractors()
@@ -333,6 +439,7 @@ class DICTest extends BaseTestCase
             $this->assertArrayHasKey($extractor, $container->getExtractors());
         }
     }
+
     public function testGetExtractionChain()
     {
         $this->assertInstanceOf(ExtractionChain::class, $this->getContainer()->getExtractionChain());

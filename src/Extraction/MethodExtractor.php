@@ -31,10 +31,10 @@ class MethodExtractor implements ExtractorContract
      */
     public function extract(ExtractionParameterContract $params, DIC $container)
     {
-        $object = $this->getObject($params, $container);
         /**
-         * @var $params MethodExtractionParameter
+         * @var MethodExtractionParameter $params
          */
+        $object = $this->getObject($params, $container);
         $reflectedMethod = new ReflectionMethod($object, $params->getMethod());
         $methodParams = $this->getFunctionParameters($reflectedMethod, $container, $params, $params->getParameters());
         return $reflectedMethod->invokeArgs($object, $methodParams);
@@ -53,10 +53,10 @@ class MethodExtractor implements ExtractorContract
     {
         if ($parameter->getClass() instanceof  StorableContract) {
             /**
-             * @var $storable StorableContract
+             * @var StorableContract $storable
              */
             $storable = $parameter->getClass();
-            return $container->extractDependency($storable, $parameter->getClassName());
+            return $container->extract($storable);
         }
         if ($parameter->classIsString()) {
             return $container->getDependency($parameter->getClass());
@@ -68,4 +68,5 @@ class MethodExtractor implements ExtractorContract
     {
         return $params instanceof MethodExtractionParameter;
     }
+
 }

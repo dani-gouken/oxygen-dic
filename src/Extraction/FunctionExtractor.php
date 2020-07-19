@@ -11,6 +11,7 @@ use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
 use ReflectionException;
+require "./vendor/autoload.php";
 use ReflectionFunction;
 
 class FunctionExtractor implements ExtractorContract
@@ -29,7 +30,7 @@ class FunctionExtractor implements ExtractorContract
     public function extract(ExtractionParameterContract $params, DIC $container)
     {
         /**
-         * @var $params FunctionExtractionParameter
+         * @var FunctionExtractionParameter $params
          */
         $reflectedFunction = new ReflectionFunction($params->getMethod());
         $closure = $reflectedFunction->getClosure();

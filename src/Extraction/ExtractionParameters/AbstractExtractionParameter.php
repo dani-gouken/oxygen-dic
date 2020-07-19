@@ -11,17 +11,6 @@ abstract class AbstractExtractionParameter implements ExtractionParameterContrac
 {
     protected $objectMapping;
     protected $parameterMapping;
-    protected $resolutionChain = [];
-
-    public function appendToResolutionChain(string $alias)
-    {
-        $this->resolutionChain[] = $alias;
-    }
-
-    public function getResolutionChain(): array
-    {
-        return $this->resolutionChain;
-    }
 
     public function __construct()
     {

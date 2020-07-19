@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 class BaseTestCase extends TestCase
 {
 
-    public function getContainer(){
+    public function getContainer()
+    {
         return new DIC();
     }
-
 }

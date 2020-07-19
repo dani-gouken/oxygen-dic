@@ -5,12 +5,14 @@ namespace Oxygen\DI\Test\Storage;
 use Oxygen\DI\AbstractStorable;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
 use Oxygen\DI\Extraction\ValueExtractor;
 use Oxygen\DI\Storage\SingletonStorage;
 use Oxygen\DI\Storage\ValueStorage;
 use Oxygen\DI\Test\BaseTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class SingletonStorageTest extends BaseTestCase
 {
@@ -23,10 +25,14 @@ class SingletonStorageTest extends BaseTestCase
         $this->assertEquals("SINGLETONS", $this->makeStorage()->getStorageKey());
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws ContainerException
+     */
     public function testGet()
     {
         $storage = $this->makeStorage();
-        /** @var \PHPUnit\Framework\MockObject\MockObject|StorableContract  $storable */
+        /** @var MockObject|StorableContract  $storable */
         $storable = $this->createMock(AbstractStorable::class);
         $storable
             ->method("getExtractionParameter")

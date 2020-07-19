@@ -30,13 +30,6 @@ class ExtractionChain
     }
 
 
-    public function restartWith(string $item)
-    {
-        $this->clear();
-        //$this->chain[$item] = $item;
-    }
-
-
     public function clear()
     {
         $this->chain = [];

@@ -16,9 +16,12 @@ class AbstractStorageTest extends BaseTestCase
     private function makeStorage(): AbstractStorage
     {
         $container = $this->getContainer();
-        $storage = $this->getMockForAbstractClass(AbstractStorage::class, [$container]);
-        return $storage;
+        return $this->getMockForAbstractClass(AbstractStorage::class, [$container]);
     }
+
+    /**
+     * @throws ContainerException
+     */
     public function testAddSupportForExtractor()
     {
         $storage = $this->makeStorage();
@@ -35,6 +38,9 @@ class AbstractStorageTest extends BaseTestCase
         $storage->addSupportForExtractor("foo");
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function testSupportExtractor()
     {
         $storage = $this->makeStorage();
@@ -71,6 +77,9 @@ class AbstractStorageTest extends BaseTestCase
         $this->assertTrue($storage->has("foo"));
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function testResolve()
     {
         $storage = $this->makeStorage();
@@ -84,6 +93,10 @@ class AbstractStorageTest extends BaseTestCase
         $storage->resolve("bar");
     }
 
+    /**
+     * @throws ContainerException
+     * @throws NotFoundException
+     */
     public function testGet()
     {
         $storage = $this->makeStorage();
@@ -94,6 +107,10 @@ class AbstractStorageTest extends BaseTestCase
         $storage->resolve("bar");
     }
 
+    /**
+     * @throws ContainerException
+     * @throws NotFoundException
+     */
     public function testExtends()
     {
         $storage = $this->makeStorage();

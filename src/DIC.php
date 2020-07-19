@@ -156,7 +156,7 @@ class DIC implements ContainerInterface, ArrayAccess
     /**
      * return the default storage
      * @return StorageContract
-     * @throws NotFoundException
+     * @throws StorageNotFoundException
      */
     public function getDefaultStorage(): StorageContract
     {
@@ -248,6 +248,7 @@ class DIC implements ContainerInterface, ArrayAccess
      * @param string $alias
      * @param string|null $storage
      * @param array $args
+     * @param bool $makeIfNotAvailable
      * @return mixed|void
      * @throws CircularDependencyException
      * @throws ContainerException
@@ -256,9 +257,8 @@ class DIC implements ContainerInterface, ArrayAccess
      */
     public function get($alias, ?string $storage = null, $args = [], $makeIfNotAvailable = true)
     {
-        $this->chain->restartWith($alias);
-        $result = $this->getDependency($alias, $storage, $args, $makeIfNotAvailable);
-        return $result;
+        $this->chain->clear();
+        return $this->getDependency($alias, $storage, $args, $makeIfNotAvailable);
     }
 
     /**
@@ -283,8 +283,7 @@ class DIC implements ContainerInterface, ArrayAccess
             return $this->getStorage($storage)->get($alias);
         }
         $storage = $this->getStorageFor($alias);
-        $result = $storage->get($alias);
-        return $result;
+        return $storage->get($alias);
     }
 
     /**
@@ -384,7 +383,6 @@ class DIC implements ContainerInterface, ArrayAccess
      * @param mixed $offset
      * @param mixed $value
      * @throws ContainerException
-     * @throws NotFoundException
      * @throws StorageNotFoundException
      */
     public function offsetSet($offset, $value)

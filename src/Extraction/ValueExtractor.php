@@ -21,6 +21,6 @@ class ValueExtractor implements ExtractorContract
 
     public function isValidExtractionParameter(ExtractionParameterContract $params)
     {
-        return true;
+        return $params instanceof  ValueExtractionParameter;
     }
 }

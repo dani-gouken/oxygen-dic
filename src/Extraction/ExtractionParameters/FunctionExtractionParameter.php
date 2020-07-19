@@ -16,7 +16,7 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
     private $parameters;
 
 
-    public function __construct($method, array $parameters)
+    public function __construct($method, array $parameters = [])
     {
         $methodIsCallable = is_callable($method);
         $methodIsString = is_string($method);
@@ -31,7 +31,7 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
 
     public function getExtractionKey(): string
     {
-        return $this->methodIsString ? $this->method : "__closure__";
+        return $this->methodIsString ? $this->method : "closure_".rand();
     }
 
     /**

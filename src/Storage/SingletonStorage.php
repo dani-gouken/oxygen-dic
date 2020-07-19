@@ -23,6 +23,7 @@ class SingletonStorage extends AbstractStorage
 
     public function __construct(DIC $container)
     {
+        parent::__construct($container);
         $this->container = $container;
     }
 

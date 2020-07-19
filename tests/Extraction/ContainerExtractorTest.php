@@ -1,12 +1,17 @@
 <?php
+namespace Oxygen\DI\Test\Extraction;
 
+use Oxygen\DI\Exceptions\CircularDependencyException;
+use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
+use Oxygen\DI\Exceptions\StorageNotFoundException;
+use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\ContainerExtractor;
 use Oxygen\DI\Extraction\ExtractionParameters\AbstractExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 use Oxygen\DI\Test\BaseTestCase;
 
-class ContainerExtractorTest extends  BaseTestCase
+class ContainerExtractorTest extends BaseTestCase
 {
     private function makeExtractor(): ContainerExtractor
     {
@@ -21,6 +26,13 @@ class ContainerExtractorTest extends  BaseTestCase
         $this->assertFalse($extractor->isValidExtractionParameter($invalidExtractionParameter));
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws CircularDependencyException
+     * @throws ContainerException
+     * @throws StorageNotFoundException
+     * @throws UnsupportedInvokerException
+     */
     public function testExtract()
     {
         $dic = $this->getContainer();

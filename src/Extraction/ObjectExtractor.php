@@ -6,13 +6,13 @@ namespace Oxygen\DI\Extraction;
 use Exception;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\ExtractorContract;
+use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\CircularDependencyException;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Exceptions\StorageNotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
-use Oxygen\DI\Storage\ValueStorage;
 use Oxygen\DI\Value;
 use ReflectionClass;
 
@@ -45,7 +45,7 @@ class ObjectExtractor implements ExtractorContract
         }
         $constructor = $reflectedClass->getConstructor();
         if (is_null($constructor)) {
-            return $reflectedClass->newInstance();
+            return $this->cacheAndReturn($params, $container->value(), $reflectedClass->newInstance());
         }
         $constructor->getParameters();
         $resolvedParameters = $this->getFunctionParameters(
@@ -55,12 +55,22 @@ class ObjectExtractor implements ExtractorContract
             $params->getConstructorArgs()
         );
         $result = $reflectedClass->newInstanceArgs($resolvedParameters);
-        if ($params->canCacheResult()) {
-            $container->getStorage(ValueStorage::STORAGE_KEY)->store($className, new Value($result));
-        }
-        return $result;
+        return $this->cacheAndReturn($params, $container->value(), $result);
     }
 
+    /**
+     * @param ObjectExtractionParameter $parameter
+     * @param StorageContract $storage
+     * @param $concrete
+     * @return mixed
+     */
+    private function cacheAndReturn(ObjectExtractionParameter $parameter, StorageContract $storage, $concrete)
+    {
+        if ($parameter->canCacheResult()) {
+            $storage->store($parameter->getClassName(), new Value($concrete));
+        }
+        return $concrete;
+    }
     public function isValidExtractionParameter(ExtractionParameterContract $params)
     {
         return $params instanceof ObjectExtractionParameter;
