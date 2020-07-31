@@ -42,18 +42,4 @@ class ValueExtractionParameter extends AbstractExtractionParameter implements Ex
     {
         return $this->value = $value;
     }
-
-    public static function fromArray($array)
-    {
-        return self::hydrateMappingFromArray(new self(
-            $array["value"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge([
-            "value" => $this->getValue(),
-        ], $this->mappingToArray());
-    }
 }
