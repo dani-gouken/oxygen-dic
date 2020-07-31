@@ -116,15 +116,6 @@ abstract class AbstractStorage implements StorageContract
         $this->store($key, $extendFunction($this->descriptions[$key]));
     }
 
-    public function toArray(): array
-    {
-        $data = [];
-        foreach ($this->descriptions as $key => $description) {
-            $data[$key] = $description->toArray();
-        }
-        return $data;
-    }
-
     public function getDescriptions()
     {
         return $this->descriptions;

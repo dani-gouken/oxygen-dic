@@ -427,17 +427,6 @@ class DIC implements ContainerInterface, ArrayAccess
         return $this->extract(new BuildObject($alias, $params));
     }
 
-    public function toArray(): array
-    {
-        $data = [];
-        /**
-         * AbstractStorable $storage
-         */
-        foreach ($this->container as $storage) {
-            $data[$storage->getStorageKey()] = $storage->toArray();
-        }
-        return $data;
-    }
 
     /**
      * Return all the available extractors

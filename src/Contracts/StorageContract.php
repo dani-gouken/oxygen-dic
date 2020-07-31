@@ -66,10 +66,4 @@ interface StorageContract
      * @return mixed
      */
     public function extends(string $key, callable $extendFunction);
-
-    /**
-     * convert the storage to an array
-     * @return array
-     */
-    public function toArray():array;
 }

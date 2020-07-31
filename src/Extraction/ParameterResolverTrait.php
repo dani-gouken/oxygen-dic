@@ -25,6 +25,7 @@ trait ParameterResolverTrait
      * @throws ContainerException
      * @throws CircularDependencyException
      * @throws NotFoundException
+     * @throws ReflectionException
      */
     public function searchParameterValue(
         ReflectionFunctionAbstract $method,
@@ -35,7 +36,7 @@ trait ParameterResolverTrait
 
         $paramName = $parameter->name;
         if ($parameter->isDefaultValueAvailable() || $parameter->isOptional()) {
-            return $this->getParameterDefaultValue($parameter, $method);
+            return $this->getParameterDefaultValue($parameter);
         }
         if ($extractionParameter->getParameterMapping()->hasMappingFor($paramName)) {
             $mapping = $extractionParameter->getParameterMapping()->getMappingFor($paramName);
@@ -43,7 +44,7 @@ trait ParameterResolverTrait
         }
         $paramClass = $this->getParameterClassName($parameter);
         if (is_null($paramClass)) {
-            if ($method instanceof  ReflectionMethod) {
+            if ($method instanceof ReflectionMethod) {
                 throw new ContainerException("Cannot resolve argument [{$parameter->name}] when trying to call 
                 the method [$method->name] on [$method->class]");
             }
@@ -65,19 +66,11 @@ trait ParameterResolverTrait
      * @param ReflectionFunctionAbstract $function
      * @return mixed
      * @throws InvalidArgumentException
+     * @throws ReflectionException
      */
-    private function getParameterDefaultValue(ReflectionParameter $parameter, ReflectionFunctionAbstract $function)
+    private function getParameterDefaultValue(ReflectionParameter $parameter)
     {
-        try {
-            return $parameter->getDefaultValue();
-        } catch (ReflectionException $e) {
-            throw new InvalidArgumentException(sprintf(
-                'The parameter "%s" of %s has no type defined or guessable. It has a default value, '
-                . 'but the default value can\'t be read through Reflection because it is a PHP internal class.',
-                $parameter->getName(),
-                $function->getName()
-            ));
-        }
+        return $parameter->getDefaultValue();
     }
 
     /**
