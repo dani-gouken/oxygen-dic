@@ -53,18 +53,6 @@ class BuildObject extends AbstractStorable
         return $this;
     }
 
-    public static function fromArray($array)
-    {
-        return self::hydrateExtractionParameterFromArray(new self(
-            $array["className"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(["className" => $this->className], $this->extractionParameterToArray());
-    }
-
     public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
     {
         $this->extractionParameter = $extractionParameter;

@@ -127,27 +127,4 @@ class MethodExtractionParameter extends AbstractExtractionParameter implements E
     {
         $this->class = $class;
     }
-
-    public static function fromArray($array)
-    {
-        return self::hydrateMappingFromArray(new self(
-            is_array($array["class"])? call_user_func_array(
-                [array_key_first($array["class"]),"fromArray"],
-                $array["class"]
-            ) : $array["class"],
-            $array["method"],
-            $array["parameter"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge([
-            "class" => $this->getClass() instanceof ArraySerializable ?
-                        [get_class($this->getClass()) => $this->getClass()->toArray()] :
-                        $this->getClass(),
-            "method" => $this->method,
-            'parameter' => $this->parameters,
-        ], $this->mappingToArray());
-    }
 }

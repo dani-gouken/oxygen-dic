@@ -66,24 +66,6 @@ class ObjectExtractionParameter extends AbstractExtractionParameter implements E
         $this->constructorArgs = $constructorArgs;
     }
 
-    public static function fromArray($array)
-    {
-        return self::hydrateMappingFromArray(new self(
-            $array["class"],
-            $array["constructorArgs"] ?? [],
-            $array["cacheResult"]  ?? false
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge([
-            "class" => $this->getClassName(),
-            "constructorArgs" => $this->getConstructorArgs(),
-            'cacheResult' => $this->cacheResult,
-        ], $this->mappingToArray());
-    }
-
     protected function constructorArgsToArray()
     {
         return array_map(function ($value) {

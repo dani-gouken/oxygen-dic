@@ -11,7 +11,6 @@ use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
 use ReflectionException;
-require "./vendor/autoload.php";
 use ReflectionFunction;
 
 class FunctionExtractor implements ExtractorContract

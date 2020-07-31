@@ -3,7 +3,7 @@
 
 namespace Oxygen\DI\Contracts;
 
-interface StorableContract extends ArraySerializable
+interface StorableContract
 {
     public function getExtractorClassName(): string;
 

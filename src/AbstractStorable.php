@@ -30,18 +30,4 @@ abstract class AbstractStorable implements StorableContract
         $this->getExtractionParameter()->getParameterMapping()->add(new MappingItem($mappedParameterName, $storable));
         return $this;
     }
-
-    public function extractionParameterToArray()
-    {
-        return [
-            "parameters" => [get_class($this->getExtractionParameter()) => $this->getExtractionParameter()->toArray()]
-        ];
-    }
-
-    public static function hydrateExtractionParameterFromArray(StorableContract $storable, array $array)
-    {
-        $array = $array["parameters"];
-        $key = array_key_first($array);
-        return $storable->withExtractionParameter(call_user_func([$key,"fromArray"], $array[$key]));
-    }
 }

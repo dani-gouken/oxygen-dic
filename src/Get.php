@@ -34,18 +34,6 @@ class Get extends AbstractStorable
         return $this->parameter;
     }
 
-    public static function fromArray($array)
-    {
-        return self::hydrateExtractionParameterFromArray(new self(
-            $array["key"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(["key" => $this->key], $this->extractionParameterToArray());
-    }
-
     public function withExtractionParameter(ExtractionParameterContract $parameter): self
     {
         $this->parameter = $parameter;

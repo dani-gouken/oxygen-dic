@@ -34,19 +34,6 @@ class CallFunction extends AbstractStorable
         return $this->parameter;
     }
 
-
-    public static function fromArray($array)
-    {
-        return self::hydrateExtractionParameterFromArray(new self(
-            $array["className"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(["callable" => $this->callable], $this->extractionParameterToArray());
-    }
-
     public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
     {
         $this->parameter = $extractionParameter;

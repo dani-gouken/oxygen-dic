@@ -3,7 +3,7 @@
 
 namespace Oxygen\DI\Contracts;
 
-interface ExtractionParameterContract extends ArraySerializable
+interface ExtractionParameterContract
 {
     public function getExtractionKey(): string;
 

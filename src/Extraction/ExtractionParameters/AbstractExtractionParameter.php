@@ -39,21 +39,4 @@ abstract class AbstractExtractionParameter implements ExtractionParameterContrac
         $this->objectMapping = $mapping;
         return $this;
     }
-
-    protected function mappingToArray()
-    {
-        return [
-            "mapping" => [
-                "parameter_mapping" => $this->getParameterMapping()->toArray(),
-                "object_mapping" => $this->getObjectMapping()->toArray()
-            ]
-        ];
-    }
-
-    public static function hydrateMappingFromArray(ExtractionParameterContract $parameter, $mappingArray)
-    {
-        $parameter->setObjectMapping(Mapping::fromArray($mappingArray["mapping"]["object_mapping"]));
-        $parameter->setParameterMapping(Mapping::fromArray($mappingArray["mapping"]["parameter_mapping"]));
-        return $parameter;
-    }
 }

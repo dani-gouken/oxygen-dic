@@ -51,22 +51,4 @@ class Mapping implements MappingContract
     {
         $this->map[$mappingItem->getMappedEntityKey()] = $mappingItem;
     }
-
-    public static function fromArray(array $array):self
-    {
-        $mapping = new Mapping();
-        foreach ($array as $item) {
-            $mapping->add(MappingItem::fromArray($item));
-        }
-        return $mapping;
-    }
-
-    public function toArray(): array
-    {
-        $result = [];
-        foreach ($this->map as $item) {
-            $result[] = $item->toArray();
-        }
-        return $result;
-    }
 }

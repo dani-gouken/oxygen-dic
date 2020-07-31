@@ -60,20 +60,4 @@ class FunctionExtractionParameter extends AbstractExtractionParameter implements
     {
         $this->parameters = $parameters;
     }
-
-    public static function fromArray($array)
-    {
-        return self::hydrateMappingFromArray(new FunctionExtractionParameter(
-            $array["method"],
-            $array["parameter"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge([
-            "method" => $this->method,
-            'parameter' => $this->parameters,
-        ], $this->mappingToArray());
-    }
 }

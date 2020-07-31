@@ -31,18 +31,6 @@ class Value extends AbstractStorable
         return $this->parameter;
     }
 
-    public static function fromArray($array)
-    {
-        return self::hydrateExtractionParameterFromArray(new self(
-            $array["value"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(["value" => $this->value], $this->extractionParameterToArray());
-    }
-
     public function withExtractionParameter(ExtractionParameterContract $parameter): self
     {
         $this->parameter = $parameter;

@@ -3,7 +3,7 @@
 
 namespace Oxygen\DI\Contracts;
 
-interface MappingItemContract extends ArraySerializable
+interface MappingItemContract
 {
     public function getMappedEntityKey();
 

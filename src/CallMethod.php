@@ -70,19 +70,6 @@ class CallMethod extends AbstractStorable
         return $this;
     }
 
-    public static function fromArray($array)
-    {
-        $result =  self::hydrateExtractionParameterFromArray(new self(
-            $array["methodName"]
-        ), $array);
-        return $result;
-    }
-
-    public function toArray(): array
-    {
-        return array_merge(["methodName" => $this->methodName], $this->extractionParameterToArray());
-    }
-
     public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
     {
         $this->extractionParameter = $extractionParameter;

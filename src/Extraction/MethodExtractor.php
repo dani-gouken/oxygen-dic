@@ -68,5 +68,4 @@ class MethodExtractor implements ExtractorContract
     {
         return $params instanceof MethodExtractionParameter;
     }
-
 }

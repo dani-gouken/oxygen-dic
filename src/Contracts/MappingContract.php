@@ -3,7 +3,7 @@
 
 namespace Oxygen\DI\Contracts;
 
-interface MappingContract extends ArraySerializable
+interface MappingContract
 {
     /**
      * Array filled with the keys of all mapped entities

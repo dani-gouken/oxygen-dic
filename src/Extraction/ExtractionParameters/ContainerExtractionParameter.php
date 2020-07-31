@@ -28,18 +28,4 @@ class ContainerExtractionParameter extends AbstractExtractionParameter
     {
         return $this->key;
     }
-
-    public static function fromArray($array)
-    {
-        return self::hydrateMappingFromArray(new ContainerExtractionParameter(
-            $array["key"]
-        ), $array);
-    }
-
-    public function toArray(): array
-    {
-        return array_merge([
-            "key" => $this->getExtractionKey(),
-        ], $this->mappingToArray());
-    }
 }
