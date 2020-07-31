@@ -17,13 +17,13 @@ class ValueExtractionParameter extends AbstractExtractionParameter implements Ex
 
     public function getExtractionKey(): string
     {
-        if (is_string($this->value) || is_numeric($this->value)) {
-            return (string) $this->value;
+        if (is_numeric($this->value) || is_string($this->value) || is_bool($this->value)) {
+            return (string)$this->value;
         }
         if (is_object($this->value)) {
             return get_class($this->value);
         }
-        return "closure_".rand();
+        return gettype($this->value) . rand();
     }
 
     /**

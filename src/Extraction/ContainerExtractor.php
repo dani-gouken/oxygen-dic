@@ -28,7 +28,7 @@ class ContainerExtractor implements ExtractorContract
         /**
          * @var ContainerExtractionParameter $params
          */
-        return $container->getDependency($params->getKey(), null, [], false);
+        return $container->getDependency($params->getExtractionKey(), null, [], false);
     }
 
     public function isValidExtractionParameter(ExtractionParameterContract $params)

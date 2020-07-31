@@ -72,9 +72,10 @@ $dic->singleton()->toGet(
         ->giveParameter("password", get("db.password"))
         ->giveParameter("username", get("db.username"))
 );
-function configuration(string $key){
+function configuration(string $key)
+{
     return "secret" . $key;
 }
-$dic->factory()->store("auth.secret",callFunction("configuration",["key"=>"yelp"]));
+$dic->factory()->store("auth.secret", callFunction("configuration", ["key"=>"yelp"]));
 var_dump($dic->make(User::class));
 var_dump($dic->factory()->get("auth.secret"));

@@ -20,12 +20,4 @@ class ContainerExtractionParameter extends AbstractExtractionParameter
     {
         return $this->key;
     }
-
-    /**
-     * @return string
-     */
-    public function getKey(): string
-    {
-        return $this->key;
-    }
 }

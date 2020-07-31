@@ -119,12 +119,4 @@ class MethodExtractionParameter extends AbstractExtractionParameter implements E
     {
         $this->parameters = $parameters;
     }
-
-    /**
-     * @param object|string $class
-     */
-    public function setClass($class): void
-    {
-        $this->class = $class;
-    }
 }

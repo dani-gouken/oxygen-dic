@@ -65,24 +65,4 @@ class ObjectExtractionParameter extends AbstractExtractionParameter implements E
     {
         $this->constructorArgs = $constructorArgs;
     }
-
-    protected function constructorArgsToArray()
-    {
-        return array_map(function ($value) {
-            if ($value instanceof ArraySerializable) {
-                return [get_class($value) => $value->toArray()];
-            }
-            return $value;
-        }, $this->constructorArgs);
-    }
-
-    protected static function hydrateConstructorArgs(ObjectExtractionParameter $parameter, $array)
-    {
-        return $parameter->constructorArgs = array_map(function ($value) {
-            if (is_array($value)) {
-                return call_user_func(array(array_key_first($value), end($value)));
-            }
-            return $value;
-        }, $array);
-    }
 }
