@@ -29,12 +29,15 @@ class CallFunction extends AbstractStorable
         return FunctionExtractor::class;
     }
 
+    /**
+     * @return FunctionExtractionParameter
+     */
     public function getExtractionParameter(): ExtractionParameterContract
     {
         return $this->parameter;
     }
 
-    public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
+    public function withExtractionParameter(FunctionExtractionParameter $extractionParameter): self
     {
         $this->parameter = $extractionParameter;
         return $this;

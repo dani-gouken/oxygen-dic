@@ -5,6 +5,7 @@ namespace Oxygen\DI;
 
 use InvalidArgumentException;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
+use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
 use Oxygen\DI\Extraction\MethodExtractor;
 
@@ -35,7 +36,7 @@ class CallMethod extends AbstractStorable
     }
 
     /**
-     * @return ExtractionParameterContract
+     * @return MethodExtractionParameter
      */
     public function getExtractionParameter(): ExtractionParameterContract
     {
@@ -49,11 +50,18 @@ class CallMethod extends AbstractStorable
         return $this->extractionParameter;
     }
 
+    /**
+     * @return string
+     */
     public function getExtractorClassName(): string
     {
         return MethodExtractor::class;
     }
 
+    /**
+     * @param array $parameters
+     * @return $this
+     */
     public function withParameters(array $parameters): self
     {
         $this->parameter = $parameters;
@@ -64,13 +72,13 @@ class CallMethod extends AbstractStorable
      * @param $object
      * @return CallMethod
      */
-    public function on($object)
+    public function on($object):self
     {
         $this->object = $object;
         return $this;
     }
 
-    public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
+    public function withExtractionParameter(MethodExtractionParameter $extractionParameter): self
     {
         $this->extractionParameter = $extractionParameter;
         return $this;

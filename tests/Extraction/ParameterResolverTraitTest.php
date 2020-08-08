@@ -128,7 +128,7 @@ class ParameterResolverTraitTest extends BaseTestCase
         $container->singleton()->toGet(
             Dummy2::class,
             (new BuildObject(Dummy2::class))
-                ->giveParameter("foo", new Value("bar"))
+                ->withParameter("foo", new Value("bar"))
         );
         $parameter = $reflectedFunction->getParameters()[0];
         $extractionParameter = new ValueExtractionParameter("foo");

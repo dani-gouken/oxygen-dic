@@ -14,7 +14,7 @@ abstract class AbstractStorable implements StorableContract
      * @param StorableContract $storable
      * @return AbstractStorable
      */
-    public function give(string $mappedObjectClassName, StorableContract $storable):self
+    public function bind(string $mappedObjectClassName, StorableContract $storable):self
     {
         $this->getExtractionParameter()->getObjectMapping()->add(new MappingItem($mappedObjectClassName, $storable));
         return $this;
@@ -25,7 +25,7 @@ abstract class AbstractStorable implements StorableContract
      * @param StorableContract $storable
      * @return AbstractStorable
      */
-    public function giveParameter(string $mappedParameterName, StorableContract $storable):self
+    public function withParameter(string $mappedParameterName, StorableContract $storable):self
     {
         $this->getExtractionParameter()->getParameterMapping()->add(new MappingItem($mappedParameterName, $storable));
         return $this;

@@ -4,6 +4,7 @@
 namespace Oxygen\DI;
 
 use Oxygen\DI\Contracts\ExtractionParameterContract;
+use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
 use Oxygen\DI\Extraction\ObjectExtractor;
 
@@ -36,7 +37,7 @@ class BuildObject extends AbstractStorable
     }
 
     /**
-     * @return ExtractionParameterContract
+     * @return ObjectExtractionParameter
      */
     public function getExtractionParameter(): ExtractionParameterContract
     {
@@ -53,7 +54,7 @@ class BuildObject extends AbstractStorable
         return $this;
     }
 
-    public function withExtractionParameter(ExtractionParameterContract $extractionParameter): self
+    public function withExtractionParameter(ObjectExtractionParameter $extractionParameter): self
     {
         $this->extractionParameter = $extractionParameter;
         return $this;

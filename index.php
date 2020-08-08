@@ -1,5 +1,8 @@
 <?php
 
+use Oxygen\DI\BuildObject;
+use Oxygen\DI\Get;
+
 require "vendor/autoload.php";
 
 class DbConnection
@@ -68,14 +71,27 @@ $dic->value()->store("db.host", value("localhost"));
 $dic->singleton()->toGet(
     DbConnection::class,
     buildObject(DbConnection::class)
-        ->giveParameter("host", get("db.host"))
-        ->giveParameter("password", get("db.password"))
-        ->giveParameter("username", get("db.username"))
+        ->bind(User::class, new Get(User::class))
+        ->withParameter("host", get("db.host"))
+        ->withParameter("password", get("db.password"))
+        ->withparameter("username", get("db.username"))
 );
 function configuration(string $key)
 {
     return "secret" . $key;
 }
-$dic->factory()->store("auth.secret", callFunction("configuration", ["key"=>"yelp"]));
+
+$dic->factory()->store("auth.secret", callFunction("configuration", ["key" => "yelp"]));
 var_dump($dic->make(User::class));
 var_dump($dic->factory()->get("auth.secret"));
+$dic->factory()
+    ->toGet(
+        UserRepository::class,
+        (new BuildObject(UserRepository::class))
+            ->bind(User::class, new Get(User::class))
+            ->withParameter("test", new \Oxygen\DI\Value("2"))
+            ->withConstructorParameters(["foo" => "bar"])
+    );
+
+/// pour créer l'user repository utilise User pour les paramet
+///

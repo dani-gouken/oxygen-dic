@@ -24,17 +24,27 @@ class Get extends AbstractStorable
         $this->parameter = new ContainerExtractionParameter($key);
     }
 
+    /**
+     * @return string
+     */
     public function getExtractorClassName(): string
     {
         return ContainerExtractor::class;
     }
 
+    /**
+     * @return ContainerExtractionParameter
+     */
     public function getExtractionParameter(): ExtractionParameterContract
     {
         return $this->parameter;
     }
 
-    public function withExtractionParameter(ExtractionParameterContract $parameter): self
+    /**
+     * @param ContainerExtractionParameter $parameter
+     * @return $this
+     */
+    public function withExtractionParameter(ContainerExtractionParameter $parameter): self
     {
         $this->parameter = $parameter;
         return $this;
