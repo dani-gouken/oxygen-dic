@@ -91,6 +91,7 @@ $dic->factory()
             ->bind(User::class, new Get(User::class))
             ->withParameter("test", new \Oxygen\DI\Value("2"))
             ->withConstructorParameters(["foo" => "bar"])
+            ->resolved(function())
     );
 
 /// pour créer l'user repository utilise User pour les paramet

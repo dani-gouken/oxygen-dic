@@ -35,9 +35,10 @@ abstract class AbstractStorable implements StorableContract
         return $this;
     }
 
-    public function resolved(?callable $callback)
+    public function resolved(?callable $callback):self
     {
-        return $this->resolutionCallback = $callback;
+        $this->resolutionCallback = $callback;
+        return $this;
     }
 
     public function getResolutionCallback(): ?callable
