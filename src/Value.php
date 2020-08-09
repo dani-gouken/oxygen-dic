@@ -26,6 +26,9 @@ class Value extends AbstractStorable
         return ValueExtractor::class;
     }
 
+    /**
+     * @return ValueExtractionParameter
+     */
     public function getExtractionParameter(): ExtractionParameterContract
     {
         return $this->parameter;

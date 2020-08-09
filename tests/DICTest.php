@@ -188,6 +188,28 @@ class DICTest extends BaseTestCase
     }
 
     /**
+     * @throws ContainerException
+     */
+    public function testTheResolutionCallbackIsCalled()
+    {
+        $container = $this->getContainer();
+        /** @var StorableContract|MockObject $storable */
+        $storable = $this->createMock(StorableContract::class);
+        $storable->method("getExtractorClassName")->willReturn(ValueExtractor::class);
+        $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
+        $data = null;
+        $testContainer = null;
+        $storable->expects($this->any())
+            ->method("getResolutionCallback")->willReturn(function ($value, $c) use (&$data, &$testContainer) {
+                $data = $value;
+                $testContainer = $c;
+            });
+        $container->extract($storable);
+        $this->assertEquals("foo", $data);
+        $this->assertInstanceOf(DIC::class, $testContainer);
+    }
+
+    /**
      * @throws CircularDependencyException
      * @throws ContainerException
      */

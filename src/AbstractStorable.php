@@ -8,6 +8,10 @@ use Oxygen\DI\Mapping\MappingItem;
 
 abstract class AbstractStorable implements StorableContract
 {
+    /**
+     * @var callable
+     */
+    protected $resolutionCallback;
 
     /**
      * @param string $mappedObjectClassName
@@ -29,5 +33,15 @@ abstract class AbstractStorable implements StorableContract
     {
         $this->getExtractionParameter()->getParameterMapping()->add(new MappingItem($mappedParameterName, $storable));
         return $this;
+    }
+
+    public function resolved(?callable $callback)
+    {
+        return $this->resolutionCallback = $callback;
+    }
+
+    public function getResolutionCallback(): ?callable
+    {
+        return $this->resolutionCallback;
     }
 }

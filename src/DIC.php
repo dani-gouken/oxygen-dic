@@ -226,7 +226,12 @@ class DIC implements ContainerInterface, ArrayAccess
             throw new ContainerException("[$extractionParameterClassName] is not a valid parameter 
                 for the extractor [$extractorClassName]");
         }
-        return $extractor->extract($extractionParameter, $this);
+        $result =$extractor->extract($extractionParameter, $this);
+        if ($storable->getResolutionCallback() == null) {
+            return $result;
+        }
+        $storable->getResolutionCallback()($result, $this);
+        return $result;
     }
 
     /**

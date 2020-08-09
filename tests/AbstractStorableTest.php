@@ -47,4 +47,14 @@ class AbstractStorableTest extends BaseTestCase
                 ->getStorable()->getValue()
         );
     }
+
+    public function testGetResolutionCallback()
+    {
+        $storable = $this->makeStorable();
+        $this->assertNull($storable->getResolutionCallback());
+        $storable->resolved(function () {
+            return "foo";
+        });
+        $this->assertEquals("foo", $storable->getResolutionCallback()());
+    }
 }
