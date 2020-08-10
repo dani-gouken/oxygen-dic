@@ -2,6 +2,7 @@
 
 namespace Oxygen\DI\Test;
 
+use Oxygen\DI\CallFunction;
 use Oxygen\DI\Contracts\StorableContract;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
@@ -23,6 +24,7 @@ use Oxygen\DI\Storage\ValueStorage;
 use Oxygen\DI\Test\Misc\CircularDependency\CDDummy2;
 use Oxygen\DI\Test\Misc\Dummy1;
 use Oxygen\DI\Test\Misc\Dummy2;
+use Oxygen\DI\Value;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Container\ContainerInterface;
 
@@ -149,7 +151,7 @@ class DICTest extends BaseTestCase
      */
     public function testItCanLoadFactoryStorage()
     {
-        $this->assertInstanceOf(FactoryStorage::class, $this->getContainer()->factory());
+        $this->assertInstanceOf(FactoryStorage::class, $this->getContainer()->factories());
     }
 
     /**
@@ -157,7 +159,7 @@ class DICTest extends BaseTestCase
      */
     public function testItCanLoadSingletonStorage()
     {
-        $this->assertInstanceOf(SingletonStorage::class, $this->getContainer()->singleton());
+        $this->assertInstanceOf(SingletonStorage::class, $this->getContainer()->singletons());
     }
 
     /**
@@ -165,7 +167,7 @@ class DICTest extends BaseTestCase
      */
     public function testItCanLoadValueStorage()
     {
-        $this->assertInstanceOf(ValueStorage::class, $this->getContainer()->value());
+        $this->assertInstanceOf(ValueStorage::class, $this->getContainer()->values());
     }
 
     /**
@@ -237,7 +239,7 @@ class DICTest extends BaseTestCase
         $container->getExtractionChain()->append("bar");
         $container->getExtractionChain()->append("baz");
 
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertEquals("bar", $container->get("foo"));
         $this->assertEquals("bar", $container->get("foo", ValueStorage::STORAGE_KEY));
 
@@ -260,7 +262,7 @@ class DICTest extends BaseTestCase
     public function testGetThrowsIfTheValueIsNotInTheStorageOrTheStorageDoesntExists()
     {
         $container = $this->getContainer();
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertEquals("bar", $container->get("foo", ValueStorage::STORAGE_KEY));
         $this->expectException(NotFoundException::class);
         $container->get("foo", FactoryStorage::STORAGE_KEY, [], false);
@@ -278,7 +280,7 @@ class DICTest extends BaseTestCase
     public function testGetMakeTheObjectIfTheValueIsNotAvailable()
     {
         $container = $this->getContainer();
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertInstanceOf(Dummy1::class, $container->get(Dummy1::class));
     }
 
@@ -308,7 +310,7 @@ class DICTest extends BaseTestCase
         $container->getExtractionChain()->append("jhon");
         $container->getExtractionChain()->append("doe");
 
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertEquals("bar", $container->getDependency("foo"));
         $this->assertCount(3, $container->getExtractionChain()->chain);
     }
@@ -323,7 +325,7 @@ class DICTest extends BaseTestCase
     public function testGetDependencyThrowsIfTheValueIsNotInTheStorageOrTheStorageDoesntExists()
     {
         $container = $this->getContainer();
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertEquals("bar", $container->get("foo", ValueStorage::STORAGE_KEY));
         $this->expectException(NotFoundException::class);
         $container->getExtractionChain()->clear();
@@ -342,7 +344,7 @@ class DICTest extends BaseTestCase
     public function testGetDependencyMakeTheObjectIfTheValueIsNotAvailable()
     {
         $container = $this->getContainer();
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertInstanceOf(Dummy1::class, $container->getDependency(Dummy1::class));
     }
 
@@ -366,7 +368,7 @@ class DICTest extends BaseTestCase
     public function testHas()
     {
         $container = $this->getContainer();
-        $container->value()->store("foo", value("bar"));
+        $container->values()->store("foo", new Value("bar"));
         $this->assertTrue($container->has("foo"));
         $this->assertTrue($container->has("foo", ValueStorage::STORAGE_KEY));
         $this->assertFalse($container->has("foo", FactoryStorage::STORAGE_KEY));
@@ -383,8 +385,8 @@ class DICTest extends BaseTestCase
     public function testGetStorageFor()
     {
         $container = $this->getContainer();
-        $container->value()->store("foo", value("bar"));
-        $container->singleton()->store("bar", value("baz"));
+        $container->values()->store("foo", new Value("bar"));
+        $container->singletons()->store("bar", new Value("baz"));
         $this->assertInstanceOf(ValueStorage::class, $container->getStorageFor("foo"));
         $this->assertInstanceOf(SingletonStorage::class, $container->getStorageFor("bar"));
         $this->expectException(NotFoundException::class);
@@ -401,17 +403,17 @@ class DICTest extends BaseTestCase
     {
         $container = $this->getContainer();
         //STORE VALUES
-        $container["foo"] = value("bar");
-        $container["VALUES::foo"] = value("baz");
-        $container["FACTORIES::bar"] = callFunction('Oxygen\DI\Test\Misc\returnFoo');
+        $container["foo"] = new Value("bar");
+        $container["VALUES::foo"] = new Value("baz");
+        $container["FACTORIES::bar"] = new CallFunction('Oxygen\DI\Test\Misc\returnFoo');
         //RETREIVE VALUES
         $this->assertEquals($container["foo"], "bar");
         $this->assertEquals($container["VALUES::foo"], "baz");
         $this->assertEquals($container["FACTORIES::bar"], "foo");
         $this->assertEquals($container["bar"], "foo");
         //UPDATE VALUES, cannot update SINGLETON(default) because it will return the same value everytimes
-        $container["VALUES::foo"] = value("jhon");
-        $container["FACTORIES::bar"] = callFunction('Oxygen\DI\Test\Misc\returnBar');
+        $container["VALUES::foo"] = new Value("jhon");
+        $container["FACTORIES::bar"] = new callFunction('Oxygen\DI\Test\Misc\returnBar');
         $this->assertEquals($container["VALUES::foo"], "jhon");
         $this->assertEquals($container["bar"], "bar");
         //UNSET VALUES

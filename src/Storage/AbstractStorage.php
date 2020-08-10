@@ -77,14 +77,6 @@ abstract class AbstractStorage implements StorageContract
         $this->descriptions[$key] = $value;
     }
 
-    /**
-     * @param string $key
-     * @param StorableContract $value
-     */
-    public function toGet(string $key, StorableContract $value)
-    {
-        $this->store($key, $value);
-    }
 
     /**
      * @param string $key

@@ -1,7 +1,13 @@
 <?php
 
 use Oxygen\DI\BuildObject;
+use Oxygen\DI\Exceptions\CircularDependencyException;
+use Oxygen\DI\Exceptions\ContainerException;
+use Oxygen\DI\Exceptions\NotFoundException;
+use Oxygen\DI\Exceptions\StorageNotFoundException;
+use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Get;
+use Oxygen\DI\Test\Misc\Dummy1;
 
 require "vendor/autoload.php";
 
@@ -63,36 +69,56 @@ class User
     }
 }
 
-
-$dic = new Oxygen\DI\DIC();
-$dic->value()->store("db.username", value("root"));
-$dic->value()->store("db.password", value(""));
-$dic->value()->store("db.host", value("localhost"));
-$dic->singleton()->toGet(
-    DbConnection::class,
-    buildObject(DbConnection::class)
-        ->bind(User::class, new Get(User::class))
-        ->withParameter("host", get("db.host"))
-        ->withParameter("password", get("db.password"))
-        ->withparameter("username", get("db.username"))
-);
-function configuration(string $key)
+/**
+ * @throws CircularDependencyException
+ * @throws ContainerException
+ * @throws NotFoundException
+ * @throws StorageNotFoundException
+ * @throws UnsupportedInvokerException
+ */
+function run()
 {
-    return "secret" . $key;
-}
+    $dic = new Oxygen\DI\DIC();
+    $dic->values()->store("db.username", $dic->as()->value("root"));
+    $dic->values()->store("db.password", $dic->as()->value(""));
+    $dic->values()->store("db.host", $dic->as()->value("localhost"));
+    $dic->singletons()->store(
+        DbConnection::class,
+        $dic->as()->instantiateOf(DbConnection::class)
+        ->with(User::class, $dic->as()->instantiateOf(User::class))
+        ->withParameter("host", $dic->as()->storedValue("db.host"))
+        ->withParameter("password", $dic->as()->storedValue("db.password"))
+        ->withparameter("username", $dic->as()->storedValue("db.username"))
+    );
+    $dic->singletons()->store(
+        DbConnection::class,
+        $dic->as()->callTo("__invoke")->method()
+            ->on($dic->lazy()->instantiateOf(User::class))
+            ->withParameter("foo", $dic->as()->value("bar"))
+            ->with(
+                User::class,
+                $dic->as()->value(UserRepository::class)
+            )->resolved(function ($val) {
+                log($val);
+            })
+    );
+    function configuration(string $key)
+    {
+        return "secret" . $key;
+    }
 
-$dic->factory()->store("auth.secret", callFunction("configuration", ["key" => "yelp"]));
-var_dump($dic->make(User::class));
-var_dump($dic->factory()->get("auth.secret"));
-$dic->factory()
+    $dic->factories()->store("auth.secret", $dic->callFunction("configuration", ["key" => "yelp"]));
+    var_dump($dic->make(User::class));
+    var_dump($dic->factories()->get("auth.secret"));
+    $dic->factories()
     ->toGet(
         UserRepository::class,
-        (new BuildObject(UserRepository::class))
-            ->bind(User::class, new Get(User::class))
-            ->withParameter("test", new \Oxygen\DI\Value("2"))
+        $dic->instantiate(UserRepository::class)
+            ->bind(User::class, $dic->resolve(User::class))
+            ->withParameter("test", $dic->value("2"))
             ->withConstructorParameters(["foo" => "bar"])
-            ->resolved(function())
+            ->resolved(function (UserRepository $repository) {
+                log("resolved");
+            })
     );
-
-/// pour créer l'user repository utilise User pour les paramet
-///
+}

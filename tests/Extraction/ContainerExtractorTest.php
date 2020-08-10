@@ -10,6 +10,7 @@ use Oxygen\DI\Extraction\ContainerExtractor;
 use Oxygen\DI\Extraction\ExtractionParameters\AbstractExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 use Oxygen\DI\Test\BaseTestCase;
+use Oxygen\DI\Value;
 
 class ContainerExtractorTest extends BaseTestCase
 {
@@ -36,7 +37,7 @@ class ContainerExtractorTest extends BaseTestCase
     public function testExtract()
     {
         $dic = $this->getContainer();
-        $dic->value()->store("answer", value("42"));
+        $dic->values()->store("answer", new Value("42"));
         $extractor = $this->makeExtractor();
         $this->assertEquals("42", $extractor->extract(new ContainerExtractionParameter("answer"), $dic));
         $this->expectException(NotFoundException::class);

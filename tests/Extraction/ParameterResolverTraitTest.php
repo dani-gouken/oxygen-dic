@@ -125,7 +125,7 @@ class ParameterResolverTraitTest extends BaseTestCase
         $resolver = $this->makeParameterResolver();
         $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnDummy2");
         $container = $this->getContainer();
-        $container->singleton()->toGet(
+        $container->singletons()->store(
             Dummy2::class,
             (new BuildObject(Dummy2::class))
                 ->withParameter("foo", new Value("bar"))

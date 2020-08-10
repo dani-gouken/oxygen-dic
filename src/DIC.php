@@ -36,7 +36,7 @@ class DIC implements ContainerInterface, ArrayAccess
     /**
      * @var array
      */
-    public $resolvedValues = [];
+    private $resolvedValues = [];
     /**
      * @var $instance DIC
      */
@@ -177,7 +177,7 @@ class DIC implements ContainerInterface, ArrayAccess
      * @return FactoryStorage
      * @throws StorageNotFoundException
      */
-    public function factory(): FactoryStorage
+    public function factories(): FactoryStorage
     {
         /**
          * @var FactoryStorage $result
@@ -191,7 +191,7 @@ class DIC implements ContainerInterface, ArrayAccess
      * @return SingletonStorage
      * @throws StorageNotFoundException
      */
-    public function singleton(): SingletonStorage
+    public function singletons(): SingletonStorage
     {
         /** @var SingletonStorage $result */
         $result = $this->getStorage(SingletonStorage::STORAGE_KEY);
@@ -203,7 +203,7 @@ class DIC implements ContainerInterface, ArrayAccess
      * @return ValueStorage
      * @throws StorageNotFoundException
      */
-    public function value(): ValueStorage
+    public function values(): ValueStorage
     {
         /**
          * @var ValueStorage $result
@@ -302,6 +302,9 @@ class DIC implements ContainerInterface, ArrayAccess
     {
         if (!is_null($storage)) {
             return $this->getStorage($storage)->has($alias);
+        }
+        if (isset($this->resolvedValues[$alias])) {
+            return true;
         }
         foreach ($this->container as $storage) {
             if ($storage->has($alias)) {
@@ -442,8 +445,27 @@ class DIC implements ContainerInterface, ArrayAccess
         return $this->extractors;
     }
 
+    /**
+     * @return ExtractionChain
+     */
     public function getExtractionChain(): ExtractionChain
     {
         return $this->chain;
+    }
+
+    /**
+     * @return StorableFactory
+     */
+    public function as()
+    {
+        return $this->lazy();
+    }
+
+    /**
+     * @return StorableFactory
+     */
+    public function lazy()
+    {
+        return new StorableFactory();
     }
 }

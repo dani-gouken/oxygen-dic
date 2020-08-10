@@ -14,24 +14,24 @@ abstract class AbstractStorable implements StorableContract
     protected $resolutionCallback;
 
     /**
-     * @param string $mappedObjectClassName
+     * @param string $className
      * @param StorableContract $storable
      * @return AbstractStorable
      */
-    public function bind(string $mappedObjectClassName, StorableContract $storable):self
+    public function with(string $className, StorableContract $storable):self
     {
-        $this->getExtractionParameter()->getObjectMapping()->add(new MappingItem($mappedObjectClassName, $storable));
+        $this->getExtractionParameter()->getObjectMapping()->add(new MappingItem($className, $storable));
         return $this;
     }
 
     /**
-     * @param string $mappedParameterName
+     * @param string $parameterName
      * @param StorableContract $storable
      * @return AbstractStorable
      */
-    public function withParameter(string $mappedParameterName, StorableContract $storable):self
+    public function withParameter(string $parameterName, StorableContract $storable):self
     {
-        $this->getExtractionParameter()->getParameterMapping()->add(new MappingItem($mappedParameterName, $storable));
+        $this->getExtractionParameter()->getParameterMapping()->add(new MappingItem($parameterName, $storable));
         return $this;
     }
 

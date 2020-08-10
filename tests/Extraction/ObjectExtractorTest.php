@@ -131,7 +131,7 @@ class ObjectExtractorTest extends BaseTestCase
                 $container
             )
         );
-        $this->assertFalse($container->value()->has(Dummy1::class));
+        $this->assertFalse($container->values()->has(Dummy1::class));
          $this->assertInstanceOf(
              Dummy1::class,
              $extractor->extract(
@@ -139,6 +139,6 @@ class ObjectExtractorTest extends BaseTestCase
                  $container
              )
          );
-        $this->assertTrue($container->value()->has(Dummy1::class));
+        $this->assertTrue($container->values()->has(Dummy1::class));
     }
 }

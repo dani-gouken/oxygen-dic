@@ -18,13 +18,13 @@ class AbstractStorableTest extends BaseTestCase
         return $this->getMockForAbstractClass(AbstractStorable::class);
     }
 
-    public function testBind()
+    public function testWith()
     {
         $storable = $this->makeStorable();
         $storable->expects($this->any())
             ->method('getExtractionParameter')
             ->will($this->returnValue(new ValueExtractionParameter("foo")));
-        $storable->bind("foo", $value = new Value("bar"));
+        $storable->with("foo", $value = new Value("bar"));
         $this->assertEquals(
             'bar',
             $storable->getExtractionParameter()

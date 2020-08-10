@@ -65,7 +65,7 @@ class MethodExtractorTest extends BaseTestCase
                 $this->getContainer()
             )
         );
-        $container->value()->store(
+        $container->values()->store(
             Dummy2::class,
             new Value(new Dummy2("John doe"))
         );
@@ -89,7 +89,7 @@ class MethodExtractorTest extends BaseTestCase
     {
         $container = $this->getContainer();
         $extractor = $this->makeExtractor();
-        $container->value()->store(
+        $container->values()->store(
             Dummy2::class,
             new Value(new Dummy2("John doe"))
         );
