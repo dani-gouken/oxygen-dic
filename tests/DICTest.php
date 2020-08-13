@@ -125,7 +125,7 @@ class DICTest extends BaseTestCase
 
     public function testGetContainer()
     {
-        $this->assertCount(3, $this->getContainer()->getContainer());
+        $this->assertCount(4, $this->getContainer()->getContainer());
     }
 
     /**

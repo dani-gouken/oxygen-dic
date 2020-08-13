@@ -71,6 +71,7 @@ class User
 function run()
 {
     $dic = new Oxygen\DI\DIC();
+    $dic->values()->store("foo",$dic->as()->value("bar"));
     $dic->values()->store("db.username", $dic->as()->value("root"));
     $dic->values()->store("db.password", $dic->as()->value(""));
     $dic->values()->store("db.host", $dic->as()->value("localhost"));

@@ -320,11 +320,11 @@ class DIC implements ContainerInterface, ArrayAccess
      */
     public function has($alias, ?string $storage = null)
     {
-        if (isset($this->resolvedValues[$alias])) {
-            return true;
-        }
         if (!is_null($storage)) {
             return $this->getStorage($storage)->has($alias);
+        }
+        if (isset($this->resolvedValues[$alias])) {
+            return true;
         }
         foreach ($this->container as $storage) {
             if ($storage->has($alias)) {
