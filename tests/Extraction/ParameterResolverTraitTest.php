@@ -4,7 +4,7 @@
 namespace Oxygen\DI\Test\Extraction;
 
 
-use Oxygen\DI\BuildObject;
+use Oxygen\DI\Definitions\BuildObject;
 use Oxygen\DI\Exceptions\CircularDependencyException;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
@@ -14,7 +14,7 @@ use Oxygen\DI\Mapping\MappingItem;
 use Oxygen\DI\Test\BaseTestCase;
 use Oxygen\DI\Test\Misc\Dummy1;
 use Oxygen\DI\Test\Misc\Dummy2;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 use ReflectionException;
 use ReflectionFunction;
 

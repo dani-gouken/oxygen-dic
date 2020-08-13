@@ -2,15 +2,13 @@
 
 namespace Oxygen\DI\Test\Storage;
 
-use Oxygen\DI\AbstractStorable;
-use Oxygen\DI\Contracts\StorageContract;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Definitions\AbstractDefinition;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
 use Oxygen\DI\Extraction\ValueExtractor;
 use Oxygen\DI\Storage\SingletonStorage;
-use Oxygen\DI\Storage\ValueStorage;
 use Oxygen\DI\Test\BaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -32,19 +30,19 @@ class SingletonStorageTest extends BaseTestCase
     public function testGet()
     {
         $storage = $this->makeStorage();
-        /** @var MockObject|StorableContract  $storable */
-        $storable = $this->createMock(AbstractStorable::class);
-        $storable
+        /** @var MockObject|DefinitionContract  $definition */
+        $definition = $this->createMock(AbstractDefinition::class);
+        $definition
             ->method("getExtractionParameter")
             ->willReturn(new ValueExtractionParameter("bar"));
-        $storable
+        $definition
             ->method("getExtractorClassName")
             ->willReturn(ValueExtractor::class);
-        $storable
+        $definition
             ->expects($this->once())
             ->method("getExtractionParameter");
 
-        $storage->store("foo", $storable);
+        $storage->store("foo", $definition);
         $storage->get("foo");
         $this->assertEquals("bar", $storage->get("foo"));
         $this->expectException(NotFoundException::class);

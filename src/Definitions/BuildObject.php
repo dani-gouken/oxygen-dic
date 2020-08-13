@@ -1,14 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI;
+namespace Oxygen\DI\Definitions;
 
 use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
 use Oxygen\DI\Extraction\ObjectExtractor;
 
-class BuildObject extends AbstractStorable
+class BuildObject extends AbstractDefinition
 {
     /**
      * @var string

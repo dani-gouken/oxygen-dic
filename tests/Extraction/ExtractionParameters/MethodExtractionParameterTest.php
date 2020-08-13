@@ -3,11 +3,10 @@
 
 namespace Oxygen\DI\Test\Extraction\ExtractionParameters;
 
-use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
 use Oxygen\DI\Test\BaseTestCase;
 use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 
 class MethodExtractionParameterTest extends BaseTestCase
 {
@@ -62,8 +61,8 @@ class MethodExtractionParameterTest extends BaseTestCase
     {
         $param = $this->makeParameter($object = new Dummy1(), "foo");
         $this->assertEquals($object, $param->getClass());
-        $param = $this->makeParameter($storable = new Value("foo"), "bar");
-        $this->assertEquals($storable, $param->getClass());
+        $param = $this->makeParameter($definition = new Value("foo"), "bar");
+        $this->assertEquals($definition, $param->getClass());
         $param = $this->makeParameter("foo", "bar");
         $this->assertEquals("foo", $param->getClass());
     }
@@ -72,7 +71,7 @@ class MethodExtractionParameterTest extends BaseTestCase
     {
         $param = $this->makeParameter($object = new Dummy1(), "foo");
         $this->assertFalse($param->classIsString());
-        $param = $this->makeParameter($storable = new Value("foo"), "bar");
+        $param = $this->makeParameter($definition = new Value("foo"), "bar");
         $this->assertFalse($param->classIsString());
         $param = $this->makeParameter("foo", "bar");
         $this->assertTrue($param->classIsString());

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oxygen\DI;
+namespace Oxygen\DI\Definitions;
 
 use InvalidArgumentException;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
@@ -9,7 +9,7 @@ use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
 use Oxygen\DI\Extraction\MethodExtractor;
 
-class CallMethod extends AbstractStorable
+class CallMethod extends AbstractDefinition
 {
     /**
      * @var object

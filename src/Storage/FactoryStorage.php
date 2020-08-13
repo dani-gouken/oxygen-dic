@@ -3,7 +3,7 @@
 
 namespace Oxygen\DI\Storage;
 
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\FunctionExtractor;
@@ -30,14 +30,13 @@ class FactoryStorage extends AbstractStorage
      * @return mixed|void
      * @throws UnsupportedInvokerException
      */
-    public function store(string $key, StorableContract $value)
+    public function store(string $key, DefinitionContract $value)
     {
         if (!$this->supportExtractor($value->getExtractorClassName())) {
             throw new UnsupportedInvokerException($this->getStorageKey(), $key, $value, $this->supportedExtractors);
         }
         parent::store($key, $value);
     }
-
 
     /**
      * The unique identifier of the storage
@@ -47,4 +46,5 @@ class FactoryStorage extends AbstractStorage
     {
         return self::STORAGE_KEY;
     }
+
 }

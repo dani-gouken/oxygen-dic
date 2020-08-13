@@ -6,7 +6,7 @@ namespace Oxygen\DI\Extraction\ExtractionParameters;
 use InvalidArgumentException;
 use Oxygen\DI\Contracts\ArraySerializable;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\DefinitionContract;
 
 class MethodExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract
 {
@@ -53,10 +53,10 @@ class MethodExtractionParameter extends AbstractExtractionParameter implements E
             throw new InvalidArgumentException("Parameter 1 should be either a string or an object");
         }
         $this->classIsString = $classIsString;
-        if (is_object($class) && !($class instanceof StorableContract)) {
+        if (is_object($class) && !($class instanceof DefinitionContract)) {
             $this->className = get_class($class);
         }
-        if ($class instanceof StorableContract) {
+        if ($class instanceof DefinitionContract) {
             $this->className = $class->getExtractionParameter()->getExtractionKey();
         }
         if (is_string($class)) {

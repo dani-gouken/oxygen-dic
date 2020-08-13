@@ -3,6 +3,8 @@
 
 namespace Oxygen\DI\Storage;
 
+use Oxygen\DI\Definitions\BuildObject;
+use Oxygen\DI\Definitions\Value;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
@@ -35,11 +37,11 @@ class SingletonStorage extends AbstractStorage
      */
     public function get(string $key)
     {
-        if (!$this->has($key)) {
-            throw new NotFoundException($key, $this);
-        }
         if (array_key_exists($key, $this->resolvedValues)) {
             return $this->resolvedValues[$key];
+        }
+        if (!$this->has($key)) {
+            throw new NotFoundException($key, $this);
         }
         $value = $this->container->extract($this->getDescriptions()[$key]);
         $this->resolvedValues[$key] = $value;
@@ -52,5 +54,25 @@ class SingletonStorage extends AbstractStorage
     public function getStorageKey(): string
     {
         return self::STORAGE_KEY;
+    }
+
+    /**
+     * @param string $className
+     * @return BuildObject
+     */
+    public function bindClass(string $className): BuildObject
+    {
+        $this->store($className, $definition =  new BuildObject($className));
+        return $definition;
+    }
+
+    /**
+     * @param object $object
+     * @return Value
+     */
+    public function bindInstance(object $object): Value
+    {
+        $this->store(get_class($object), $definition =  new Value($object));
+        return $definition;
     }
 }

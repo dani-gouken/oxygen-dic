@@ -5,14 +5,14 @@ namespace Oxygen\DI\Test\Mapping;
 
 use Oxygen\DI\Mapping\MappingItem;
 use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 
 class MappingItemTest extends BaseTestCase
 {
-    public function testMappedEntityKeyAndGetStorable()
+    public function testMappedEntityKeyAndGetDefinition()
     {
-        $mappingItem = new MappingItem("foo", $storable = new Value("bar"));
+        $mappingItem = new MappingItem("foo", $definition = new Value("bar"));
         $this->assertEquals("foo", $mappingItem->getMappedEntityKey());
-        $this->assertEquals($storable, $mappingItem->getStorable());
+        $this->assertEquals($definition, $mappingItem->getDefinition());
     }
 }

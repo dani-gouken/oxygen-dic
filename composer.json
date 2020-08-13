@@ -20,7 +20,8 @@
     },
     "minimum-stability": "beta",
     "require": {
-        "psr/container": "^1.0"
+        "psr/container": "^1.0",
+        "nette/php-generator": "^3.4"
     },
     "autoload": {
         "psr-4": {

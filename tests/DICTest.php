@@ -2,8 +2,8 @@
 
 namespace Oxygen\DI\Test;
 
-use Oxygen\DI\CallFunction;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Definitions\CallFunction;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\CircularDependencyException;
@@ -24,7 +24,7 @@ use Oxygen\DI\Storage\ValueStorage;
 use Oxygen\DI\Test\Misc\CircularDependency\CDDummy2;
 use Oxygen\DI\Test\Misc\Dummy1;
 use Oxygen\DI\Test\Misc\Dummy2;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Container\ContainerInterface;
 
@@ -173,20 +173,20 @@ class DICTest extends BaseTestCase
     /**
      * @throws ContainerException
      */
-    public function testItCanExtractAStorable()
+    public function testItCanExtractADefinition()
     {
         $container = $this->getContainer();
-        /** @var StorableContract|MockObject $storable */
-        $storable = $this->createMock(StorableContract::class);
-        $storable->method("getExtractorClassName")->willReturn(ValueExtractor::class);
-        $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
-        $this->assertEquals("foo", $container->extract($storable));
-        /** @var StorableContract|MockObject $storable */
-        $storable = $this->createMock(StorableContract::class);
-        $storable->method("getExtractorClassName")->willReturn(MethodExtractor::class);
-        $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
+        /** @var DefinitionContract|MockObject $definition */
+        $definition = $this->createMock(DefinitionContract::class);
+        $definition->method("getExtractorClassName")->willReturn(ValueExtractor::class);
+        $definition->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
+        $this->assertEquals("foo", $container->extract($definition));
+        /** @var DefinitionContract|MockObject $definition */
+        $definition = $this->createMock(DefinitionContract::class);
+        $definition->method("getExtractorClassName")->willReturn(MethodExtractor::class);
+        $definition->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
         $this->expectException(ContainerException::class);
-        $container->extract($storable);
+        $container->extract($definition);
     }
 
     /**
@@ -195,18 +195,18 @@ class DICTest extends BaseTestCase
     public function testTheResolutionCallbackIsCalled()
     {
         $container = $this->getContainer();
-        /** @var StorableContract|MockObject $storable */
-        $storable = $this->createMock(StorableContract::class);
-        $storable->method("getExtractorClassName")->willReturn(ValueExtractor::class);
-        $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
+        /** @var DefinitionContract|MockObject $definition */
+        $definition = $this->createMock(DefinitionContract::class);
+        $definition->method("getExtractorClassName")->willReturn(ValueExtractor::class);
+        $definition->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
         $data = null;
         $testContainer = null;
-        $storable->expects($this->any())
+        $definition->expects($this->any())
             ->method("getResolutionCallback")->willReturn(function ($value, $c) use (&$data, &$testContainer) {
                 $data = $value;
                 $testContainer = $c;
             });
-        $container->extract($storable);
+        $container->extract($definition);
         $this->assertEquals("foo", $data);
         $this->assertInstanceOf(DIC::class, $testContainer);
     }
@@ -218,11 +218,11 @@ class DICTest extends BaseTestCase
     public function testExtractDependency()
     {
         $container = $this->getContainer();
-        /** @var StorableContract|MockObject $storable */
-        $storable = $this->createMock(StorableContract::class);
-        $storable->method("getExtractorClassName")->willReturn(ValueExtractor::class);
-        $storable->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
-        $this->assertEquals("foo", $container->extractDependency($storable, "foo"));
+        /** @var DefinitionContract|MockObject $definition */
+        $definition = $this->createMock(DefinitionContract::class);
+        $definition->method("getExtractorClassName")->willReturn(ValueExtractor::class);
+        $definition->method("getExtractionParameter")->willReturn(new ValueExtractionParameter("foo"));
+        $this->assertEquals("foo", $container->extractDependency($definition, "foo"));
         $this->assertTrue($container->getExtractionChain()->contains("foo"));
     }
 

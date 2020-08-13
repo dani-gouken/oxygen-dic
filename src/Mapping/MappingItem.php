@@ -4,7 +4,7 @@
 namespace Oxygen\DI\Mapping;
 
 use Oxygen\DI\Contracts\MappingItemContract;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\DefinitionContract;
 
 class MappingItem implements MappingItemContract
 {
@@ -13,14 +13,14 @@ class MappingItem implements MappingItemContract
      */
     private $key;
     /**
-     * @var StorableContract
+     * @var DefinitionContract
      */
-    private $storable;
+    private $definition;
 
-    public function __construct(string $key, StorableContract $storable)
+    public function __construct(string $key, DefinitionContract $definition)
     {
         $this->key = $key;
-        $this->storable = $storable;
+        $this->definition = $definition;
     }
 
     public function getMappedEntityKey()
@@ -28,8 +28,8 @@ class MappingItem implements MappingItemContract
         return $this->key;
     }
 
-    public function getStorable():StorableContract
+    public function getDefinition():DefinitionContract
     {
-        return $this->storable;
+        return $this->definition;
     }
 }

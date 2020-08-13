@@ -3,7 +3,9 @@
 
 namespace Oxygen\DI\Contracts;
 
-interface StorableContract
+use Nette\PhpGenerator\Method;
+
+interface DefinitionContract
 {
     public function getExtractorClassName(): string;
 

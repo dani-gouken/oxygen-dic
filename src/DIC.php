@@ -4,8 +4,10 @@ namespace Oxygen\DI;
 
 use ArrayAccess;
 use Oxygen\DI\Contracts\ExtractorContract;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Contracts\StorageContract;
+use Oxygen\DI\Definitions\BuildObject;
+use Oxygen\DI\Definitions\DefinitionFactory;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\CircularDependencyException;
@@ -16,9 +18,11 @@ use Oxygen\DI\Extraction\FunctionExtractor;
 use Oxygen\DI\Extraction\MethodExtractor;
 use Oxygen\DI\Extraction\ObjectExtractor;
 use Oxygen\DI\Extraction\ValueExtractor;
+use Oxygen\DI\Extraction\WildcardExtractor;
 use Oxygen\DI\Storage\FactoryStorage;
 use Oxygen\DI\Storage\SingletonStorage;
 use Oxygen\DI\Storage\ValueStorage;
+use Oxygen\DI\Storage\WildcardStorage;
 use Psr\Container\ContainerInterface;
 
 class DIC implements ContainerInterface, ArrayAccess
@@ -72,12 +76,14 @@ class DIC implements ContainerInterface, ArrayAccess
         $this->addStorage(new FactoryStorage($this));
         $this->addStorage(new SingletonStorage($this));
         $this->addStorage(new ValueStorage($this));
+        $this->addStorage(new WildcardStorage($this));
         $this->extractors = [
             MethodExtractor::class => new MethodExtractor(),
             ObjectExtractor::class => new ObjectExtractor(),
             FunctionExtractor::class => new FunctionExtractor(),
             ValueExtractor::class => new ValueExtractor(),
-            ContainerExtractor::class => new ContainerExtractor()
+            ContainerExtractor::class => new ContainerExtractor(),
+            WildcardExtractor::class => new WildcardExtractor()
         ];
         $this->chain = new ExtractionChain();
         self::$instance = $this;
@@ -213,38 +219,52 @@ class DIC implements ContainerInterface, ArrayAccess
     }
 
     /**
-     * @param StorableContract $storable
+     * return the wildcard storage
+     * @return WildcardStorage
+     * @throws StorageNotFoundException
+     */
+    public function wildcards(): WildcardStorage
+    {
+        /**
+         * @var WildcardStorage $result
+         */
+        $result = $this->getStorage(WildcardStorage::STORAGE_KEY);
+        return $result;
+    }
+
+    /**
+     * @param DefinitionContract $definition
      * @return mixed
      * @throws ContainerException
      */
-    public function extract(StorableContract $storable)
+    public function extract(DefinitionContract $definition)
     {
-        $extractionParameter = $storable->getExtractionParameter();
-        $extractor = $this->getExtractor($extractorClassName = $storable->getExtractorClassName());
+        $extractionParameter = $definition->getExtractionParameter();
+        $extractor = $this->getExtractor($extractorClassName = $definition->getExtractorClassName());
         if (!$extractor->isValidExtractionParameter($extractionParameter)) {
             $extractionParameterClassName = get_class($extractionParameter);
             throw new ContainerException("[$extractionParameterClassName] is not a valid parameter 
                 for the extractor [$extractorClassName]");
         }
         $result =$extractor->extract($extractionParameter, $this);
-        if ($storable->getResolutionCallback() == null) {
+        if ($definition->getResolutionCallback() == null) {
             return $result;
         }
-        $storable->getResolutionCallback()($result, $this);
+        $definition->getResolutionCallback()($result, $this);
         return $result;
     }
 
     /**
-     * @param StorableContract $storable
+     * @param DefinitionContract $definition
      * @param string $dependencyAlias
      * @return mixed
      * @throws CircularDependencyException
      * @throws ContainerException
      */
-    public function extractDependency(StorableContract $storable, string $dependencyAlias)
+    public function extractDependency(DefinitionContract $definition, string $dependencyAlias)
     {
         $this->chain->append($dependencyAlias);
-        return $this->extract($storable);
+        return $this->extract($definition);
     }
 
 
@@ -300,11 +320,11 @@ class DIC implements ContainerInterface, ArrayAccess
      */
     public function has($alias, ?string $storage = null)
     {
-        if (!is_null($storage)) {
-            return $this->getStorage($storage)->has($alias);
-        }
         if (isset($this->resolvedValues[$alias])) {
             return true;
+        }
+        if (!is_null($storage)) {
+            return $this->getStorage($storage)->has($alias);
         }
         foreach ($this->container as $storage) {
             if ($storage->has($alias)) {
@@ -454,7 +474,7 @@ class DIC implements ContainerInterface, ArrayAccess
     }
 
     /**
-     * @return StorableFactory
+     * @return DefinitionFactory
      */
     public function as()
     {
@@ -462,10 +482,10 @@ class DIC implements ContainerInterface, ArrayAccess
     }
 
     /**
-     * @return StorableFactory
+     * @return DefinitionFactory
      */
     public function lazy()
     {
-        return new StorableFactory();
+        return new DefinitionFactory();
     }
 }

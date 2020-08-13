@@ -3,6 +3,7 @@
 
 namespace Oxygen\DI\Test\Extraction;
 
+use Oxygen\DI\Definitions\Value;
 use Oxygen\DI\Exceptions\CircularDependencyException;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
@@ -11,12 +12,12 @@ use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
 use Oxygen\DI\Extraction\MethodExtractor;
-use Oxygen\DI\Get;
+use Oxygen\DI\Definitions\Get;
 use Oxygen\DI\Test\BaseTestCase;
 use Oxygen\DI\Test\Misc\Dummy1;
 use Oxygen\DI\Test\Misc\Dummy2;
 use Oxygen\DI\Test\Misc\Dummy3;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\zValue;
 use ReflectionException;
 
 class MethodExtractorTest extends BaseTestCase

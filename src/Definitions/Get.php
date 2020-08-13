@@ -1,13 +1,14 @@
 <?php
 
 
-namespace Oxygen\DI;
+namespace Oxygen\DI\Definitions;
 
+use Nette\PhpGenerator\Method;
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Extraction\ContainerExtractor;
 use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 
-class Get extends AbstractStorable
+class Get extends AbstractDefinition
 {
     /**
      * @var string

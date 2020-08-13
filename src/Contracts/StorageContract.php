@@ -3,6 +3,7 @@
 
 namespace Oxygen\DI\Contracts;
 
+use Nette\PhpGenerator\ClassType;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\ContainerException;
 
@@ -46,17 +47,17 @@ interface StorageContract
     /**
      * add a value to the storage
      * @param string $key
-     * @param StorableContract $storable
+     * @param DefinitionContract $definition
      * @return mixed
      */
-    public function store(string $key, StorableContract $storable);
+    public function store(string $key, DefinitionContract $definition);
 
     /**
      * resolve a value in the storage
      * @param string $key
      * @return mixed
      */
-    public function resolve(string $key):StorableContract;
+    public function resolve(string $key):DefinitionContract;
 
     /**
      * alter a value already stored on the storage

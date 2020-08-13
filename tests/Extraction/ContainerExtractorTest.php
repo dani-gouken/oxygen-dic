@@ -10,7 +10,7 @@ use Oxygen\DI\Extraction\ContainerExtractor;
 use Oxygen\DI\Extraction\ExtractionParameters\AbstractExtractionParameter;
 use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 
 class ContainerExtractorTest extends BaseTestCase
 {

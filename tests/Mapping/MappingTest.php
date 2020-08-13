@@ -7,7 +7,7 @@ use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Mapping\Mapping;
 use Oxygen\DI\Mapping\MappingItem;
 use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 
 class MappingTest extends BaseTestCase
 {
@@ -23,7 +23,7 @@ class MappingTest extends BaseTestCase
         $mapping->add(new MappingItem("bar", new Value("baz")));
 
         $this->assertTrue($mapping->hasMappingFor("foo"));
-        $this->assertEquals($mapping->getMappingFor("foo")->getStorable()->getValue(), "bar");
+        $this->assertEquals($mapping->getMappingFor("foo")->getDefinition()->getValue(), "bar");
         $this->assertCount(2, $mapping->getMappedEntities());
     }
 

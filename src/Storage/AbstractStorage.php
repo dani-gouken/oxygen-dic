@@ -3,7 +3,8 @@
 
 namespace Oxygen\DI\Storage;
 
-use Oxygen\DI\Contracts\StorableContract;
+use Nette\PhpGenerator\ClassType;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\ContainerException;
@@ -27,6 +28,9 @@ abstract class AbstractStorage implements StorageContract
         FunctionExtractor::class
     ];
     protected $container;
+    /**
+     * @var array<DefinitionContract>
+     */
     protected $descriptions = [];
     public function __construct(DIC $dic)
     {
@@ -70,9 +74,9 @@ abstract class AbstractStorage implements StorageContract
 
     /**
      * @param string $key
-     * @param StorableContract $value
+     * @param DefinitionContract $value
      */
-    public function store(string $key, StorableContract $value)
+    public function store(string $key, DefinitionContract $value)
     {
         $this->descriptions[$key] = $value;
     }
@@ -83,7 +87,7 @@ abstract class AbstractStorage implements StorageContract
      * @return mixed
      * @throws NotFoundException
      */
-    public function resolve(string $key): StorableContract
+    public function resolve(string $key): DefinitionContract
     {
         if (!$this->has($key)) {
             throw new NotFoundException($key, $this);

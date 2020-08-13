@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Oxygen\DI;
+namespace Oxygen\DI\Definitions;
 
-class CallableStorableFactory
+class CallableDefinitionFactory
 {
     private $parameters;
     private $callable;

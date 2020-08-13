@@ -7,7 +7,7 @@ use Oxygen\DI\Extraction\ExtractionParameters\AbstractExtractionParameter;
 use Oxygen\DI\Mapping\Mapping;
 use Oxygen\DI\Mapping\MappingItem;
 use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 
 class AbstractExtractionParameterTest extends BaseTestCase
 {

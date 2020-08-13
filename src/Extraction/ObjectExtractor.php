@@ -13,7 +13,7 @@ use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Exceptions\StorageNotFoundException;
 use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
 use ReflectionClass;
 
 class ObjectExtractor implements ExtractorContract

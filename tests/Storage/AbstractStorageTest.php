@@ -9,9 +9,10 @@ use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
 use Oxygen\DI\Extraction\FunctionExtractor;
 use Oxygen\DI\Storage\AbstractStorage;
 use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Value;
+use Oxygen\DI\Definitions\Value;
+use TypeError;
 
-class AbstractStorageTest extends BaseTestCase
+class AbstractDefinitionTest extends BaseTestCase
 {
     private function makeStorage(): AbstractStorage
     {
@@ -116,15 +117,15 @@ class AbstractStorageTest extends BaseTestCase
         $storage = $this->makeStorage();
         $storage->store("foo", new Value("bar"));
 
-        $storage->extends("foo", function (Value $storable) {
-            $storable->setValue("baz");
-            return $storable;
+        $storage->extends("foo", function (Value $definition) {
+            $definition->setValue("baz");
+            return $definition;
         });
         $this->assertEquals("baz", $storage->get("foo"));
 
-        $this->expectException(\TypeError::class);
-        $storage->extends("foo", function (Value $storable) {
-            $storable->setValue("baz");
+        $this->expectException(TypeError::class);
+        $storage->extends("foo", function (Value $definition) {
+            $definition->setValue("baz");
             return "baz";
         });
     }

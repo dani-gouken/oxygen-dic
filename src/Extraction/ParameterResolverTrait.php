@@ -40,7 +40,7 @@ trait ParameterResolverTrait
         }
         if ($extractionParameter->getParameterMapping()->hasMappingFor($paramName)) {
             $mapping = $extractionParameter->getParameterMapping()->getMappingFor($paramName);
-            return $container->extractDependency($mapping->getStorable(), $mapping->getMappedEntityKey());
+            return $container->extractDependency($mapping->getDefinition(), $mapping->getMappedEntityKey());
         }
         $paramClass = $this->getParameterClassName($parameter);
         if (is_null($paramClass)) {
@@ -53,7 +53,7 @@ trait ParameterResolverTrait
         }
         if ($extractionParameter->getObjectMapping()->hasMappingFor($paramClass)) {
             $mapping = $extractionParameter->getObjectMapping()->getMappingFor($paramClass);
-            return $container->extractDependency($mapping->getStorable(), $mapping->getMappedEntityKey());
+            return $container->extractDependency($mapping->getDefinition(), $mapping->getMappedEntityKey());
         }
         return $container->getDependency($paramClass);
     }

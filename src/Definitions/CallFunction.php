@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI;
+namespace Oxygen\DI\Definitions;
 
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
 use Oxygen\DI\Extraction\FunctionExtractor;
 
-class CallFunction extends AbstractStorable
+class CallFunction extends AbstractDefinition
 {
     /**
      * @var FunctionExtractionParameter

@@ -7,5 +7,5 @@ interface MappingItemContract
 {
     public function getMappedEntityKey();
 
-    public function getStorable(): StorableContract;
+    public function getDefinition(): DefinitionContract;
 }

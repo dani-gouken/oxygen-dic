@@ -5,7 +5,7 @@ namespace Oxygen\DI\Extraction;
 
 use Oxygen\DI\Contracts\ExtractionParameterContract;
 use Oxygen\DI\Contracts\ExtractorContract;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
@@ -51,12 +51,12 @@ class MethodExtractor implements ExtractorContract
      */
     public function getObject(MethodExtractionParameter $parameter, DIC $container):object
     {
-        if ($parameter->getClass() instanceof  StorableContract) {
+        if ($parameter->getClass() instanceof  DefinitionContract) {
             /**
-             * @var StorableContract $storable
+             * @var DefinitionContract $definition
              */
-            $storable = $parameter->getClass();
-            return $container->extract($storable);
+            $definition = $parameter->getClass();
+            return $container->extract($definition);
         }
         if ($parameter->classIsString()) {
             return $container->getDependency($parameter->getClass());

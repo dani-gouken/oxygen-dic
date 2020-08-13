@@ -2,7 +2,9 @@
 
 namespace Oxygen\DI\Storage;
 
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Contracts\DefinitionContract;
+use Oxygen\DI\Definitions\BuildObject;
+use Oxygen\DI\Definitions\Value;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\ContainerExtractor;
@@ -29,11 +31,11 @@ class ValueStorage extends AbstractStorage
 
     /**
      * @param string $key
-     * @param StorableContract $value
+     * @param DefinitionContract $value
      * @return mixed|void
      * @throws UnsupportedInvokerException
      */
-    public function store(string $key, StorableContract $value)
+    public function store(string $key, DefinitionContract $value)
     {
         if (!$this->supportExtractor($value->getExtractorClassName())) {
             throw new UnsupportedInvokerException($this->getStorageKey(), $key, $value, $this->supportedExtractors);
@@ -41,12 +43,46 @@ class ValueStorage extends AbstractStorage
         parent::store($key, $value);
     }
 
-
     /**
      * @return string
      */
     public function getStorageKey(): string
     {
         return self::STORAGE_KEY;
+    }
+
+    /**
+     * @param $class
+     * @throws UnsupportedInvokerException
+     */
+    public function bind($class)
+    {
+        if (is_string($class)) {
+            $this->store($class, new BuildObject($class));
+        } else {
+            $this->store(get_class($class), new Value($class));
+        }
+    }
+
+    /**
+     * @param string $className
+     * @return BuildObject
+     * @throws UnsupportedInvokerException
+     */
+    public function bindClass(string $className): BuildObject
+    {
+        $this->store($className, $definition =  new BuildObject($className));
+        return $definition;
+    }
+
+    /**
+     * @param object $object
+     * @return Value
+     * @throws UnsupportedInvokerException
+     */
+    public function bindInstance(object $object): Value
+    {
+        $this->store(get_class($object), $definition =  new Value($object));
+        return $definition;
     }
 }

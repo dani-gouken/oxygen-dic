@@ -2,16 +2,15 @@
 
 namespace Oxygen\DI\Test\Storage;
 
-use Oxygen\DI\CallFunction;
-use Oxygen\DI\CallMethod;
-use Oxygen\DI\Contracts\StorableContract;
+use Oxygen\DI\Definitions\CallFunction;
+use Oxygen\DI\Definitions \CallMethod;
+use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Exceptions\ContainerException;
 use Oxygen\DI\Exceptions\NotFoundException;
 use Oxygen\DI\Exceptions\UnsupportedInvokerException;
 use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
 use Oxygen\DI\Storage\FactoryStorage;
 use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
 use Oxygen\DI\Test\Misc\Dummy2;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -31,12 +30,12 @@ class FactoryStorageTest extends BaseTestCase
      */
     public function testStoreWithInvalidExtractor()
     {
-        $storable = $this->createMock(StorableContract::class);
-        /** @var StorableContract|MockObject  $storable */
-        $storable->method("getExtractorClassName")->willReturn(ValueExtractionParameter::class);
+        $definition = $this->createMock(DefinitionContract::class);
+        /** @var DefinitionContract|MockObject  $definition */
+        $definition->method("getExtractorClassName")->willReturn(ValueExtractionParameter::class);
 
         $this->expectException(UnsupportedInvokerException::class);
-        $this->makeStorage()->store("foo", $storable);
+        $this->makeStorage()->store("foo", $definition);
     }
 
     /**
