@@ -46,5 +46,4 @@ class FactoryStorage extends AbstractStorage
     {
         return self::STORAGE_KEY;
     }
-
 }

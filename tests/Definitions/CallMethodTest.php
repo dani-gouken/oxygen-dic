@@ -4,6 +4,7 @@
 namespace Oxygen\DI\Test;
 
 use Oxygen\DI\Definitions\CallMethod;
+use Oxygen\DI\Definitions\Value;
 use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
 use Oxygen\DI\Extraction\MethodExtractor;
 use Oxygen\DI\Test\Misc\Dummy1;
@@ -50,5 +51,24 @@ class CallMethodTest extends BaseTestCase
         $definition->withExtractionParameter($extractionParameter);
         $this->assertInstanceOf(MethodExtractionParameter::class, $definition->getExtractionParameter());
         $this->assertEquals($extractionParameter, $definition->getExtractionParameter());
+    }
+
+    public function testWithParameter()
+    {
+        $definition = $this->makeDefinition();
+        $definition->on(new Dummy1());
+        $definition->withParameter("foo", $value1= new Value("bar"));
+        $definition->withParameter("bar", $value2= new Value("baz"));
+
+        $this->assertTrue($definition->getExtractionParameter()->getParameterMapping()->hasMappingFor('foo'));
+        $this->assertTrue($definition->getExtractionParameter()->getParameterMapping()->hasMappingFor('bar'));
+        $this->assertEquals(
+            $definition->getExtractionParameter()->getParameterMapping()->getMappingFor('foo')->getDefinition(),
+            $value1
+        );
+        $this->assertEquals(
+            $definition->getExtractionParameter()->getParameterMapping()->getMappingFor('bar')->getDefinition(),
+            $value2
+        );
     }
 }

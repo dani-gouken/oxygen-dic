@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1597513554">
+  <project timestamp="1597513554">
+    <file name="C:\xampp\htdocs\oxygen-dic\src\Contracts\DefinitionContract.php">
+      <metrics loc="15" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="C:\xampp\htdocs\oxygen-dic\src\Contracts\ExtractionParameterContract.php">
+      <metrics loc="17" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="C:\xampp\htdocs\oxygen-dic\src\Contracts\ExtractorContract.php">
+      <metrics loc="13" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="C:\xampp\htdocs\oxygen-dic\src\Contracts\MappingContract.php">
+      <metrics loc="31" ncloc="19" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="C:\xampp\htdocs\oxygen-dic\src\Contracts\MappingItemContract.php">
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="C:\xampp\htdocs\oxygen-dic\src\Contracts\StorageContract.php">
+      <metrics loc="70" ncloc="37" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Oxygen\DI">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\DIC.php">
+        <class name="Oxygen\DI\DIC" namespace="Oxygen\DI">
+          <metrics complexity="66" methods="33" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="128" coveredstatements="122" elements="161" coveredelements="152"/>
+        </class>
+        <line num="70" type="method" name="getInstance" visibility="public" complexity="2" crap="2" count="2"/>
+        <line num="72" type="stmt" count="2"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="2"/>
+        <line num="78" type="method" name="clearInstance" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="87" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="89" type="stmt" count="76"/>
+        <line num="90" type="stmt" count="76"/>
+        <line num="91" type="stmt" count="76"/>
+        <line num="92" type="stmt" count="76"/>
+        <line num="93" type="stmt" count="76"/>
+        <line num="94" type="stmt" count="76"/>
+        <line num="95" type="stmt" count="76"/>
+        <line num="96" type="stmt" count="76"/>
+        <line num="97" type="stmt" count="76"/>
+        <line num="98" type="stmt" count="76"/>
+        <line num="99" type="stmt" count="76"/>
+        <line num="101" type="stmt" count="76"/>
+        <line num="102" type="stmt" count="76"/>
+        <line num="103" type="stmt" count="76"/>
+        <line num="110" type="method" name="getExtractor" visibility="public" complexity="2" crap="2" count="29"/>
+        <line num="112" type="stmt" count="29"/>
+        <line num="113" type="stmt" count="1"/>
+        <line num="115" type="stmt" count="29"/>
+        <line num="118" type="method" name="hasExtractor" visibility="public" complexity="1" crap="1" count="32"/>
+        <line num="120" type="stmt" count="32"/>
+        <line num="123" type="method" name="addExtractor" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="125" type="stmt" count="2"/>
+        <line num="126" type="stmt" count="2"/>
+        <line num="133" type="method" name="addStorage" visibility="public" complexity="2" crap="2" count="76"/>
+        <line num="135" type="stmt" count="76"/>
+        <line num="136" type="stmt" count="1"/>
+        <line num="138" type="stmt" count="76"/>
+        <line num="139" type="stmt" count="76"/>
+        <line num="147" type="method" name="hasStorage" visibility="public" complexity="1" crap="1" count="29"/>
+        <line num="149" type="stmt" count="29"/>
+        <line num="158" type="method" name="getStorage" visibility="public" complexity="2" crap="2" count="28"/>
+        <line num="160" type="stmt" count="28"/>
+        <line num="161" type="stmt" count="1"/>
+        <line num="163" type="stmt" count="28"/>
+        <line num="170" type="method" name="getContainer" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="172" type="stmt" count="76"/>
+        <line num="180" type="method" name="getDefaultStorage" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="182" type="stmt" count="2"/>
+        <line num="189" type="method" name="getDefaultStorageAlias" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="191" type="stmt" count="2"/>
+        <line num="199" type="method" name="factories" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="204" type="stmt" count="1"/>
+        <line num="205" type="stmt" count="1"/>
+        <line num="213" type="method" name="singletons" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="216" type="stmt" count="3"/>
+        <line num="217" type="stmt" count="3"/>
+        <line num="225" type="method" name="values" visibility="public" complexity="1" crap="1" count="22"/>
+        <line num="230" type="stmt" count="22"/>
+        <line num="231" type="stmt" count="22"/>
+        <line num="239" type="method" name="wildcards" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="244" type="stmt" count="1"/>
+        <line num="245" type="stmt" count="1"/>
+        <line num="254" type="method" name="extract" visibility="public" complexity="7" crap="7" count="28"/>
+        <line num="256" type="stmt" count="28"/>
+        <line num="257" type="stmt" count="28"/>
+        <line num="258" type="stmt" count="28"/>
+        <line num="259" type="stmt" count="1"/>
+        <line num="260" type="stmt" count="1"/>
+        <line num="261" type="stmt" count="1"/>
+        <line num="263" type="stmt" count="28"/>
+        <line num="264" type="stmt" count="26"/>
+        <line num="265" type="stmt" count="1"/>
+        <line num="267" type="stmt" count="26"/>
+        <line num="268" type="stmt" count="1"/>
+        <line num="269" type="stmt" count="1"/>
+        <line num="271" type="stmt" count="26"/>
+        <line num="272" type="stmt" count="1"/>
+        <line num="274" type="stmt" count="26"/>
+        <line num="284" type="method" name="extractDependency" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="286" type="stmt" count="4"/>
+        <line num="287" type="stmt" count="4"/>
+        <line num="303" type="method" name="get" visibility="public" complexity="2" crap="2" count="9"/>
+        <line num="305" type="stmt" count="9"/>
+        <line num="306" type="stmt" count="9"/>
+        <line num="321" type="method" name="getDependency" visibility="public" complexity="6" crap="6" count="17"/>
+        <line num="323" type="stmt" count="17"/>
+        <line num="324" type="stmt" count="17"/>
+        <line num="325" type="stmt" count="9"/>
+        <line num="327" type="stmt" count="12"/>
+        <line num="328" type="stmt" count="4"/>
+        <line num="330" type="stmt" count="10"/>
+        <line num="331" type="stmt" count="10"/>
+        <line num="341" type="method" name="has" visibility="public" complexity="6" crap="6" count="18"/>
+        <line num="343" type="stmt" count="18"/>
+        <line num="344" type="stmt" count="5"/>
+        <line num="346" type="stmt" count="16"/>
+        <line num="347" type="stmt" count="1"/>
+        <line num="349" type="stmt" count="16"/>
+        <line num="350" type="stmt" count="16"/>
+        <line num="351" type="stmt" count="11"/>
+        <line num="352" type="stmt" count="11"/>
+        <line num="355" type="stmt" count="11"/>
+        <line num="363" type="method" name="getStorageFor" visibility="public" complexity="4" crap="4" count="11"/>
+        <line num="365" type="stmt" count="11"/>
+        <line num="366" type="stmt" count="10"/>
+        <line num="368" type="stmt" count="3"/>
+        <line num="369" type="stmt" count="3"/>
+        <line num="370" type="stmt" count="1"/>
+        <line num="371" type="stmt" count="1"/>
+        <line num="374" type="stmt" count="3"/>
+        <line num="384" type="method" name="parseOffset" visibility="private" complexity="3" crap="3.01" count="1"/>
+        <line num="386" type="stmt" count="1"/>
+        <line num="387" type="stmt" count="1"/>
+        <line num="389" type="stmt" count="1"/>
+        <line num="392" type="stmt" count="1"/>
+        <line num="393" type="stmt" count="1"/>
+        <line num="394" type="stmt" count="1"/>
+        <line num="395" type="stmt" count="1"/>
+        <line num="397" type="stmt" count="0"/>
+        <line num="401" type="stmt" count="1"/>
+        <line num="402" type="stmt" count="1"/>
+        <line num="411" type="method" name="offsetExists" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="413" type="stmt" count="0"/>
+        <line num="414" type="stmt" count="0"/>
+        <line num="424" type="method" name="offsetGet" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="426" type="stmt" count="1"/>
+        <line num="427" type="stmt" count="1"/>
+        <line num="436" type="method" name="offsetSet" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="438" type="stmt" count="1"/>
+        <line num="439" type="stmt" count="1"/>
+        <line num="440" type="stmt" count="1"/>
+        <line num="441" type="stmt" count="1"/>
+        <line num="443" type="stmt" count="1"/>
+        <line num="444" type="stmt" count="1"/>
+        <line num="445" type="stmt" count="1"/>
+        <line num="446" type="stmt" count="1"/>
+        <line num="452" type="method" name="offsetUnset" visibility="public" complexity="3" crap="3.33" count="1"/>
+        <line num="454" type="stmt" count="1"/>
+        <line num="455" type="stmt" count="1"/>
+        <line num="456" type="stmt" count="1"/>
+        <line num="457" type="stmt" count="1"/>
+        <line num="458" type="stmt" count="1"/>
+        <line num="459" type="stmt" count="1"/>
+        <line num="461" type="stmt" count="0"/>
+        <line num="462" type="stmt" count="0"/>
+        <line num="464" type="stmt" count="0"/>
+        <line num="473" type="method" name="make" visibility="public" complexity="1" crap="1" count="10"/>
+        <line num="475" type="stmt" count="10"/>
+        <line num="483" type="method" name="getExtractors" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="485" type="stmt" count="2"/>
+        <line num="491" type="method" name="getExtractionChain" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="493" type="stmt" count="5"/>
+        <line num="499" type="method" name="as" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="501" type="stmt" count="4"/>
+        <line num="507" type="method" name="lazy" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="509" type="stmt" count="5"/>
+        <line num="512" type="method" name="resolved" visibility="public" complexity="5" crap="5" count="2"/>
+        <line num="514" type="stmt" count="2"/>
+        <line num="515" type="stmt" count="1"/>
+        <line num="517" type="stmt" count="2"/>
+        <line num="518" type="stmt" count="1"/>
+        <line num="520" type="stmt" count="1"/>
+        <line num="522" type="stmt" count="2"/>
+        <metrics loc="523" ncloc="371" classes="1" methods="33" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="128" coveredstatements="122" elements="161" coveredelements="152"/>
+      </file>
+    </package>
+    <package name="Oxygen\DI\Definitions">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\AbstractDefinition.php">
+        <class name="Oxygen\DI\Definitions\AbstractDefinition" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="6" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+        </class>
+        <line num="21" type="method" name="with" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="32" type="method" name="withParameter" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="35" type="stmt" count="3"/>
+        <line num="38" type="method" name="resolved" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="44" type="method" name="getResolutionCallback" visibility="public" complexity="2" crap="2" count="23"/>
+        <line num="46" type="stmt" count="23"/>
+        <metrics loc="48" ncloc="38" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\BuildObject.php">
+        <class name="Oxygen\DI\Definitions\BuildObject" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+        </class>
+        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="19"/>
+        <line num="24" type="stmt" count="19"/>
+        <line num="25" type="stmt" count="19"/>
+        <line num="26" type="stmt" count="19"/>
+        <line num="33" type="method" name="getExtractorClassName" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="35" type="stmt" count="13"/>
+        <line num="41" type="method" name="getExtractionParameter" visibility="public" complexity="1" crap="1" count="17"/>
+        <line num="43" type="stmt" count="17"/>
+        <line num="50" type="method" name="withConstructorParameters" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="56" type="method" name="withExtractionParameter" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="59" type="stmt" count="1"/>
+        <metrics loc="61" ncloc="50" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\CallFunction.php">
+        <class name="Oxygen\DI\Definitions\CallFunction" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+        </class>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="20" type="stmt" count="6"/>
+        <line num="21" type="stmt" count="6"/>
+        <line num="22" type="stmt" count="6"/>
+        <line num="27" type="method" name="getExtractorClassName" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="29" type="stmt" count="3"/>
+        <line num="35" type="method" name="getExtractionParameter" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="37" type="stmt" count="4"/>
+        <line num="40" type="method" name="withExtractionParameter" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <metrics loc="45" ncloc="39" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\CallMethod.php">
+        <class name="Oxygen\DI\Definitions\CallMethod" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="7" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="19" coveredelements="19"/>
+        </class>
+        <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="34" type="stmt" count="8"/>
+        <line num="35" type="stmt" count="8"/>
+        <line num="36" type="stmt" count="8"/>
+        <line num="41" type="method" name="getExtractionParameter" visibility="public" complexity="3" crap="3" count="6"/>
+        <line num="43" type="stmt" count="6"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="46" type="stmt" count="5"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="49" type="stmt" count="4"/>
+        <line num="50" type="stmt" count="4"/>
+        <line num="56" type="method" name="getExtractorClassName" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="58" type="stmt" count="2"/>
+        <line num="65" type="method" name="on" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="67" type="stmt" count="4"/>
+        <line num="68" type="stmt" count="4"/>
+        <line num="71" type="method" name="withExtractionParameter" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="74" type="stmt" count="1"/>
+        <metrics loc="76" ncloc="61" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="19" coveredelements="19"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\CallableDefinitionFactory.php">
+        <class name="Oxygen\DI\Definitions\CallableDefinitionFactory" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
+        </class>
+        <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="12" type="stmt" count="3"/>
+        <line num="13" type="stmt" count="3"/>
+        <line num="14" type="stmt" count="3"/>
+        <line num="19" type="method" name="function" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="27" type="method" name="method" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <metrics loc="31" ncloc="27" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\DefinitionFactory.php">
+        <class name="Oxygen\DI\Definitions\DefinitionFactory" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="12" coveredelements="12"/>
+        </class>
+        <line num="8" type="method" name="instanceOf" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="10" type="stmt" count="1"/>
+        <line num="13" type="method" name="get" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="15" type="stmt" count="1"/>
+        <line num="18" type="method" name="value" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="20" type="stmt" count="3"/>
+        <line num="22" type="method" name="object" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="27" type="method" name="wildcardFor" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="32" type="method" name="callTo" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <metrics loc="36" ncloc="36" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="12" coveredelements="12"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\Get.php">
+        <class name="Oxygen\DI\Definitions\Get" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+        </class>
+        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="24" type="stmt" count="5"/>
+        <line num="25" type="stmt" count="5"/>
+        <line num="26" type="stmt" count="5"/>
+        <line num="31" type="method" name="getExtractorClassName" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="39" type="method" name="getExtractionParameter" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="41" type="stmt" count="4"/>
+        <line num="48" type="method" name="withExtractionParameter" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="50" type="stmt" count="1"/>
+        <line num="51" type="stmt" count="1"/>
+        <metrics loc="53" ncloc="42" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\Value.php">
+        <class name="Oxygen\DI\Definitions\Value" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
+        </class>
+        <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="49"/>
+        <line num="21" type="stmt" count="49"/>
+        <line num="22" type="stmt" count="49"/>
+        <line num="23" type="stmt" count="49"/>
+        <line num="25" type="method" name="getExtractorClassName" visibility="public" complexity="1" crap="1" count="23"/>
+        <line num="27" type="stmt" count="23"/>
+        <line num="33" type="method" name="getExtractionParameter" visibility="public" complexity="1" crap="1" count="27"/>
+        <line num="35" type="stmt" count="27"/>
+        <line num="38" type="method" name="withExtractionParameter" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="44" type="method" name="setValue" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="46" type="stmt" count="2"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="49" type="method" name="getValue" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="51" type="stmt" count="5"/>
+        <metrics loc="53" ncloc="49" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Definitions\Wildcard.php">
+        <class name="Oxygen\DI\Definitions\Wildcard" namespace="Oxygen\DI\Definitions">
+          <metrics complexity="11" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="27" coveredelements="27"/>
+        </class>
+        <line num="31" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="6"/>
+        <line num="33" type="stmt" count="6"/>
+        <line num="34" type="stmt" count="6"/>
+        <line num="35" type="stmt" count="6"/>
+        <line num="37" type="method" name="getExtractorClassName" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="42" type="method" name="getExtractionParameter" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="44" type="stmt" count="1"/>
+        <line num="45" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="48" type="stmt" count="1"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="57" type="method" name="hasPattern" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="59" type="stmt" count="5"/>
+        <line num="65" type="method" name="setPattern" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="67" type="stmt" count="4"/>
+        <line num="68" type="stmt" count="4"/>
+        <line num="73" type="method" name="getPattern" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="75" type="stmt" count="5"/>
+        <line num="81" type="method" name="getClass" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="83" type="stmt" count="3"/>
+        <line num="89" type="method" name="setClass" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="91" type="stmt" count="4"/>
+        <line num="92" type="stmt" count="4"/>
+        <line num="97" type="method" name="getReplacement" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="99" type="stmt" count="3"/>
+        <metrics loc="101" ncloc="81" classes="1" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="27" coveredelements="27"/>
+      </file>
+    </package>
+    <package name="Oxygen\DI\Exceptions">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Exceptions\CircularDependencyException.php">
+        <class name="Oxygen\DI\Exceptions\CircularDependencyException" namespace="Oxygen\DI\Exceptions">
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="13" type="stmt" count="3"/>
+        <line num="14" type="stmt" count="3"/>
+        <line num="15" type="stmt" count="3"/>
+        <metrics loc="16" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Exceptions\ContainerException.php">
+        <class name="Oxygen\DI\Exceptions\ContainerException" namespace="Oxygen\DI\Exceptions">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Exceptions\NotFoundException.php">
+        <class name="Oxygen\DI\Exceptions\NotFoundException" namespace="Oxygen\DI\Exceptions">
+          <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        </class>
+        <line num="10" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="9"/>
+        <line num="12" type="stmt" count="9"/>
+        <line num="13" type="stmt" count="6"/>
+        <line num="15" type="stmt" count="3"/>
+        <line num="17" type="stmt" count="9"/>
+        <line num="18" type="stmt" count="9"/>
+        <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Exceptions\StorageNotFoundException.php">
+        <class name="Oxygen\DI\Exceptions\StorageNotFoundException" namespace="Oxygen\DI\Exceptions">
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="8" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="10" type="stmt" count="1"/>
+        <line num="11" type="stmt" count="1"/>
+        <metrics loc="12" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Exceptions\UnsupportedInvokerException.php">
+        <class name="Oxygen\DI\Exceptions\UnsupportedInvokerException" namespace="Oxygen\DI\Exceptions">
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+        </class>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="13" type="stmt" count="3"/>
+        <line num="14" type="stmt" count="3"/>
+        <line num="15" type="stmt" count="3"/>
+        <line num="16" type="stmt" count="3"/>
+        <metrics loc="17" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </file>
+    </package>
+    <package name="Oxygen\DI\Extraction">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ContainerExtractor.php">
+        <class name="Oxygen\DI\Extraction\ContainerExtractor" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        </class>
+        <line num="26" type="method" name="extract" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="34" type="method" name="isValidExtractionParameter" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="36" type="stmt" count="2"/>
+        <metrics loc="38" ncloc="28" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionChain.php">
+        <class name="Oxygen\DI\Extraction\ExtractionChain" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="6" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+        </class>
+        <line num="19" type="method" name="append" visibility="public" complexity="2" crap="2" count="25"/>
+        <line num="21" type="stmt" count="25"/>
+        <line num="22" type="stmt" count="3"/>
+        <line num="24" type="stmt" count="25"/>
+        <line num="25" type="stmt" count="25"/>
+        <line num="27" type="method" name="contains" visibility="public" complexity="1" crap="1" count="25"/>
+        <line num="29" type="stmt" count="25"/>
+        <line num="33" type="method" name="clear" visibility="public" complexity="1" crap="1" count="10"/>
+        <line num="35" type="stmt" count="10"/>
+        <line num="36" type="stmt" count="10"/>
+        <line num="41" type="method" name="getChain" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="43" type="stmt" count="2"/>
+        <line num="46" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="48" type="stmt" count="4"/>
+        <metrics loc="50" ncloc="43" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\FunctionExtractor.php">
+        <class name="Oxygen\DI\Extraction\FunctionExtractor" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+        </class>
+        <line num="29" type="method" name="extract" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="35" type="stmt" count="3"/>
+        <line num="36" type="stmt" count="3"/>
+        <line num="37" type="stmt" count="3"/>
+        <line num="44" type="method" name="isValidExtractionParameter" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="46" type="stmt" count="3"/>
+        <metrics loc="48" ncloc="35" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\MethodExtractor.php">
+        <class name="Oxygen\DI\Extraction\MethodExtractor" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+        </class>
+        <line num="32" type="method" name="extract" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="52" type="method" name="getObject" visibility="public" complexity="3" crap="3" count="3"/>
+        <line num="54" type="stmt" count="3"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="59" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="3"/>
+        <line num="62" type="stmt" count="2"/>
+        <line num="64" type="stmt" count="3"/>
+        <line num="67" type="method" name="isValidExtractionParameter" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="69" type="stmt" count="3"/>
+        <metrics loc="71" ncloc="50" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ObjectExtractor.php">
+        <class name="Oxygen\DI\Extraction\ObjectExtractor" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="7" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
+        </class>
+        <line num="32" type="method" name="extract" visibility="public" complexity="4" crap="4" count="17"/>
+        <line num="37" type="stmt" count="17"/>
+        <line num="39" type="stmt" count="17"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="41" type="stmt" count="2"/>
+        <line num="43" type="stmt" count="15"/>
+        <line num="44" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="14"/>
+        <line num="47" type="stmt" count="14"/>
+        <line num="48" type="stmt" count="10"/>
+        <line num="50" type="stmt" count="5"/>
+        <line num="51" type="stmt" count="5"/>
+        <line num="52" type="stmt" count="5"/>
+        <line num="55" type="stmt" count="5"/>
+        <line num="57" type="stmt" count="3"/>
+        <line num="58" type="stmt" count="3"/>
+        <line num="67" type="method" name="cacheAndReturn" visibility="private" complexity="2" crap="2" count="12"/>
+        <line num="69" type="stmt" count="12"/>
+        <line num="70" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="12"/>
+        <line num="74" type="method" name="isValidExtractionParameter" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="76" type="stmt" count="13"/>
+        <metrics loc="78" ncloc="63" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ParameterResolverTrait.php">
+        <class name="Oxygen\DI\Extraction\ParameterResolverTrait" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="14" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="34" coveredelements="34"/>
+        </class>
+        <line num="30" type="method" name="searchParameterValue" visibility="public" complexity="7" crap="7" count="10"/>
+        <line num="37" type="stmt" count="10"/>
+        <line num="38" type="stmt" count="10"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="41" type="stmt" count="8"/>
+        <line num="42" type="stmt" count="2"/>
+        <line num="43" type="stmt" count="2"/>
+        <line num="45" type="stmt" count="7"/>
+        <line num="46" type="stmt" count="7"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="48" type="stmt" count="1"/>
+        <line num="49" type="stmt" count="1"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="54" type="stmt" count="5"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="58" type="stmt" count="4"/>
+        <line num="71" type="method" name="getParameterDefaultValue" visibility="private" complexity="1" crap="1" count="4"/>
+        <line num="73" type="stmt" count="4"/>
+        <line num="88" type="method" name="getFunctionParameters" visibility="private" complexity="3" crap="3" count="9"/>
+        <line num="94" type="stmt" count="9"/>
+        <line num="95" type="stmt" count="9"/>
+        <line num="96" type="stmt" count="6"/>
+        <line num="97" type="stmt" count="6"/>
+        <line num="98" type="stmt" count="3"/>
+        <line num="99" type="stmt" count="3"/>
+        <line num="101" type="stmt" count="5"/>
+        <line num="103" type="stmt" count="7"/>
+        <line num="112" type="method" name="getParameterClassName" visibility="private" complexity="3" crap="3" count="7"/>
+        <line num="114" type="stmt" count="7"/>
+        <line num="115" type="stmt" count="7"/>
+        <line num="116" type="stmt" count="2"/>
+        <line num="118" type="stmt" count="5"/>
+        <metrics loc="120" ncloc="86" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="34" coveredelements="34"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ValueExtractor.php">
+        <class name="Oxygen\DI\Extraction\ValueExtractor" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        </class>
+        <line num="14" type="method" name="extract" visibility="public" complexity="1" crap="1" count="21"/>
+        <line num="19" type="stmt" count="21"/>
+        <line num="22" type="method" name="isValidExtractionParameter" visibility="public" complexity="1" crap="1" count="21"/>
+        <line num="24" type="stmt" count="21"/>
+        <metrics loc="26" ncloc="24" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\WildcardExtractor.php">
+        <class name="Oxygen\DI\Extraction\WildcardExtractor" namespace="Oxygen\DI\Extraction">
+          <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+        </class>
+        <line num="27" type="method" name="extract" visibility="public" complexity="3" crap="3" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="40" type="method" name="isValidExtractionParameter" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="42" type="stmt" count="2"/>
+        <metrics loc="44" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+      </file>
+    </package>
+    <package name="Oxygen\DI\Extraction\ExtractionParameters">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\AbstractExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\AbstractExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+        </class>
+        <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="111"/>
+        <line num="17" type="stmt" count="111"/>
+        <line num="18" type="stmt" count="111"/>
+        <line num="19" type="stmt" count="111"/>
+        <line num="21" type="method" name="getObjectMapping" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="23" type="stmt" count="8"/>
+        <line num="26" type="method" name="getParameterMapping" visibility="public" complexity="1" crap="1" count="12"/>
+        <line num="28" type="stmt" count="12"/>
+        <line num="31" type="method" name="setParameterMapping" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="37" type="method" name="setObjectMapping" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <metrics loc="42" ncloc="42" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\ContainerExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+        </class>
+        <line num="13" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="15" type="stmt" count="11"/>
+        <line num="16" type="stmt" count="11"/>
+        <line num="17" type="stmt" count="11"/>
+        <line num="19" type="method" name="getExtractionKey" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="21" type="stmt" count="5"/>
+        <metrics loc="23" ncloc="21" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\FunctionExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="9" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="21" coveredelements="21"/>
+        </class>
+        <line num="19" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="16"/>
+        <line num="21" type="stmt" count="16"/>
+        <line num="22" type="stmt" count="16"/>
+        <line num="23" type="stmt" count="16"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="15"/>
+        <line num="27" type="stmt" count="15"/>
+        <line num="28" type="stmt" count="15"/>
+        <line num="29" type="stmt" count="15"/>
+        <line num="30" type="stmt" count="15"/>
+        <line num="32" type="method" name="getExtractionKey" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="40" type="method" name="getMethod" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="42" type="stmt" count="4"/>
+        <line num="44" type="method" name="getParameters" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="46" type="stmt" count="6"/>
+        <line num="51" type="method" name="methodIsString" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="59" type="method" name="setParameters" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="61" type="stmt" count="1"/>
+        <line num="62" type="stmt" count="1"/>
+        <metrics loc="63" ncloc="55" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="21" coveredelements="21"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\MethodExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="14" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="32" coveredelements="32"/>
+        </class>
+        <line num="46" type="method" name="__construct" visibility="public" complexity="7" crap="7" count="17"/>
+        <line num="48" type="stmt" count="17"/>
+        <line num="49" type="stmt" count="17"/>
+        <line num="50" type="stmt" count="17"/>
+        <line num="51" type="stmt" count="17"/>
+        <line num="52" type="stmt" count="17"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="16"/>
+        <line num="56" type="stmt" count="16"/>
+        <line num="57" type="stmt" count="11"/>
+        <line num="59" type="stmt" count="16"/>
+        <line num="60" type="stmt" count="6"/>
+        <line num="62" type="stmt" count="16"/>
+        <line num="63" type="stmt" count="12"/>
+        <line num="65" type="stmt" count="16"/>
+        <line num="66" type="stmt" count="16"/>
+        <line num="67" type="stmt" count="16"/>
+        <line num="69" type="method" name="getExtractionKey" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="77" type="method" name="getParameters" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="79" type="stmt" count="4"/>
+        <line num="85" type="method" name="getClass" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="87" type="stmt" count="6"/>
+        <line num="93" type="method" name="getMethod" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="95" type="stmt" count="2"/>
+        <line num="101" type="method" name="classIsString" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="103" type="stmt" count="4"/>
+        <line num="109" type="method" name="getClassName" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="111" type="stmt" count="1"/>
+        <line num="118" type="method" name="setParameters" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="120" type="stmt" count="1"/>
+        <line num="121" type="stmt" count="1"/>
+        <metrics loc="122" ncloc="93" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="32" coveredelements="32"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\ObjectExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="17" coveredelements="17"/>
+        </class>
+        <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="30"/>
+        <line num="26" type="stmt" count="30"/>
+        <line num="27" type="stmt" count="30"/>
+        <line num="28" type="stmt" count="30"/>
+        <line num="29" type="stmt" count="30"/>
+        <line num="30" type="stmt" count="30"/>
+        <line num="32" type="method" name="getExtractionKey" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="40" type="method" name="getConstructorArgs" visibility="public" complexity="1" crap="1" count="10"/>
+        <line num="42" type="stmt" count="10"/>
+        <line num="48" type="method" name="getClassName" visibility="public" complexity="1" crap="1" count="22"/>
+        <line num="50" type="stmt" count="22"/>
+        <line num="56" type="method" name="canCacheResult" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="58" type="stmt" count="13"/>
+        <line num="64" type="method" name="setConstructorArgs" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="66" type="stmt" count="2"/>
+        <line num="67" type="stmt" count="2"/>
+        <metrics loc="68" ncloc="54" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="17" coveredelements="17"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\ValueExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="8" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="14" coveredelements="14"/>
+        </class>
+        <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="62"/>
+        <line num="14" type="stmt" count="62"/>
+        <line num="15" type="stmt" count="62"/>
+        <line num="16" type="stmt" count="62"/>
+        <line num="18" type="method" name="getExtractionKey" visibility="public" complexity="5" crap="5" count="6"/>
+        <line num="20" type="stmt" count="6"/>
+        <line num="21" type="stmt" count="6"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="32" type="method" name="getValue" visibility="public" complexity="1" crap="1" count="33"/>
+        <line num="34" type="stmt" count="33"/>
+        <line num="41" type="method" name="setValue" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="43" type="stmt" count="3"/>
+        <metrics loc="45" ncloc="40" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="14" coveredelements="14"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Extraction\ExtractionParameters\WildcardExtractionParameter.php">
+        <class name="Oxygen\DI\Extraction\ExtractionParameters\WildcardExtractionParameter" namespace="Oxygen\DI\Extraction\ExtractionParameters">
+          <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+        </class>
+        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="24" type="stmt" count="3"/>
+        <line num="25" type="stmt" count="3"/>
+        <line num="26" type="stmt" count="3"/>
+        <line num="27" type="stmt" count="3"/>
+        <line num="28" type="stmt" count="3"/>
+        <line num="29" type="method" name="getExtractionKey" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="37" type="method" name="getReplacement" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="45" type="method" name="getClassName" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="53" type="method" name="getPattern" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="55" type="stmt" count="2"/>
+        <metrics loc="57" ncloc="45" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+      </file>
+    </package>
+    <package name="Oxygen\DI\Mapping">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Mapping\Mapping.php">
+        <class name="Oxygen\DI\Mapping\Mapping" namespace="Oxygen\DI\Mapping">
+          <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+        </class>
+        <line num="19" type="method" name="getMappedEntities" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="21" type="stmt" count="2"/>
+        <line num="29" type="method" name="getMappingFor" visibility="public" complexity="2" crap="2" count="8"/>
+        <line num="31" type="stmt" count="8"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="8"/>
+        <line num="41" type="method" name="hasMappingFor" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="43" type="stmt" count="14"/>
+        <line num="50" type="method" name="add" visibility="public" complexity="1" crap="1" count="11"/>
+        <line num="52" type="stmt" count="11"/>
+        <line num="53" type="stmt" count="11"/>
+        <metrics loc="54" ncloc="41" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="11" coveredelements="11"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Mapping\MappingItem.php">
+        <class name="Oxygen\DI\Mapping\MappingItem" namespace="Oxygen\DI\Mapping">
+          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
+        </class>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+        <line num="22" type="stmt" count="12"/>
+        <line num="23" type="stmt" count="12"/>
+        <line num="24" type="stmt" count="12"/>
+        <line num="26" type="method" name="getMappedEntityKey" visibility="public" complexity="1" crap="1" count="12"/>
+        <line num="28" type="stmt" count="12"/>
+        <line num="31" type="method" name="getDefinition" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="33" type="stmt" count="8"/>
+        <metrics loc="35" ncloc="31" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
+      </file>
+    </package>
+    <package name="Oxygen\DI\Storage">
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Storage\AbstractStorage.php">
+        <class name="Oxygen\DI\Storage\AbstractStorage" namespace="Oxygen\DI\Storage" fullPackage="Oxygen" package="Oxygen">
+          <metrics complexity="16" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="36" coveredelements="36"/>
+        </class>
+        <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="36" type="stmt" count="76"/>
+        <line num="37" type="stmt" count="76"/>
+        <line num="39" type="method" name="getContainer" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="41" type="stmt" count="2"/>
+        <line num="48" type="method" name="addSupportForExtractor" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="50" type="stmt" count="2"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="54" type="stmt" count="2"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="57" type="stmt" count="2"/>
+        <line num="59" type="method" name="supportExtractor" visibility="public" complexity="1" crap="1" count="21"/>
+        <line num="61" type="stmt" count="21"/>
+        <line num="64" type="method" name="has" visibility="public" complexity="1" crap="1" count="29"/>
+        <line num="66" type="stmt" count="29"/>
+        <line num="69" type="method" name="contains" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="78" type="method" name="store" visibility="public" complexity="1" crap="1" count="31"/>
+        <line num="80" type="stmt" count="31"/>
+        <line num="81" type="stmt" count="31"/>
+        <line num="89" type="method" name="resolve" visibility="public" complexity="2" crap="2" count="15"/>
+        <line num="91" type="stmt" count="15"/>
+        <line num="92" type="stmt" count="4"/>
+        <line num="94" type="stmt" count="15"/>
+        <line num="103" type="method" name="get" visibility="public" complexity="1" crap="1" count="15"/>
+        <line num="105" type="stmt" count="15"/>
+        <line num="109" type="method" name="extends" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="111" type="stmt" count="1"/>
+        <line num="112" type="stmt" count="1"/>
+        <line num="114" type="method" name="getDescriptions" visibility="public" complexity="1" crap="1" count="18"/>
+        <line num="116" type="stmt" count="18"/>
+        <line num="119" type="method" name="remove" visibility="public" complexity="2" crap="2" count="2"/>
+        <line num="121" type="stmt" count="2"/>
+        <line num="122" type="stmt" count="2"/>
+        <line num="124" type="stmt" count="2"/>
+        <metrics loc="125" ncloc="104" classes="1" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="36" coveredelements="36"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Storage\ClassBindingTrait.php">
+        <class name="Oxygen\DI\Storage\ClassBindingTrait" namespace="Oxygen\DI\Storage" fullPackage="Oxygen" package="Oxygen">
+          <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+        </class>
+        <line num="21" type="method" name="bindClass" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="24" type="stmt" count="1"/>
+        <line num="31" type="method" name="bindInstance" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <metrics loc="36" ncloc="27" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Storage\FactoryStorage.php">
+        <class name="Oxygen\DI\Storage\FactoryStorage" namespace="Oxygen\DI\Storage">
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+        </class>
+        <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="23" type="stmt" count="76"/>
+        <line num="24" type="stmt" count="76"/>
+        <line num="25" type="stmt" count="76"/>
+        <line num="33" type="method" name="store" visibility="public" complexity="2" crap="2" count="3"/>
+        <line num="35" type="stmt" count="3"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="45" type="method" name="getStorageKey" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="47" type="stmt" count="76"/>
+        <metrics loc="49" ncloc="39" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Storage\SingletonStorage.php">
+        <class name="Oxygen\DI\Storage\SingletonStorage" namespace="Oxygen\DI\Storage">
+          <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+        </class>
+        <line num="27" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="29" type="stmt" count="76"/>
+        <line num="30" type="stmt" count="76"/>
+        <line num="31" type="stmt" count="76"/>
+        <line num="39" type="method" name="get" visibility="public" complexity="3" crap="3" count="3"/>
+        <line num="41" type="stmt" count="3"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="49" type="stmt" count="3"/>
+        <line num="55" type="method" name="getStorageKey" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="57" type="stmt" count="76"/>
+        <metrics loc="59" ncloc="47" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Storage\ValueStorage.php">
+        <class name="Oxygen\DI\Storage\ValueStorage" namespace="Oxygen\DI\Storage">
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+        </class>
+        <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="28" type="stmt" count="76"/>
+        <line num="29" type="stmt" count="76"/>
+        <line num="30" type="stmt" count="76"/>
+        <line num="39" type="method" name="store" visibility="public" complexity="2" crap="2" count="17"/>
+        <line num="41" type="stmt" count="17"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="44" type="stmt" count="16"/>
+        <line num="45" type="stmt" count="16"/>
+        <line num="50" type="method" name="getStorageKey" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="52" type="stmt" count="76"/>
+        <metrics loc="54" ncloc="45" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+      </file>
+      <file name="C:\xampp\htdocs\oxygen-dic\src\Storage\WildcardStorage.php">
+        <class name="Oxygen\DI\Storage\WildcardStorage" namespace="Oxygen\DI\Storage">
+          <metrics complexity="13" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="28" coveredelements="28"/>
+        </class>
+        <line num="23" type="method" name="store" visibility="public" complexity="3" crap="3" count="5"/>
+        <line num="25" type="stmt" count="5"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="28" type="stmt" count="5"/>
+        <line num="29" type="stmt" count="4"/>
+        <line num="31" type="stmt" count="5"/>
+        <line num="32" type="stmt" count="5"/>
+        <line num="34" type="method" name="has" visibility="public" complexity="1" crap="1" count="15"/>
+        <line num="36" type="stmt" count="15"/>
+        <line num="39" type="method" name="getMatchFor" visibility="private" complexity="4" crap="4" count="16"/>
+        <line num="44" type="stmt" count="16"/>
+        <line num="45" type="stmt" count="5"/>
+        <line num="46" type="stmt" count="5"/>
+        <line num="49" type="stmt" count="14"/>
+        <line num="57" type="method" name="resolve" visibility="public" complexity="2" crap="2" count="4"/>
+        <line num="59" type="stmt" count="4"/>
+        <line num="60" type="stmt" count="4"/>
+        <line num="61" type="stmt" count="1"/>
+        <line num="63" type="stmt" count="4"/>
+        <line num="64" type="stmt" count="4"/>
+        <line num="67" type="method" name="match" visibility="private" complexity="1" crap="1" count="5"/>
+        <line num="69" type="stmt" count="5"/>
+        <line num="70" type="stmt" count="5"/>
+        <line num="71" type="stmt" count="5"/>
+        <line num="80" type="method" name="add" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="88" type="method" name="getStorageKey" visibility="public" complexity="1" crap="1" count="76"/>
+        <line num="90" type="stmt" count="76"/>
+        <metrics loc="92" ncloc="74" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="28" coveredelements="28"/>
+      </file>
+    </package>
+    <metrics files="44" loc="2657" ncloc="2103" classes="37" methods="179" coveredmethods="176" conditionals="0" coveredconditionals="0" statements="481" coveredstatements="475" elements="660" coveredelements="651"/>
+  </project>
+</coverage>

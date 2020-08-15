@@ -13,6 +13,7 @@ use Oxygen\DI\Extraction\ValueExtractor;
 
 class ValueStorage extends AbstractStorage
 {
+    use ClassBindingTrait;
     public const STORAGE_KEY = "VALUES";
 
     protected $supportedExtractors= [ValueExtractor::class,ObjectExtractor::class,ContainerExtractor::class];
@@ -49,40 +50,5 @@ class ValueStorage extends AbstractStorage
     public function getStorageKey(): string
     {
         return self::STORAGE_KEY;
-    }
-
-    /**
-     * @param $class
-     * @throws UnsupportedInvokerException
-     */
-    public function bind($class)
-    {
-        if (is_string($class)) {
-            $this->store($class, new BuildObject($class));
-        } else {
-            $this->store(get_class($class), new Value($class));
-        }
-    }
-
-    /**
-     * @param string $className
-     * @return BuildObject
-     * @throws UnsupportedInvokerException
-     */
-    public function bindClass(string $className): BuildObject
-    {
-        $this->store($className, $definition =  new BuildObject($className));
-        return $definition;
-    }
-
-    /**
-     * @param object $object
-     * @return Value
-     * @throws UnsupportedInvokerException
-     */
-    public function bindInstance(object $object): Value
-    {
-        $this->store(get_class($object), $definition =  new Value($object));
-        return $definition;
     }
 }

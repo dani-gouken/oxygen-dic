@@ -67,9 +67,6 @@ class AbstractDefinitionTest extends BaseTestCase
         $this->assertFalse($storage->contains("bar"));
     }
 
-    /**
-     * @covers AbstractStorage::toGet()
-     */
     public function testStore()
     {
         $storage = $this->makeStorage();

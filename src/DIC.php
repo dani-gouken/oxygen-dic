@@ -42,6 +42,14 @@ class DIC implements ContainerInterface, ArrayAccess
      */
     private $resolvedValues = [];
     /**
+     * @var callable
+     */
+    private $globalResolutionCallback;
+    /**
+     * @var array<string,callable>
+     */
+    private $resolutionCallback = [];
+    /**
      * @var $instance DIC
      */
     private static $instance;
@@ -65,6 +73,11 @@ class DIC implements ContainerInterface, ArrayAccess
             self::$instance = new self();
         }
         return self::$instance;
+    }
+
+    public static function clearInstance()
+    {
+        self::$instance = null;
     }
 
     /**
@@ -234,10 +247,11 @@ class DIC implements ContainerInterface, ArrayAccess
 
     /**
      * @param DefinitionContract $definition
+     * @param string|null $key
      * @return mixed
      * @throws ContainerException
      */
-    public function extract(DefinitionContract $definition)
+    public function extract(DefinitionContract $definition, ?string $key = null)
     {
         $extractionParameter = $definition->getExtractionParameter();
         $extractor = $this->getExtractor($extractorClassName = $definition->getExtractorClassName());
@@ -246,11 +260,17 @@ class DIC implements ContainerInterface, ArrayAccess
             throw new ContainerException("[$extractionParameterClassName] is not a valid parameter 
                 for the extractor [$extractorClassName]");
         }
-        $result =$extractor->extract($extractionParameter, $this);
-        if ($definition->getResolutionCallback() == null) {
-            return $result;
+        $result = $extractor->extract($extractionParameter, $this);
+        if ($definition->getResolutionCallback() != null) {
+            $result = $definition->getResolutionCallback()($result, $this) ?? $result;
         }
-        $definition->getResolutionCallback()($result, $this);
+        if ($this->globalResolutionCallback != null) {
+            $callback = $this->globalResolutionCallback;
+            $callback($result, $this);
+        }
+        if ($key != null && array_key_exists($key, $this->resolutionCallback)) {
+            $result = $this->resolutionCallback[$key]($result,$this) ?? $result;
+        }
         return $result;
     }
 
@@ -264,7 +284,7 @@ class DIC implements ContainerInterface, ArrayAccess
     public function extractDependency(DefinitionContract $definition, string $dependencyAlias)
     {
         $this->chain->append($dependencyAlias);
-        return $this->extract($definition);
+        return $this->extract($definition, $dependencyAlias);
     }
 
 
@@ -452,7 +472,7 @@ class DIC implements ContainerInterface, ArrayAccess
      */
     public function make(string $alias, array $params = [])
     {
-        return $this->extract(new BuildObject($alias, $params));
+        return $this->extract(new BuildObject($alias, $params), $alias);
     }
 
 
@@ -487,5 +507,17 @@ class DIC implements ContainerInterface, ArrayAccess
     public function lazy()
     {
         return new DefinitionFactory();
+    }
+
+    public function resolved($key, ?callable $callback = null)
+    {
+        if ($callback != null && !is_string($key)) {
+            throw new \InvalidArgumentException("The resolution callback must be a valid callable");
+        }
+        if ($callback == null) {
+            $this->globalResolutionCallback = $key;
+        } else {
+            $this->resolutionCallback[$key] = $callback;
+        }
     }
 }

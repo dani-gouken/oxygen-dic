@@ -59,16 +59,6 @@ class CallMethod extends AbstractDefinition
     }
 
     /**
-     * @param array $parameters
-     * @return $this
-     */
-    public function withParameters(array $parameters): self
-    {
-        $this->parameter = $parameters;
-        return $this;
-    }
-
-    /**
      * @param $object
      * @return CallMethod
      */

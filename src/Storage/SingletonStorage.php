@@ -11,6 +11,7 @@ use Oxygen\DI\Exceptions\NotFoundException;
 
 class SingletonStorage extends AbstractStorage
 {
+    use ClassBindingTrait;
     /**
      * @var DIC
      */
@@ -43,7 +44,7 @@ class SingletonStorage extends AbstractStorage
         if (!$this->has($key)) {
             throw new NotFoundException($key, $this);
         }
-        $value = $this->container->extract($this->getDescriptions()[$key]);
+        $value = $this->container->extract($this->getDescriptions()[$key], $key);
         $this->resolvedValues[$key] = $value;
         return $value;
     }
@@ -54,25 +55,5 @@ class SingletonStorage extends AbstractStorage
     public function getStorageKey(): string
     {
         return self::STORAGE_KEY;
-    }
-
-    /**
-     * @param string $className
-     * @return BuildObject
-     */
-    public function bindClass(string $className): BuildObject
-    {
-        $this->store($className, $definition =  new BuildObject($className));
-        return $definition;
-    }
-
-    /**
-     * @param object $object
-     * @return Value
-     */
-    public function bindInstance(object $object): Value
-    {
-        $this->store(get_class($object), $definition =  new Value($object));
-        return $definition;
     }
 }

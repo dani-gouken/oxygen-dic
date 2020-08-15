@@ -3,7 +3,6 @@
 
 namespace Oxygen\DI\Storage;
 
-use Nette\PhpGenerator\ClassType;
 use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Contracts\StorageContract;
 use Oxygen\DI\DIC;
@@ -103,7 +102,7 @@ abstract class AbstractStorage implements StorageContract
      */
     public function get(string $key)
     {
-        return $this->container->extract($this->resolve($key));
+        return $this->container->extract($this->resolve($key), $key);
     }
 
 

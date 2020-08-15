@@ -24,9 +24,9 @@ class DefinitionFactory
         return new Value($object);
     }
 
-    public function wildcardFor(string $pattern):Wildcard
+    public function wildcardFor(string $replacement):Wildcard
     {
-        return new Wildcard($pattern);
+        return new Wildcard($replacement);
     }
 
     public function callTo($callable, $parameters = [])

@@ -30,6 +30,7 @@ class WildcardStorage extends AbstractStorage
         }
         parent::store($key, $value);
     }
+
     public function has(string $key): bool
     {
         return $this->getMatchFor($key) != null;

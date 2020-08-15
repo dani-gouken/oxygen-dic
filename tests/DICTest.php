@@ -2,9 +2,11 @@
 
 namespace Oxygen\DI\Test;
 
+use InvalidArgumentException;
 use Oxygen\DI\Definitions\CallFunction;
 use Oxygen\DI\Contracts\DefinitionContract;
 use Oxygen\DI\Contracts\StorageContract;
+use Oxygen\DI\Definitions\DefinitionFactory;
 use Oxygen\DI\DIC;
 use Oxygen\DI\Exceptions\CircularDependencyException;
 use Oxygen\DI\Exceptions\ContainerException;
@@ -51,6 +53,17 @@ class DICTest extends BaseTestCase
     public function testItIsASingleton()
     {
         $container = $this->getContainer();
+        $instance = DIC::getInstance();
+        $this->assertEquals($container, $instance);
+    }
+
+    /**
+     * @throws ContainerException
+     */
+    public function testGetInstance()
+    {
+        DIC::clearInstance();
+        $container = DIC::getInstance();
         $instance = DIC::getInstance();
         $this->assertEquals($container, $instance);
     }
@@ -393,12 +406,7 @@ class DICTest extends BaseTestCase
         $container->getStorageFor("baz");
     }
 
-    /**
-     * @covers DIC::offsetGet()
-     * @covers DIC::offsetUnset()
-     * @covers DIC::offsetSet()
-     * @covers DIC::offsetExists()
-     */
+
     public function testTheContainerImplementsArrayAccess()
     {
         $container = $this->getContainer();
@@ -422,6 +430,7 @@ class DICTest extends BaseTestCase
         $container["VALUES::foo"];
         $this->assertEquals($container["foo"], "bar");
         $this->assertTrue(isset($container["foo"]));
+        $this->assertTrue($container->offsetExists("foo"));
         $this->assertFalse(isset($container["VALUES::foo"]));
         unset($container["foo"]);
         $this->assertFalse(isset($container["foo"]));
@@ -467,5 +476,70 @@ class DICTest extends BaseTestCase
     public function testGetExtractionChain()
     {
         $this->assertInstanceOf(ExtractionChain::class, $this->getContainer()->getExtractionChain());
+    }
+
+    public function testLazy()
+    {
+        $this->assertInstanceOf(DefinitionFactory::class, $this->getContainer()->lazy());
+    }
+    public function testAs()
+    {
+        $this->assertInstanceOf(DefinitionFactory::class, $this->getContainer()->as());
+    }
+
+    public function testGlobalResolutionCallback()
+    {
+        $container = $this->getContainer();
+        $i = 0;
+        $resolvedValue = null;
+        $resolvedContainer = null;
+        $container->resolved(function ($value, $container) use (&$i, &$resolvedValue, &$resolvedContainer) {
+            $i++;
+            $resolvedContainer = $container;
+            $resolvedValue = $value;
+        });
+        $container->values()->store("foo", $container->as()->value("bar"));
+        $container->values()->store("bar", $container->as()->value("baz"));
+
+        $bar = $container->get("foo");
+        $this->assertEquals(1, $i);
+        $this->assertInstanceOf(DIC::class, $resolvedContainer);
+        $this->assertEquals("bar", $resolvedValue);
+
+
+        $baz = $container->get("bar");
+        $this->assertEquals(2, $i);
+        $this->assertInstanceOf(DIC::class, $resolvedContainer);
+        $this->assertEquals("baz", $baz);
+        $this->assertEquals("bar", $bar);
+
+        $this->expectException(InvalidArgumentException::class);
+        $container->resolved(function () {
+        }, function () {
+        });
+    }
+
+    public function testResolutionCallback()
+    {
+        $container = $this->getContainer();
+        $resolvedValue = null;
+        $resolvedContainer = null;
+        $i = 0;
+        $container->values()->store("foo", $container->as()->value("bar"));
+        $container->resolved(
+            "foo",
+            function ($value, $container) use (&$i, &$resolvedValue, &$resolvedContainer) {
+                $i+=1;
+                $resolvedValue = $value;
+                $resolvedContainer = $container;
+                return "baz";
+            }
+        );
+
+        $foo = $container->get("foo");
+        $this->assertEquals(1, $i);
+        $this->assertEquals($resolvedValue, "bar");
+        $this->assertEquals($foo, "baz");
+        $this->assertInstanceOf(DIC::class, $resolvedContainer);
     }
 }
