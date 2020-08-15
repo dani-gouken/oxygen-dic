@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction\ExtractionParameters;
+namespace Atom\DI\Extraction\ExtractionParameters;
 
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Contracts\MappingContract;
-use Oxygen\DI\Mapping\Mapping;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\MappingContract;
+use Atom\DI\Mapping\Mapping;
 
 abstract class AbstractExtractionParameter implements ExtractionParameterContract
 {

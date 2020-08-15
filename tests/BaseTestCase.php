@@ -1,7 +1,7 @@
 <?php
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\DIC;
+use Atom\DI\DIC;
 use PHPUnit\Framework\TestCase;
 
 class BaseTestCase extends TestCase

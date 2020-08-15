@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction\ExtractionParameters;
+namespace Atom\DI\Extraction\ExtractionParameters;
 
-use Oxygen\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\ExtractionParameterContract;
 
 class ValueExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract
 {

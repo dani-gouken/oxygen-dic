@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Definitions;
+namespace Atom\DI\Test\Definitions;
 
-use Oxygen\DI\Definitions\CallableDefinitionFactory;
-use Oxygen\DI\Definitions\CallFunction;
-use Oxygen\DI\Definitions\CallMethod;
-use Oxygen\DI\Test\BaseTestCase;
+use Atom\DI\Definitions\CallableDefinitionFactory;
+use Atom\DI\Definitions\CallFunction;
+use Atom\DI\Definitions\CallMethod;
+use Atom\DI\Test\BaseTestCase;
 
 class CallableDefinitionFactoryTest extends BaseTestCase
 {

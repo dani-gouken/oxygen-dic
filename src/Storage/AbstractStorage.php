@@ -1,22 +1,22 @@
 <?php
 
 
-namespace Oxygen\DI\Storage;
+namespace Atom\DI\Storage;
 
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Contracts\StorageContract;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Extraction\MethodExtractor;
-use Oxygen\DI\Extraction\ObjectExtractor;
-use Oxygen\DI\Extraction\ValueExtractor;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Contracts\StorageContract;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Extraction\MethodExtractor;
+use Atom\DI\Extraction\ObjectExtractor;
+use Atom\DI\Extraction\ValueExtractor;
 
 /**
  * Class AbstractArrayStorage
  * @property DIC $container
- * @package Oxygen\DI\Storage
+ * @package Atom\DI\Storage
  */
 abstract class AbstractStorage implements StorageContract
 {

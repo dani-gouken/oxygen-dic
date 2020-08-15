@@ -1,19 +1,19 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction;
+namespace Atom\DI\Test\Extraction;
 
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\StorageNotFoundException;
-use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
-use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
-use Oxygen\DI\Extraction\ObjectExtractor;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Test\Misc\Dummy2;
-use Oxygen\DI\Test\Misc\NotInstantiable;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\StorageNotFoundException;
+use Atom\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
+use Atom\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
+use Atom\DI\Extraction\ObjectExtractor;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
+use Atom\DI\Test\Misc\Dummy2;
+use Atom\DI\Test\Misc\NotInstantiable;
 
 class ObjectExtractorTest extends BaseTestCase
 {

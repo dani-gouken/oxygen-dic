@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Mapping;
+namespace Atom\DI\Test\Mapping;
 
-use Oxygen\DI\Mapping\MappingItem;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Mapping\MappingItem;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Definitions\Value;
 
 class MappingItemTest extends BaseTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Oxygen\DI\Exceptions;
+namespace Atom\DI\Exceptions;
 
 use Psr\Container\ContainerExceptionInterface;
 

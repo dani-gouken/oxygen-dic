@@ -1,6 +1,6 @@
 <?php
 
-namespace Oxygen\DI\Test\Misc;
+namespace Atom\DI\Test\Misc;
 
 function returnFoo()
 {

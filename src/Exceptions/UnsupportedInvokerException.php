@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Oxygen\DI\Exceptions;
+namespace Atom\DI\Exceptions;
 
 use Exception;
-use Oxygen\DI\Contracts\DefinitionContract;
+use Atom\DI\Contracts\DefinitionContract;
 
 class UnsupportedInvokerException extends Exception
 {

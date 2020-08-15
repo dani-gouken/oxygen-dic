@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Oxygen\DI\Definitions;
+namespace Atom\DI\Definitions;
 
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Mapping\MappingItem;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Mapping\MappingItem;
 
 abstract class AbstractDefinition implements DefinitionContract
 {

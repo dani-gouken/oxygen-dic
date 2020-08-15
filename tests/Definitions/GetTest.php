@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\Extraction\ContainerExtractor;
-use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
-use Oxygen\DI\Definitions\Get;
+use Atom\DI\Extraction\ContainerExtractor;
+use Atom\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
+use Atom\DI\Definitions\Get;
 
 class GetTest extends BaseTestCase
 {

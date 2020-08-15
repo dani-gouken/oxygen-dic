@@ -1,15 +1,15 @@
 <?php
 
-namespace Oxygen\DI\Test\Storage;
+namespace Atom\DI\Test\Storage;
 
-use Oxygen\DI\Contracts\ExtractorContract;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Storage\AbstractStorage;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Contracts\ExtractorContract;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Storage\AbstractStorage;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Definitions\Value;
 use TypeError;
 
 class AbstractDefinitionTest extends BaseTestCase

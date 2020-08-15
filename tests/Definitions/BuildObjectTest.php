@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
-use Oxygen\DI\Extraction\ObjectExtractor;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
+use Atom\DI\Extraction\ObjectExtractor;
 
 class BuildObjectTest extends BaseTestCase
 {

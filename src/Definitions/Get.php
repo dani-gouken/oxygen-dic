@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Oxygen\DI\Definitions;
+namespace Atom\DI\Definitions;
 
 use Nette\PhpGenerator\Method;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Extraction\ContainerExtractor;
-use Oxygen\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Extraction\ContainerExtractor;
+use Atom\DI\Extraction\ExtractionParameters\ContainerExtractionParameter;
 
 class Get extends AbstractDefinition
 {

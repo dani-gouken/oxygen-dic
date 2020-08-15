@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\Definitions\AbstractDefinition;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Definitions\AbstractDefinition;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Definitions\Value;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class AbstractDefinitionTest extends BaseTestCase

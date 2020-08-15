@@ -1,15 +1,15 @@
 <?php
 
-namespace Oxygen\DI\Test\Definitions;
+namespace Atom\DI\Test\Definitions;
 
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Definitions\CallableDefinitionFactory;
-use Oxygen\DI\Definitions\DefinitionFactory;
-use Oxygen\DI\Definitions\Get;
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\Definitions\Wildcard;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Definitions\CallableDefinitionFactory;
+use Atom\DI\Definitions\DefinitionFactory;
+use Atom\DI\Definitions\Get;
+use Atom\DI\Definitions\Value;
+use Atom\DI\Definitions\Wildcard;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
 
 class DefinitionFactoryTest extends BaseTestCase
 {

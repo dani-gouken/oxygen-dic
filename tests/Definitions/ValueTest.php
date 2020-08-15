@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Extraction\ValueExtractor;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Extraction\ValueExtractor;
+use Atom\DI\Definitions\Value;
 
 class ValueTest extends BaseTestCase
 {

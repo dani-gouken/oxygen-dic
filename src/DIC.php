@@ -1,28 +1,28 @@
 <?php
 
-namespace Oxygen\DI;
+namespace Atom\DI;
 
 use ArrayAccess;
-use Oxygen\DI\Contracts\ExtractorContract;
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Contracts\StorageContract;
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Definitions\DefinitionFactory;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\StorageNotFoundException;
-use Oxygen\DI\Extraction\ContainerExtractor;
-use Oxygen\DI\Extraction\ExtractionChain;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Extraction\MethodExtractor;
-use Oxygen\DI\Extraction\ObjectExtractor;
-use Oxygen\DI\Extraction\ValueExtractor;
-use Oxygen\DI\Extraction\WildcardExtractor;
-use Oxygen\DI\Storage\FactoryStorage;
-use Oxygen\DI\Storage\SingletonStorage;
-use Oxygen\DI\Storage\ValueStorage;
-use Oxygen\DI\Storage\WildcardStorage;
+use Atom\DI\Contracts\ExtractorContract;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Contracts\StorageContract;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Definitions\DefinitionFactory;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\StorageNotFoundException;
+use Atom\DI\Extraction\ContainerExtractor;
+use Atom\DI\Extraction\ExtractionChain;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Extraction\MethodExtractor;
+use Atom\DI\Extraction\ObjectExtractor;
+use Atom\DI\Extraction\ValueExtractor;
+use Atom\DI\Extraction\WildcardExtractor;
+use Atom\DI\Storage\FactoryStorage;
+use Atom\DI\Storage\SingletonStorage;
+use Atom\DI\Storage\ValueStorage;
+use Atom\DI\Storage\WildcardStorage;
 use Psr\Container\ContainerInterface;
 
 class DIC implements ContainerInterface, ArrayAccess

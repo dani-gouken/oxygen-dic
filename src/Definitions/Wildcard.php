@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Definitions;
+namespace Atom\DI\Definitions;
 
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Extraction\ExtractionParameters\WildcardExtractionParameter;
-use Oxygen\DI\Extraction\WildcardExtractor;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Extraction\ExtractionParameters\WildcardExtractionParameter;
+use Atom\DI\Extraction\WildcardExtractor;
 
 class Wildcard extends AbstractDefinition
 {

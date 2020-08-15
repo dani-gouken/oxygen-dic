@@ -1,17 +1,17 @@
 <?php
 
-namespace Oxygen\DI\Test\Storage;
+namespace Atom\DI\Test\Storage;
 
-use Oxygen\DI\Definitions\CallFunction;
-use Oxygen\DI\Definitions \CallMethod;
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Storage\FactoryStorage;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy2;
+use Atom\DI\Definitions\CallFunction;
+use Atom\DI\Definitions \CallMethod;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Storage\FactoryStorage;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy2;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class FactoryStorageTest extends BaseTestCase

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\Definitions\CallFunction;
-use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
-use Oxygen\DI\Extraction\FunctionExtractor;
+use Atom\DI\Definitions\CallFunction;
+use Atom\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
+use Atom\DI\Extraction\FunctionExtractor;
 
 class CallFunctionTest extends BaseTestCase
 {

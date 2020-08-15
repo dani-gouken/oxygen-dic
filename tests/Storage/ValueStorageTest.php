@@ -1,17 +1,17 @@
 <?php
 
-namespace Oxygen\DI\Test\Storage;
+namespace Atom\DI\Test\Storage;
 
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Storage\ValueStorage;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Storage\ValueStorage;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
+use Atom\DI\Definitions\Value;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ValueStorageTest extends BaseTestCase

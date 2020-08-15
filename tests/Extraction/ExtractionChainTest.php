@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction;
+namespace Atom\DI\Test\Extraction;
 
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Extraction\ExtractionChain;
-use Oxygen\DI\Test\BaseTestCase;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Extraction\ExtractionChain;
+use Atom\DI\Test\BaseTestCase;
 
 class ExtractionChainTest extends BaseTestCase
 {

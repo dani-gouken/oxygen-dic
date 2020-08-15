@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Definitions;
+namespace Atom\DI\Definitions;
 
 use InvalidArgumentException;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
-use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
-use Oxygen\DI\Extraction\MethodExtractor;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
+use Atom\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
+use Atom\DI\Extraction\MethodExtractor;
 
 class CallMethod extends AbstractDefinition
 {

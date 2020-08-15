@@ -1,23 +1,23 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction;
+namespace Atom\DI\Test\Extraction;
 
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\StorageNotFoundException;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
-use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
-use Oxygen\DI\Extraction\MethodExtractor;
-use Oxygen\DI\Definitions\Get;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Test\Misc\Dummy2;
-use Oxygen\DI\Test\Misc\Dummy3;
-use Oxygen\DI\Definitions\zValue;
+use Atom\DI\Definitions\Value;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\StorageNotFoundException;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
+use Atom\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
+use Atom\DI\Extraction\MethodExtractor;
+use Atom\DI\Definitions\Get;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
+use Atom\DI\Test\Misc\Dummy2;
+use Atom\DI\Test\Misc\Dummy3;
+use Atom\DI\Definitions\zValue;
 use ReflectionException;
 
 class MethodExtractorTest extends BaseTestCase

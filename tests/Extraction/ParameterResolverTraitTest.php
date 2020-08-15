@@ -1,20 +1,20 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction;
+namespace Atom\DI\Test\Extraction;
 
 
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Extraction\ParameterResolverTrait;
-use Oxygen\DI\Mapping\MappingItem;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Test\Misc\Dummy2;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Extraction\ParameterResolverTrait;
+use Atom\DI\Mapping\MappingItem;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
+use Atom\DI\Test\Misc\Dummy2;
+use Atom\DI\Definitions\Value;
 use ReflectionException;
 use ReflectionFunction;
 
@@ -41,7 +41,7 @@ class ParameterResolverTraitTest extends BaseTestCase
     public function testSearchParameterValueWithDefaultValue()
     {
         $resolver = $this->makeParameterResolver();
-        $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnDefaultValue");
+        $reflectedFunction = new ReflectionFunction("Atom\\DI\\Test\\Misc\\returnDefaultValue");
         $parameter = $reflectedFunction->getParameters()[0];
         $value = $resolver->searchParameterValue($reflectedFunction, $parameter, $this->getContainer(),
             new ValueExtractionParameter("test"));
@@ -57,7 +57,7 @@ class ParameterResolverTraitTest extends BaseTestCase
     public function testSearchParameterValueUsingParameterMapping()
     {
         $resolver = $this->makeParameterResolver();
-        $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnValue");
+        $reflectedFunction = new ReflectionFunction("Atom\\DI\\Test\\Misc\\returnValue");
         $parameter = $reflectedFunction->getParameters()[0];
         $extractionParameter = new ValueExtractionParameter("foo");
         $extractionParameter->getParameterMapping()->add(new MappingItem("value", new Value("bar")));
@@ -79,7 +79,7 @@ class ParameterResolverTraitTest extends BaseTestCase
     public function testSearchParameterValueUsingObjectMapping()
     {
         $resolver = $this->makeParameterResolver();
-        $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnDummy2");
+        $reflectedFunction = new ReflectionFunction("Atom\\DI\\Test\\Misc\\returnDummy2");
         $parameter = $reflectedFunction->getParameters()[0];
         $extractionParameter = new ValueExtractionParameter("foo");
         $extractionParameter->getObjectMapping()->add(new MappingItem(Dummy2::class, new Value(new Dummy2("bar"))));
@@ -102,7 +102,7 @@ class ParameterResolverTraitTest extends BaseTestCase
     public function testSearchParameterValueUsingAutoWiring()
     {
         $resolver = $this->makeParameterResolver();
-        $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnDummy1");
+        $reflectedFunction = new ReflectionFunction("Atom\\DI\\Test\\Misc\\returnDummy1");
         $parameter = $reflectedFunction->getParameters()[0];
         $extractionParameter = new ValueExtractionParameter("foo");
         $value = $resolver->searchParameterValue(
@@ -123,7 +123,7 @@ class ParameterResolverTraitTest extends BaseTestCase
     public function testSearchParameterValueUsingTheContainer()
     {
         $resolver = $this->makeParameterResolver();
-        $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnDummy2");
+        $reflectedFunction = new ReflectionFunction("Atom\\DI\\Test\\Misc\\returnDummy2");
         $container = $this->getContainer();
         $container->singletons()->store(
             Dummy2::class,
@@ -151,7 +151,7 @@ class ParameterResolverTraitTest extends BaseTestCase
     public function testItThrowsIfItCantResolveTheParameter()
     {
         $resolver = $this->makeParameterResolver();
-        $reflectedFunction = new ReflectionFunction("Oxygen\\DI\\Test\\Misc\\returnValue");
+        $reflectedFunction = new ReflectionFunction("Atom\\DI\\Test\\Misc\\returnValue");
         $parameter = $reflectedFunction->getParameters()[0];
         $extractionParameter = new ValueExtractionParameter("foo");
         $this->expectException(ContainerException::class);

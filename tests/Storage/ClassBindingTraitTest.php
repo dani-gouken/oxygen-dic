@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Definitions;
+namespace Atom\DI\Test\Definitions;
 
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\Storage\ClassBindingTrait;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Definitions\Value;
+use Atom\DI\Storage\ClassBindingTrait;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ClassBindingTraitTest extends BaseTestCase

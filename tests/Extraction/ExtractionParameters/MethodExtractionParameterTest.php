@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction\ExtractionParameters;
+namespace Atom\DI\Test\Extraction\ExtractionParameters;
 
-use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
+use Atom\DI\Definitions\Value;
 
 class MethodExtractionParameterTest extends BaseTestCase
 {

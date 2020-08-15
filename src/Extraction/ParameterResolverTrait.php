@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction;
+namespace Atom\DI\Extraction;
 
 use InvalidArgumentException;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\NotFoundException;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\NotFoundException;
 use ReflectionException;
 use ReflectionFunctionAbstract;
 use ReflectionMethod;

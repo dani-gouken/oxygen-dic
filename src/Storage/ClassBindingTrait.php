@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Oxygen\DI\Storage;
+namespace Atom\DI\Storage;
 
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Definitions\Value;
 
 /**
  * Trait ClassBindingTrait
- * @package Oxygen\DI\Storage
+ * @package Atom\DI\Storage
  */
 trait ClassBindingTrait
 {

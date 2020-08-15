@@ -1,32 +1,32 @@
 <?php
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
 use InvalidArgumentException;
-use Oxygen\DI\Definitions\CallFunction;
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Contracts\StorageContract;
-use Oxygen\DI\Definitions\DefinitionFactory;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\StorageNotFoundException;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\ContainerExtractor;
-use Oxygen\DI\Extraction\ExtractionChain;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Extraction\MethodExtractor;
-use Oxygen\DI\Extraction\ObjectExtractor;
-use Oxygen\DI\Extraction\ValueExtractor;
-use Oxygen\DI\Storage\FactoryStorage;
-use Oxygen\DI\Storage\SingletonStorage;
-use Oxygen\DI\Storage\ValueStorage;
-use Oxygen\DI\Test\Misc\CircularDependency\CDDummy2;
-use Oxygen\DI\Test\Misc\Dummy1;
-use Oxygen\DI\Test\Misc\Dummy2;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Definitions\CallFunction;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Contracts\StorageContract;
+use Atom\DI\Definitions\DefinitionFactory;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\StorageNotFoundException;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\ContainerExtractor;
+use Atom\DI\Extraction\ExtractionChain;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Extraction\MethodExtractor;
+use Atom\DI\Extraction\ObjectExtractor;
+use Atom\DI\Extraction\ValueExtractor;
+use Atom\DI\Storage\FactoryStorage;
+use Atom\DI\Storage\SingletonStorage;
+use Atom\DI\Storage\ValueStorage;
+use Atom\DI\Test\Misc\CircularDependency\CDDummy2;
+use Atom\DI\Test\Misc\Dummy1;
+use Atom\DI\Test\Misc\Dummy2;
+use Atom\DI\Definitions\Value;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Container\ContainerInterface;
 
@@ -413,7 +413,7 @@ class DICTest extends BaseTestCase
         //STORE VALUES
         $container["foo"] = new Value("bar");
         $container["VALUES::foo"] = new Value("baz");
-        $container["FACTORIES::bar"] = new CallFunction('Oxygen\DI\Test\Misc\returnFoo');
+        $container["FACTORIES::bar"] = new CallFunction('Atom\DI\Test\Misc\returnFoo');
         //RETREIVE VALUES
         $this->assertEquals($container["foo"], "bar");
         $this->assertEquals($container["VALUES::foo"], "baz");
@@ -421,7 +421,7 @@ class DICTest extends BaseTestCase
         $this->assertEquals($container["bar"], "foo");
         //UPDATE VALUES, cannot update SINGLETON(default) because it will return the same value everytimes
         $container["VALUES::foo"] = new Value("jhon");
-        $container["FACTORIES::bar"] = new callFunction('Oxygen\DI\Test\Misc\returnBar');
+        $container["FACTORIES::bar"] = new callFunction('Atom\DI\Test\Misc\returnBar');
         $this->assertEquals($container["VALUES::foo"], "jhon");
         $this->assertEquals($container["bar"], "bar");
         //UNSET VALUES

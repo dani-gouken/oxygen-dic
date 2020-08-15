@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction\ExtractionParameters;
+namespace Atom\DI\Extraction\ExtractionParameters;
 
-use Oxygen\DI\Contracts\ArraySerializable;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\ArraySerializable;
+use Atom\DI\Contracts\ExtractionParameterContract;
 
 class ObjectExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract
 {

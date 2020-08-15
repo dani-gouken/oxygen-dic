@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction\ExtractionParameters;
+namespace Atom\DI\Test\Extraction\ExtractionParameters;
 
 use InvalidArgumentException;
-use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
-use Oxygen\DI\Test\BaseTestCase;
+use Atom\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
+use Atom\DI\Test\BaseTestCase;
 
 class FunctionExtractionParameterTest extends BaseTestCase
 {

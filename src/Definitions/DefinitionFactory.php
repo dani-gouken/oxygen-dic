@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oxygen\DI\Definitions;
+namespace Atom\DI\Definitions;
 
 class DefinitionFactory
 {

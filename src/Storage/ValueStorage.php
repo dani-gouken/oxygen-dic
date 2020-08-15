@@ -1,15 +1,15 @@
 <?php
 
-namespace Oxygen\DI\Storage;
+namespace Atom\DI\Storage;
 
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\ContainerExtractor;
-use Oxygen\DI\Extraction\ObjectExtractor;
-use Oxygen\DI\Extraction\ValueExtractor;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Definitions\Value;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\ContainerExtractor;
+use Atom\DI\Extraction\ObjectExtractor;
+use Atom\DI\Extraction\ValueExtractor;
 
 class ValueStorage extends AbstractStorage
 {

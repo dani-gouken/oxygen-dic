@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction;
+namespace Atom\DI\Extraction;
 
-use Oxygen\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\CircularDependencyException;
 
 class ExtractionChain
 {

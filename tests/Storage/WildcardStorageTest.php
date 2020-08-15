@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Storage;
+namespace Atom\DI\Test\Storage;
 
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\Definitions\Wildcard;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Storage\WildcardStorage;
-use Oxygen\DI\Test\BaseTestCase;
+use Atom\DI\Definitions\Value;
+use Atom\DI\Definitions\Wildcard;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Storage\WildcardStorage;
+use Atom\DI\Test\BaseTestCase;
 
 class WildcardStorageTest extends BaseTestCase
 {

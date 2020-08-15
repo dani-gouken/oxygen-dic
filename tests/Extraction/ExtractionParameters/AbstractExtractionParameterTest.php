@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction\ExtractionParameters;
+namespace Atom\DI\Test\Extraction\ExtractionParameters;
 
-use Oxygen\DI\Extraction\ExtractionParameters\AbstractExtractionParameter;
-use Oxygen\DI\Mapping\Mapping;
-use Oxygen\DI\Mapping\MappingItem;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Extraction\ExtractionParameters\AbstractExtractionParameter;
+use Atom\DI\Mapping\Mapping;
+use Atom\DI\Mapping\MappingItem;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Definitions\Value;
 
 class AbstractExtractionParameterTest extends BaseTestCase
 {

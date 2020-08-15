@@ -1,19 +1,19 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction;
+namespace Atom\DI\Extraction;
 
 use Exception;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Contracts\ExtractorContract;
-use Oxygen\DI\Contracts\StorageContract;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\StorageNotFoundException;
-use Oxygen\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
-use Oxygen\DI\Definitions\Value;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\ExtractorContract;
+use Atom\DI\Contracts\StorageContract;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\StorageNotFoundException;
+use Atom\DI\Extraction\ExtractionParameters\ObjectExtractionParameter;
+use Atom\DI\Definitions\Value;
 use ReflectionClass;
 
 class ObjectExtractor implements ExtractorContract

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Oxygen\DI\Exceptions;
+namespace Atom\DI\Exceptions;
 
 use Exception;
-use Oxygen\DI\Extraction\ExtractionChain;
+use Atom\DI\Extraction\ExtractionChain;
 
 class CircularDependencyException extends Exception
 {

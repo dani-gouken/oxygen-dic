@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Storage;
+namespace Atom\DI\Storage;
 
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Definitions\Wildcard;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\WildcardExtractor;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Definitions\Wildcard;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\WildcardExtractor;
 
 class WildcardStorage extends AbstractStorage
 {

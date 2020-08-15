@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Test;
+namespace Atom\DI\Test;
 
-use Oxygen\DI\Definitions\CallMethod;
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
-use Oxygen\DI\Extraction\MethodExtractor;
-use Oxygen\DI\Test\Misc\Dummy1;
+use Atom\DI\Definitions\CallMethod;
+use Atom\DI\Definitions\Value;
+use Atom\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
+use Atom\DI\Extraction\MethodExtractor;
+use Atom\DI\Test\Misc\Dummy1;
 
 class CallMethodTest extends BaseTestCase
 {

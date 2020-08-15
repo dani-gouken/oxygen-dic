@@ -1,15 +1,15 @@
 <?php
 
-namespace Oxygen\DI\Test\Storage;
+namespace Atom\DI\Test\Storage;
 
-use Oxygen\DI\Definitions\AbstractDefinition;
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Extraction\ValueExtractor;
-use Oxygen\DI\Storage\SingletonStorage;
-use Oxygen\DI\Test\BaseTestCase;
+use Atom\DI\Definitions\AbstractDefinition;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Extraction\ValueExtractor;
+use Atom\DI\Storage\SingletonStorage;
+use Atom\DI\Test\BaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class SingletonStorageTest extends BaseTestCase

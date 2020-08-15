@@ -1,17 +1,17 @@
 <?php
 
-namespace Oxygen\DI\Test\Extraction;
+namespace Atom\DI\Test\Extraction;
 
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Exceptions\CircularDependencyException;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
-use Oxygen\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
-use Oxygen\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Test\BaseTestCase;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Exceptions\CircularDependencyException;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
+use Atom\DI\Extraction\ExtractionParameters\FunctionExtractionParameter;
+use Atom\DI\Extraction\ExtractionParameters\MethodExtractionParameter;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Test\BaseTestCase;
 use ReflectionException;
-use function Oxygen\DI\Test\Misc\returnBar;
+use function Atom\DI\Test\Misc\returnBar;
 
 class FunctionExtractorTest extends BaseTestCase
 {
@@ -46,7 +46,7 @@ class FunctionExtractorTest extends BaseTestCase
         $this->assertEquals(
             "foo",
             $extractor->extract(
-                new FunctionExtractionParameter("Oxygen\\DI\\Test\\Misc\\returnFoo"),
+                new FunctionExtractionParameter("Atom\\DI\\Test\\Misc\\returnFoo"),
                 $this->getContainer()
             ),
         );

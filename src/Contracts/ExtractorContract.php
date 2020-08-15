@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Oxygen\DI\Contracts;
+namespace Atom\DI\Contracts;
 
-use Oxygen\DI\DIC;
+use Atom\DI\DIC;
 
 interface ExtractorContract
 {

@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Storage;
+namespace Atom\DI\Storage;
 
-use Oxygen\DI\Contracts\DefinitionContract;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\UnsupportedInvokerException;
-use Oxygen\DI\Extraction\FunctionExtractor;
-use Oxygen\DI\Extraction\MethodExtractor;
+use Atom\DI\Contracts\DefinitionContract;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\UnsupportedInvokerException;
+use Atom\DI\Extraction\FunctionExtractor;
+use Atom\DI\Extraction\MethodExtractor;
 
 class FactoryStorage extends AbstractStorage
 {

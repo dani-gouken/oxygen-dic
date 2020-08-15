@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Mapping;
+namespace Atom\DI\Mapping;
 
-use Oxygen\DI\Contracts\MappingContract;
-use Oxygen\DI\Contracts\MappingItemContract;
-use Oxygen\DI\Exceptions\ContainerException;
+use Atom\DI\Contracts\MappingContract;
+use Atom\DI\Contracts\MappingItemContract;
+use Atom\DI\Exceptions\ContainerException;
 
 class Mapping implements MappingContract
 {

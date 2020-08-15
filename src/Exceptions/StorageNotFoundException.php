@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oxygen\DI\Exceptions;
+namespace Atom\DI\Exceptions;
 
 class StorageNotFoundException extends ContainerException
 {

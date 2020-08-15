@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Extraction;
+namespace Atom\DI\Test\Extraction;
 
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
-use Oxygen\DI\Extraction\ExtractionParameters\WildcardExtractionParameter;
-use Oxygen\DI\Extraction\WildcardExtractor;
-use Oxygen\DI\Test\BaseTestCase;
-use Oxygen\DI\Test\Misc\Dummy1;
+use Atom\DI\Definitions\Value;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Extraction\ExtractionParameters\WildcardExtractionParameter;
+use Atom\DI\Extraction\WildcardExtractor;
+use Atom\DI\Test\BaseTestCase;
+use Atom\DI\Test\Misc\Dummy1;
 
 class WildcardExtractorTest extends BaseTestCase
 {
@@ -25,15 +25,15 @@ class WildcardExtractorTest extends BaseTestCase
     {
         $container = $this->getContainer();
         $container->wildcards()->store(
-            $pattern = "Oxygen\DI\Test\Fixtures\*",
-            $container->as()->wildcardFor($replacement = "Oxygen\DI\Test\Misc\*")
+            $pattern = "Atom\DI\Test\Fixtures\*",
+            $container->as()->wildcardFor($replacement = "Atom\DI\Test\Misc\*")
         );
         $extractor = $container->getExtractor(WildcardExtractor::class);
         $this->assertInstanceOf(
             Dummy1::class,
             $extractor->extract(
                 new WildcardExtractionParameter(
-                    'Oxygen\DI\Test\Misc\Dummy1',
+                    'Atom\DI\Test\Misc\Dummy1',
                     $pattern,
                     $replacement
                 ),

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction\ExtractionParameters;
+namespace Atom\DI\Extraction\ExtractionParameters;
 
 use InvalidArgumentException;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\ExtractionParameterContract;
 
 class FunctionExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract
 {

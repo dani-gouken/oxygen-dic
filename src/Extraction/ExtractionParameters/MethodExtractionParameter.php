@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction\ExtractionParameters;
+namespace Atom\DI\Extraction\ExtractionParameters;
 
 use InvalidArgumentException;
-use Oxygen\DI\Contracts\ArraySerializable;
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Contracts\DefinitionContract;
+use Atom\DI\Contracts\ArraySerializable;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\DefinitionContract;
 
 class MethodExtractionParameter extends AbstractExtractionParameter implements ExtractionParameterContract
 {

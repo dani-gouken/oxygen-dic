@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oxygen\DI\Contracts;
+namespace Atom\DI\Contracts;
 
 interface MappingItemContract
 {

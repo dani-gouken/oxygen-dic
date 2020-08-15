@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Oxygen\DI\Contracts;
+namespace Atom\DI\Contracts;
 
 use Nette\PhpGenerator\ClassType;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\ContainerException;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\ContainerException;
 
 interface StorageContract
 {

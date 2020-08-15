@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Oxygen\DI\Storage;
+namespace Atom\DI\Storage;
 
-use Oxygen\DI\Definitions\BuildObject;
-use Oxygen\DI\Definitions\Value;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Exceptions\ContainerException;
-use Oxygen\DI\Exceptions\NotFoundException;
+use Atom\DI\Definitions\BuildObject;
+use Atom\DI\Definitions\Value;
+use Atom\DI\DIC;
+use Atom\DI\Exceptions\ContainerException;
+use Atom\DI\Exceptions\NotFoundException;
 
 class SingletonStorage extends AbstractStorage
 {

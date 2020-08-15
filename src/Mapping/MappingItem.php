@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Oxygen\DI\Mapping;
+namespace Atom\DI\Mapping;
 
-use Oxygen\DI\Contracts\MappingItemContract;
-use Oxygen\DI\Contracts\DefinitionContract;
+use Atom\DI\Contracts\MappingItemContract;
+use Atom\DI\Contracts\DefinitionContract;
 
 class MappingItem implements MappingItemContract
 {

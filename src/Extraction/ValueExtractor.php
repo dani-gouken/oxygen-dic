@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction;
+namespace Atom\DI\Extraction;
 
-use Oxygen\DI\Contracts\ExtractionParameterContract;
-use Oxygen\DI\Contracts\ExtractorContract;
-use Oxygen\DI\DIC;
-use Oxygen\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
+use Atom\DI\Contracts\ExtractionParameterContract;
+use Atom\DI\Contracts\ExtractorContract;
+use Atom\DI\DIC;
+use Atom\DI\Extraction\ExtractionParameters\ValueExtractionParameter;
 
 class ValueExtractor implements ExtractorContract
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oxygen\DI\Extraction\ExtractionParameters;
+namespace Atom\DI\Extraction\ExtractionParameters;
 
 class WildcardExtractionParameter extends AbstractExtractionParameter
 {

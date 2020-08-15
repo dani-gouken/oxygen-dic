@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oxygen\DI\Test\Misc;
+namespace Atom\DI\Test\Misc;
 
 class Dummy3
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Oxygen\DI\Exceptions;
+namespace Atom\DI\Exceptions;
 
 use Exception;
-use Oxygen\DI\Contracts\StorageContract;
+use Atom\DI\Contracts\StorageContract;
 use Psr\Container\NotFoundExceptionInterface;
 
 class NotFoundException extends Exception implements NotFoundExceptionInterface
